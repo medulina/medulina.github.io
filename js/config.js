@@ -14,6 +14,7 @@ var auth_url = {
   "tumor.medulina.com": "http://api.medulina.com/api/authenticate/tumor/github/"
 }
 
+// name of project in database
 var task_dict = {
   "stroke.medulina.com": "atlas_lesions",
   "tumor.medulina.com": "meningioma000",
