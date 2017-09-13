@@ -7,11 +7,11 @@ var auth_id = {
 }
 
 var auth_url = {
-  "dg.medulina.com": "http://api.medulina.com/api/authenticate/dg/github/",
-  "localhost:8000": "http://api.medulina.com/api/authenticate/githublocal/",
-  "test.medulina.com": "http://testapi.medulina.com/api/authenticate/githubtest/",
-  "stroke.medulina.com": "http://api.medulina.com/api/authenticate/stroke/github/",
-  "tumor.medulina.com": "http://api.medulina.com/api/authenticate/tumor/github/"
+  "dg.medulina.com": "https://api.medulina.com/api/authenticate/dg/github/",
+  "localhost:8000": "https://api.medulina.com/api/authenticate/githublocal/",
+  "test.medulina.com": "https://testapi.medulina.com/api/authenticate/githubtest/",
+  "stroke.medulina.com": "https://api.medulina.com/api/authenticate/stroke/github/",
+  "tumor.medulina.com": "https://api.medulina.com/api/authenticate/tumor/github/"
 }
 
 // name of project in database
@@ -39,10 +39,10 @@ var context_dict = {
 
 
 config = {
-  mask_url: 'http://api.medulina.com/api/v1/mask',
-  image_url: 'http://api.medulina.com/api/v1/image/',
-  player_url: 'http://api.medulina.com/api/v1/user/',
-  edit_url: 'http://api.medulina.com/api/v1/mask',
+  mask_url: 'https://api.medulina.com/api/v1/mask',
+  image_url: 'https://api.medulina.com/api/v1/image/',
+  player_url: 'https://api.medulina.com/api/v1/user/',
+  edit_url: 'https://api.medulina.com/api/v1/mask',
   use_random: false,
   task: task_dict[window.location.host],
   num: 15,
@@ -54,10 +54,10 @@ config = {
 if (window.location.host == "test.medulina.com"){
   console.log("USING TEST CONFIG")
   config = {
-    mask_url: 'http://testapi.medulina.com/api/v1/mask',
-    image_url: 'http://testapi.medulina.com/api/v1/image/',
-    player_url: 'http://testapi.medulina.com/api/v1/user',
-    edit_url: 'http://testapi.medulina.com/api/v1/mask',
+    mask_url: 'https://testapi.medulina.com/api/v1/mask',
+    image_url: 'https://testapi.medulina.com/api/v1/image/',
+    player_url: 'https://testapi.medulina.com/api/v1/user',
+    edit_url: 'https://testapi.medulina.com/api/v1/mask',
     use_random: false,
     task: "atlas_lesions",
     num: 15,
