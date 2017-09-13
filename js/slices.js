@@ -339,7 +339,7 @@ var app =  new Vue({
     }
   })
 
-var url = 'http://api.medulina.com/api/v1/'
+var url = 'https://api.medulina.com/api/v1/'
 
 function getData(){
   $.get(url + app.query(), function(data){

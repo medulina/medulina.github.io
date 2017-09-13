@@ -25,8 +25,8 @@ def load_json(filename):
 
 
 databases = {
-"prod": 'http://api.medulina.com/api/v1/',
-"dev": 'http://testapi.medulina.com/api/v1/'
+"prod": 'https://api.medulina.com/api/v1/',
+"dev": 'https://testapi.medulina.com/api/v1/'
 }
 
 def upload_to_mindR(imgPath, task, subject, username, password, database="prod"):

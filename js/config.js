@@ -17,7 +17,7 @@ var auth_url = {
 // name of project in database
 var task_dict = {
   "stroke.medulina.com": "atlas_lesions",
-  "tumor.medulina.com": "meningioma000",
+  "tumor.medulina.com": "meningioma001",
   "dg.medulina.com": "db_cor_context03",
   "localhost:8000": "atlas_lesions"
 }
