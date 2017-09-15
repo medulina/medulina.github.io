@@ -207,7 +207,7 @@
     }
 
     a {
-      color: #313E50;
+      color: #31708f;
       cursor: pointer;
     }
 
@@ -328,6 +328,9 @@ backface-visibility: hidden;
   opacity: 1;
 }
 
+.rowb{
+  display: block;
+}
 
 
     </style>
@@ -346,7 +349,7 @@ backface-visibility: hidden;
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Medulina <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Medulina <span class="sr-only">(current)</span></a>
           </li>
 
         </ul>
@@ -360,79 +363,96 @@ backface-visibility: hidden;
     <div class="container-fluid" id="main" v-cloak>
       <section class="jumbotron text-center">
         <div class="container">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="/">
             <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon.png" width="100px">
           </a>
-          <h1 class="jumbotron-heading">Medulina</h1>
-          <p class="lead text-muted"> Help us teach computers to read medical images</p>
-          <a href="/about.html" class="btn btn-primary"> Learn More </a>
+          <h1 class="jumbotron-heading">About Medulina</h1>
+          <p class="lead text-muted"> The crowdsourcing game to segment brains</p>
+
         </div>
       </section>
 
-      <div class="album text-muted">
+      <div class="">
       <div class="container">
-        <div class="row">
-          <div class="card card1 col-lg-4 col-md-12">
-            <img src="images/tumor_seg.png" alt="Tumor Image" class="image imageh">
-            <div class="middle">
-              <a href="https://tumor.medulina.com" class="btn btn-primary">Find Menigiomas</a>
-            </div>
-            <h3> Meningioma </h3>
-            <p class="card-text"><a href="https://en.wikipedia.org/wiki/Meningioma">Menigiomas</a> are tumors that grow from the brains covering. Help us teach computers to spot these tumors so we can automate detection and predict outcomes.</p>
+        <div class="row rowb">
 
-            <p>Menigiomas stand out from the surroundings and are <b>a great place to start.</b></p>
 
-          </div>
-          <div class="card card2 col-lg-4 col-md-12">
-            <img src="images/stroke_seg.png" alt="Stroke Image" class="image image1">
-            <div class="middle2">
-              <a href="https://stroke.medulina.com" class="btn btn-primary">Find Strokes</a>
-            </div>
-            <h3> Stroke </h3>
-            <p class="card-text"><a href="https://en.wikipedia.org/wiki/Stroke">Strokes</a> occur when the brain is damaged by lack of blood flow or by bleeding in the brain. Help us teach computers how to find damage caused by strokes.</p>
-            <p>The areas most damaged by a stroke are easy to spot, but finding the full extent of the damage <b>can be tricky.</b>
-            </p>
-            <p><small> The data is provided by the <a href="http://www.biorxiv.org/content/early/2017/08/26/179614">ATLAS dataset</a>, by <i>Liew et al. 2017</i></small></p>
+          <h4>Why Medulina?</h4>
+          <p>
+            Scientists have learned a lot about the brain by measuring it from non-invasive imaging, like MRI.
+            But as we collect larger datasets, our measurements become less accurate.
+            Current computer algorithms are able to make measurements quickly, but are not very accurate.
+            Expert neuroanatomists are accurate, but it takes them a long time.
+            The goal of the Medulina project is to train citizen scientists in neuroanatomy, and combine their measurements with
+            computer algorithms to get the most accurate measurements of the brain in a short amount of time.
 
-          </div>
-          <div class="card card3 col-lg-4 col-md-12">
-            <img src="images/dg_seg.png" alt="Dentate Gyrus Image" class="image image2">
-            <div class="middle3">
-              <a href="https://dg.medulina.com" class="btn btn-primary">Find the Dentate Gyrus</a>
-            </div>
-            <h3> Dentate Gyrus </h3>
-            <p class="card-text">The <a href="https://en.wikipedia.org/wiki/Dentate_gyrus"> dentate gyrus</a> is part of the hippocampus that helps form new memories. Help us spot its complex, curving structure so we can learn more about how it works.</p>
-            <p>The dentate gyrus is a band of darker tissue within the hippocampus that can be <b>quite challenging to spot.</b></p>
+          </p>
+          <p>Medulina is an open source game to crowdsource brain image segmentation.
+            Its still in beta, but if you want to try it out, you just need a <a href="https://github.com">GitHub </a> account.
+            Currently, you can try to identify <a href="http://tumor.medulina.com"> meningiomas </a> (a type of brain tumor),
+            <a href="http://stroke.medulina.com"> stroke lesions </a>, and the <a href="http://dg.medulina.com"> dentate gyrus </a>,
+            a structure in the brain that is important for forming new memories.
 
-          </div>
 
-          <!--<div class="card">
-            <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card">
-            <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card">
-            <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
+          </p>
+        </div>
 
-          <div class="card">
-            <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card">
-            <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-          <div class="card">
-            <img data-src="holder.js/100px280/thumb" alt="Card image cap">
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          </div>
-        </div>-->
+        <div class="row rowb">
+          <h4> The Team</h4>
 
+          <p>
+            Medulina was started by <a href="http://akeshavan.github.com">Anisha Keshavan</a> while procrastinating on writing her PhD disseration.
+
+            <a href="">Dylan Nielson</a> and <a href=""> Adam Thomas </a> became collaborators when they all met at the <a href="">2017 OHBM Hackathon</a>.
+          </p>
+        </div>
+        
+        <div class="row rowb">
+
+          <h4>What hardware do I need to play?</h4>
+
+          <p>
+            Medulina works on a computer, tablet and even a cell phone (but you should only play if you have a large screen, and you are connected to wifi/have unlimited data).
+          </p>
+        </div>
+        <div class="row rowb">
+          <h4>Can I crowdsource my data on Medulina?</h4>
+
+          <p>
+            We are actively developing Medulina, so it is not "live" yet.
+            If you are interested in using Medulina for your data, please post on our
+            <a href="https://github.com/medulina/medulina.github.io">Github Issues Page </a> or
+
+             email <u>anishakeshavan at gmail dot com</u> .
+
+          </p>
+        </div>
+
+        <div class="row rowb">
+          <h4> I found a bug! What do I do? </h4>
+          <p>
+            Please post on our <a href="https://github.com/medulina/medulina.github.io">Github Issues Page </a>!
+          </p>
+        </div>
+
+
+        <div class="row rowb">
+          <h4> Want to join the team? </h4>
+
+          <p>
+            Join us on <a href="https://github.com/medulina/medulina.github.io">GitHub</a> and
+            on the #medulina <a href="https://brainhack.slack.com">brainhack slack </a> channel!
+          </p>
+        </div>
+
+
+
+        <div class="row rowb">
+          <h4> What does Medulina mean? </h4>
+
+            It means "the brain"  in <a href="https://translate.google.com/?sl=kn&q=medulina#kn/en/medulina"> Kannada </a>, a South Indian language.
+
+        </div>
       </div>
     </div>
 
