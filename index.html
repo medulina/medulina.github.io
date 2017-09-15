@@ -396,9 +396,16 @@ var app =  new Vue({
     },
     methods: {
       hide: function () {
-        fn.visible = this.overlay
-        fp.visible = this.overlay
-        tp.visible = this.overlay
+        try {
+          fn.visible = this.overlay
+          fp.visible = this.overlay
+          tp.visible = this.overlay
+        } catch (e) {
+          console.log("fn, fp, tp not visible yet")
+        } finally {
+
+        }
+
 
 
 
