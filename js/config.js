@@ -8,7 +8,7 @@ var auth_id = {
 
 var auth_url = {
   "dg.medulina.com": "https://api.medulina.com/api/authenticate/dg/github/",
-  "localhost:8000": "https://api.medulina.com/api/authenticate/githublocal/",
+  "localhost:8000": "https://api.medulina.com/api/authenticate/dg/githublocal/",
   "test.medulina.com": "https://testapi.medulina.com/api/authenticate/githubtest/",
   "stroke.medulina.com": "https://api.medulina.com/api/authenticate/stroke/github/",
   "tumor.medulina.com": "https://api.medulina.com/api/authenticate/tumor/github/"

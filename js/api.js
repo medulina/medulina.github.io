@@ -28,30 +28,32 @@ get_mask_url = function(image_info){
 
 do_eval = function(){
   console.log('DOING EVAL\n\n')
-  startProgress()
-  $('#submit_button').prop('disabled',true);
+
   var data = window.currentData._items[0]
 
   var profile = store.get('github_profile')
   var score = {'name': app.login.username, 'edit_data_id': data._id}
 
-  /*if (window.appMode == "train"){
-    var truth = window.truthData._items[0].pic
-    var cscore_and_diff = roi.diff(truth)
-    var cscore = cscore_and_diff[0]
-    var diffvals = cscore_and_diff[1]
-    window.diffvals = diffvals
-    score['xp'] = cscore.tp - cscore.fn - cscore.fp
-    score['accuracy'] = 2* cscore.tp/(2* cscore.tp + cscore.fn + cscore.fp) //this is the dice coefficient
-    console.log('score is', score)
-  } else {
-    var diffvals = roi.pixelLog
-    console.log("test: these are the vals", diffvals)
-  }*/
-  var segmentation = roi.getNonZeroPixels()
-  stopProgress()
-  do_save(score, JSON.stringify(segmentation))
+  if (draw.history.length == 1 && draw.history[0].length == 0){
+    if (confirm("Are you sure you want to submit an empty drawing?")){
+      startProgress()
+      $('#submit_button').prop('disabled',true);
+      var segmentation = roi.getNonZeroPixels()
+      stopProgress()
+      do_save(score, JSON.stringify(segmentation))
 
+    } else {
+      stopProgress()
+
+    }
+
+  } else {
+    startProgress()
+    $('#submit_button').prop('disabled',true);
+    var segmentation = roi.getNonZeroPixels()
+    stopProgress()
+    do_save(score, JSON.stringify(segmentation))
+  }
 
   //})
 }
