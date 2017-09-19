@@ -1004,6 +1004,12 @@ function start(base_url){
 get_images = function(url, callback){
   $.get(url, function(data, status, jqXhr){
     window.currentData = data
+    console.log("got data", url, data)
+    if (data._items.length == 0){
+      get_images(url, callback)
+      return 0
+    }
+    
     var base_url = data._items[0].pic
     var sliceNo = parseInt(data._items[0].slice).toString()
     console.log(sliceNo, sliceNo.length)
