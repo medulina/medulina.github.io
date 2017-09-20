@@ -334,3 +334,16 @@ nav h4 {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
+.introjs-tooltiptext h1{
+  text-align: center;
+}
+
+.introjs-helperNumberLayer {
+  background: #FF595E;
+  visibility: hidden;
+}
+
+.introjs-tooltipbuttons {
+  text-align: center;
+}

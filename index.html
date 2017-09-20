@@ -27,13 +27,13 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="main_style.css">
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-default.css" rel="stylesheet">
     <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
     <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@2.8.0-alpha.1/minified/introjs.min.css">
+    <link rel="stylesheet" href="main_style.css">
 
 
     <style>
@@ -144,7 +144,7 @@
             <div class="submitButton" >
 
 
-                <button data-intro='When you are done, hit Submit' class="btn btn-med btn-primary colorBold" style="position:fixed; right:0; top:0;" id="submit_button" v-on:click="runEval">
+                <button class="btn btn-med btn-primary colorBold" style="position:fixed; right:0; top:0;" id="submit_button" v-on:click="runEval">
                   {{status}}
                 </button>
 
@@ -154,7 +154,7 @@
 
 
           <div class="img-container">
-            <canvas id="myCanvas" resize data-intro='Click and drag to draw on this image. Double-tap to fill'>
+            <canvas id="myCanvas" resize>
           </div>
 
         <transition name="fade">
@@ -229,15 +229,15 @@
 
         <div class="bottomMenu colorNeutralBackground">
           <div class="colorNeutralBackground" style="text-align:center; padding-bottom: 2px;" id="toggleButton">
-            <button class="btn btn-lg btn-outline-info left" v-on:click="hide" data-intro='Hide and show your drawing'>
+            <button class="btn btn-lg btn-outline-info left" v-on:click="hide" id="hideshow">
               <i class="fa fa-eye" v-if="overlay"aria-hidden="true"></i>
               <i class="fa fa-eye-slash" v-if="!overlay"aria-hidden="true"></i>
             </button>
-            <button class="btn btn-lg btn-outline-info" v-on:click="show = !show" id="menuButton" data-intro='Open the menu to change brush size, color and image brightness and contrast'>
+            <button class="btn btn-lg btn-outline-info" v-on:click="show = !show" id="menuButton">
               <i class="fa fa-chevron-down" v-if="show"aria-hidden="true"></i>
               <i class="fa fa-chevron-up" v-if="!show"aria-hidden="true"></i>
             </button>
-            <button class="btn btn-lg btn-outline-info right" v-on:click="undo" id="undoButton" data-intro='Click here to undo'>
+            <button class="btn btn-lg btn-outline-info right" v-on:click="undo" id="undoButton" >
               <i class="fa fa-undo" aria-hidden="true"></i>
             </button>
           </div>
@@ -477,7 +477,7 @@ var app =  new Vue({
       },
 
       startTour: function () {
-        introJs().start();
+        startIntro()
       },
     },
   });

@@ -1,82 +1,46 @@
-var tour = new Shepherd.Tour({
-  defaults: {
-    classes: 'shepherd-theme-arrows tourStyle'
-  }
-});
+function startIntro(){
+       var intro = introJs();
+         intro.setOptions({
+           steps: [
+             {
+               intro: `<h1> Welcome! </h1>
+                <p> This tutorial will step through the features of Medulina </p>
+
+               `
+             },
+             {
+               element: '#myCanvas',
+               intro: `
+
+               <h1 style="text-align: center"> Draw and Fill </h1>
+
+                <p> <strong> Click and Drag </strong> to draw a shape on the image </p>
+
+                <p> <strong> Double Tap </strong> to fill your shape </p>
 
 
-var tour_config = [
-  /*{
-    title: "Segment the stroke lesions",
-    text: `Brain researchers need your help to identify stroke lesions:
-    <br>
-    <br>
-    <img src="https://cdn.rawgit.com/medulina/context/f48d59e5/DentateGyrusSurface_black.png" width="200px;" class="mx-auto d-block" style="border-radius: 5px; border-style: solid; border-color:black;">
-
-    `,
-    showCancelLink: true,
-    attachTo: "nav top"
-  },
-
-  {
-    title: "Draw and fill",
-    text: `On an MRI scan, it might look like:
-    <br>
-    <br>
-    <img src="/images/example01.png" width="200px;" class="mx-auto d-block" style="border-radius: 5px; border-style: solid; border-color:black;">
-
-    `,
-    showCancelLink: true,
-    attachTo: "nav top"
-  },
-
-  {
-    title: "Find the Dentate",
-    text: `On this slice, the dentate is shown in red
-    <br>
-    <br>
-    <img src="/images/example01_answer.png" width="200px;" class="mx-auto d-block" style="border-radius: 5px; border-style: solid; border-color:black;">
-
-    `,
-    showCancelLink: true,
-    attachTo: "nav top"
-  },
-
-  {
-    title: "Find the Dentate",
-    text: `On this slice, the dentate is shown in red
-    <br>
-    <br>
-    <img src="/images/example02_context.png" width="200px;" class="mx-auto d-block" style="border-radius: 5px; border-style: solid; border-color:black;">
-
-    `,
-    showCancelLink: true,
-    attachTo: "nav top"
-  },
-
-  {
-    title: "Find the Dentate",
-    text: `But the cross section of the dentate looks different at different sections.
-    <br>
-    <br>
-    <img src="/images/example02.png" width="200px;" class="mx-auto d-block" style="border-radius: 5px; border-style: solid; border-color:black;">
-
-    `,
-    showCancelLink: true,
-    attachTo: "legend right"
-  },*/
-
-]
-
-tour_config.forEach(function(val, idx, arr){
-
-  tour.addStep('Step'+idx, {
-    title: val.title,
-    text: val.text,
-    //attachTo: '#menuButton bottom',
-    //advanceOn: {selector: "#menuButton", event: "click"},
-    showCancelLink: true,
-    attachTo: val.attachTo
-  });
-
-})
+               `
+             },
+             {
+               element: '#hideshow',
+               intro: "Ok, wasn't that fun?",
+               position: 'top'
+             },
+             {
+               element: '#menuButton',
+               intro: 'More features, more fun.',
+               position: 'top'
+             },
+             {
+               element: '#undoButton',
+               intro: "Another step.",
+               position: 'top'
+             },
+             {
+               element: '#submit_button',
+               intro: 'Get it, use it.'
+             }
+           ]
+         });
+         intro.start();
+     }
