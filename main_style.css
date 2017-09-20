@@ -347,3 +347,16 @@ nav h4 {
 .introjs-tooltipbuttons {
   text-align: center;
 }
+
+.introjs-helperLayer {
+  /*background: rgba(255,255,255, 0);*/
+  border-style: solid;
+  border-color: white;
+  border-width: 2px;
+}
+
+.introjs-fixParent {
+    z-index: auto !important;
+    opacity: 1.0 !important;
+ +  position: absolute;
+  }

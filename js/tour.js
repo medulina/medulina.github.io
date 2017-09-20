@@ -24,7 +24,7 @@ function startIntro(){
              {
                element: '#hideshow',
                intro: "Ok, wasn't that fun?",
-               position: 'top'
+               position: 'top-right-aligned'
              },
              {
                element: '#menuButton',
