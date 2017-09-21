@@ -9,7 +9,7 @@ function startIntro(){
                `
              },
              {
-               element: '#myCanvas',
+               //element: '#myCanvas',
                intro: `
 
                <h1 style="text-align: center"> Draw and Fill </h1>
@@ -23,22 +23,22 @@ function startIntro(){
              },
              {
                element: '#hideshow',
-               intro: "Ok, wasn't that fun?",
-               position: 'top-right-aligned'
+               intro: "Click here to hide/show your drawing",
+               position: 'top'
              },
              {
                element: '#menuButton',
-               intro: 'More features, more fun.',
+               intro: 'This menu gives you options to change your brush size, brush color, image birghtness and contrast',
                position: 'top'
              },
              {
                element: '#undoButton',
-               intro: "Another step.",
+               intro: "Click to undo",
                position: 'top'
              },
              {
                element: '#submit_button',
-               intro: 'Get it, use it.'
+               intro: 'Finally, <strong> submit </strong> your drawing'
              }
            ]
          });

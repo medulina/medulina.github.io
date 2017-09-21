@@ -1006,10 +1006,11 @@ get_images = function(url, callback){
     window.currentData = data
     console.log("got data", url, data)
     if (data._items.length == 0){
-      get_images(url, callback)
+      //get_images(url, callback)
+      alert("0 images!")
       return 0
     }
-    
+
     var base_url = data._items[0].pic
     var sliceNo = parseInt(data._items[0].slice).toString()
     console.log(sliceNo, sliceNo.length)

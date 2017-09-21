@@ -79,10 +79,12 @@ body {
   height:35.56px;
   width: 100%;
   left: 0;
-  z-index:999;
-  position:fixed;
+  /*z-index:999;*/
+  position:absolute;
   bottom:20px;
 }
+
+
 
 button{
   margin: 5px;
@@ -196,7 +198,7 @@ line-height:91px;
 
 nav {
   display: inline-block;
-  position: fixed;
+  position: absolute;
   width: 100%;
   color: white;
   text-align:center;
@@ -225,9 +227,9 @@ nav h4 {
 }
 
 .left {
-  position:fixed;
+  position: absolute;
   left:0;
-  bottom:0;
+  /*bottom:0;*/
 }
 
 .right{
@@ -349,14 +351,39 @@ nav h4 {
 }
 
 .introjs-helperLayer {
-  /*background: rgba(255,255,255, 0);*/
-  border-style: solid;
+  background: rgba(255,255,255, 0);
+  /*border-style: solid;
   border-color: white;
-  border-width: 2px;
+  border-width: 2px;*/
 }
 
 .introjs-fixParent {
     z-index: auto !important;
     opacity: 1.0 !important;
- +  position: absolute;
+    position: absolute;
+  }
+
+  @media only screen
+  and (min-device-width : 320px)
+  and (max-device-width : 370px) {
+    /* STYLES GO HERE */
+
+    .bottomMenu {
+      background-color:rgba(255,255,255,0);
+      height:35.56px;
+      width: 100%;
+      left: 0;
+      /*z-index:999;*/
+      position:fixed;
+      bottom:20px;
+    }
+
+    nav {
+      display: inline-block;
+      position: fixed;
+      width: 100%;
+      color: white;
+      text-align:center;
+    }
+
   }
