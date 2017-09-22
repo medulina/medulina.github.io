@@ -66,7 +66,7 @@ function startIntro(){
                   console.log(overlay)
                   for(i=0; i<overlay.length; i++) {
                       //overlay[i].style.position = 'fixed';
-                      overlay[i].style.bottom = window.innerWidth <= 478 ? '100px' : '0px';
+                      overlay[i].style.bottom = window.innerWidth <= 478 ? '110px' : '0px';
                       overlay[i].style.top = null;
 
                   }
