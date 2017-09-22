@@ -80,7 +80,7 @@ body {
   width: 100%;
   left: 0;
   /*z-index:999;*/
-  position:absolute;
+  position: fixed;
   bottom:20px;
 }
 
@@ -198,7 +198,7 @@ line-height:91px;
 
 nav {
   display: inline-block;
-  position: absolute;
+  position: fixed;
   width: 100%;
   color: white;
   text-align:center;
@@ -227,13 +227,13 @@ nav h4 {
 }
 
 .left {
-  position: absolute;
+  position: fixed;
   left:0;
-  /*bottom:0;*/
+  bottom:0;
 }
 
 .right{
-  position:fixed;
+  position: fixed;
   right:0;
   bottom:0;
 }
@@ -352,6 +352,7 @@ nav h4 {
 
 .introjs-helperLayer {
   background: rgba(255,255,255, 0);
+  visibility: hidden;
   /*border-style: solid;
   border-color: white;
   border-width: 2px;*/
@@ -363,27 +364,6 @@ nav h4 {
     position: absolute;
   }
 
-  @media only screen
-  and (min-device-width : 320px)
-  and (max-device-width : 370px) {
-    /* STYLES GO HERE */
-
-    .bottomMenu {
-      background-color:rgba(255,255,255,0);
-      height:35.56px;
-      width: 100%;
-      left: 0;
-      /*z-index:999;*/
-      position:fixed;
-      bottom:20px;
-    }
-
-    nav {
-      display: inline-block;
-      position: fixed;
-      width: 100%;
-      color: white;
-      text-align:center;
-    }
-
+  .introjs-overlay {
+    background: unset !important;
   }

@@ -1,6 +1,7 @@
 function startIntro(){
        var intro = introJs();
          intro.setOptions({
+
            steps: [
              {
                intro: `<h1> Welcome! </h1>
@@ -41,6 +42,43 @@ function startIntro(){
                intro: 'Finally, <strong> submit </strong> your drawing'
              }
            ]
+         });
+         intro.onafterchange(function(targetElement) {
+            console.log("currentStep is", this._currentStep)
+              if(this._currentStep == 2){
+                  overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
+                  console.log(overlay)
+                  for(i=0; i<overlay.length; i++) {
+                      //overlay[i].style.left = '10px';
+                      //overlay[i].style.right = '10px';
+                      overlay[i].style.position = 'fixed';
+                      overlay[i].style.bottom = '20px';
+                      overlay[i].style.top = null;
+                      //window.scrollTo(0,0)
+
+                      //Set css properties like this.
+                  }
+              }
+              //"introjs-fixedTooltip" is the other thing
+              if(this._currentStep == 3){
+                  overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
+                  console.log(overlay)
+                  for(i=0; i<overlay.length; i++) {
+                      //overlay[i].style.position = 'fixed';
+                      overlay[i].style.bottom = window.innerWidth <= 478 ? '120px' : '0px';
+                      overlay[i].style.top = null;
+
+                  }
+              }
+              if(this._currentStep == 4){
+                  overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
+                  console.log(overlay)
+                  for(i=0; i<overlay.length; i++) {
+                    overlay[i].style.position = 'fixed';
+                      overlay[i].style.bottom = '20px';
+                      overlay[i].style.top = null;
+                  }
+              }
          });
          intro.start();
      }
