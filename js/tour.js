@@ -1,5 +1,8 @@
 function startIntro(){
        var intro = introJs();
+
+       var is_small = window.innerWidth <= 478 ? true : false
+
          intro.setOptions({
 
            steps: [
@@ -36,22 +39,115 @@ function startIntro(){
                `
              },
              {
-               element: '#hideshow',
-               intro: `Click here to <strong>hide</strong>/<strong>show</strong> your drawing`,
+               //element: is_small ? null : '#hideshow',
+               intro: `
+
+               <h2 style="text-align: center"> Hide and Show </h2>
+
+
+               Click TMP to <strong>hide</strong>/<strong>show</strong>
+                       your drawing`.replace("TMP", `
+                       <button class="btn btn-lg btn-outline-info" style="background-color: #313e50">
+                           <i class="fa fa-eye" aria-hidden="true"></i>
+                       </button>
+                       `),
                position: 'top'
              },
              {
-               element: '#menuButton',
-               intro: `This menu gives you options to
-               change your <strong>brush size</strong>,
-               <strong>brush color </strong>,
-               image <strong>brightness</strong>
-               and <strong>contrast</strong>`,
+               //element: '#menuButton',
+               intro: `
+
+               <h2 style="text-align: center"> Brush Options </h2>
+
+               <p>The menu button
+
+               <button class="btn btn-lg btn-outline-info" style="background-color: #313e50">
+                   <i class="fa fa-chevron-up" aria-hidden="true"></i>
+               </button>
+
+               gives you options to
+               change your
+               </p>
+               <p style="text-align: center">
+               <i class="fa fa-paint-brush fa-2x tour" style="
+                   background: #313e50;
+                   color: white;
+                   padding: 3px;
+                   border-style: solid;
+                   border-color: #87bcde;
+                   border-width: 1px;
+                   border-radius: 5px;
+               "></i>
+
+               <strong>brush size</i></strong></p>
+               <p style="text-align: center">and</p>
+               <p style="text-align: center">
+               <i class="fa fa-tint fa-2x tour" style="
+                   background: #313e50;
+                   color: white;
+                   padding: 3px;
+                   padding-left:9px;
+                   padding-right: 9px;
+                   border-style: solid;
+                   border-color: #87bcde;
+                   border-width: 1px;
+                   border-radius: 5px;
+               "></i>
+
+               <strong>brush color</i></strong></p>`,
                position: 'top'
              },
              {
-               element: '#undoButton',
-               intro: "Click here to <strong>undo</strong>",
+               //element: '#menuButton',
+               intro: `
+
+               <h2 style="text-align: center"> Image Options </h2>
+
+               <p>You can also change the image
+               </p>
+               <p style="text-align: center">
+               <i class="fa fa-sun-o fa-2x tour" style="
+                   background: #313e50;
+                   color: white;
+                   padding: 3px;
+                   border-style: solid;
+                   border-color: #87bcde;
+                   border-width: 1px;
+                   border-radius: 5px;
+               "></i>
+
+               <strong>brightness</i></strong></p>
+               <p style="text-align: center">and</p>
+               <p style="text-align: center">
+               <i class="fa fa-adjust fa-2x tour" style="
+                   background: #313e50;
+                   color: white;
+                   padding: 3px;
+                   padding-left:5px;
+                   padding-right: 5px;
+                   border-style: solid;
+                   border-color: #87bcde;
+                   border-width: 1px;
+                   border-radius: 5px;
+               "></i>
+
+               <strong>contrast</i></strong></p>`,
+               position: 'top'
+             },
+             {
+               //element: '#undoButton',
+               intro: `
+
+               <h2 style="text-align: center"> Undo </h2>
+
+
+               Click
+
+               <button class="btn btn-lg btn-outline-info" style="background-color: #313e50">
+                   <i class="fa fa-undo" aria-hidden="true"></i>
+               </button>
+
+               to <strong>undo</strong>`,
                position: 'top'
              },
              {
@@ -69,7 +165,7 @@ function startIntro(){
             console.log("currentStep is", this._currentStep)
             //window.scrollTo(0,0)
 
-              if(this._currentStep == 3){
+              /*if(this._currentStep == 3){
                   overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
                   console.log(overlay)
                   for(i=0; i<overlay.length; i++) {
@@ -81,19 +177,16 @@ function startIntro(){
 
                       //Set css properties like this.
                   }
-              }
+              }*/
               //"introjs-fixedTooltip" is the other thing
               if(this._currentStep == 4){
-                  overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
-                  console.log(overlay)
-                  for(i=0; i<overlay.length; i++) {
-                      //overlay[i].style.position = 'fixed';
-                      overlay[i].style.bottom = window.innerWidth <= 478 ? '110px' : '0px';
-                      overlay[i].style.top = null;
-
-                  }
+                  app.show = true;
               }
-              if(this._currentStep == 5){
+
+              if(this._currentStep == 6){
+                  app.show = false;
+              }
+              /*if(this._currentStep == 5){
                   overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
                   console.log(overlay)
                   for(i=0; i<overlay.length; i++) {
@@ -101,7 +194,7 @@ function startIntro(){
                       overlay[i].style.bottom = '20px';
                       overlay[i].style.top = null;
                   }
-              }
+              }*/
          });
          intro.start();
      }
