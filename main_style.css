@@ -111,6 +111,7 @@ button{
 .scrolls {
     overflow-x: scroll;
     overflow-y: hidden;
+    /*overflow: hidden;*/
     white-space:nowrap
 }
 .imageDiv {

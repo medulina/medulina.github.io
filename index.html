@@ -498,7 +498,10 @@
         e.preventDefault();
     }*/
 
-    document.ontouchmove = function(e){
+    $(".bottomMenu").ontouchmove = function(e){
+        e.preventDefault();
+    }
+    $("nav").ontouchmove = function(e){
         e.preventDefault();
     }
 
