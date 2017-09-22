@@ -498,12 +498,12 @@
         e.preventDefault();
     }*/
 
-    $(".bottomMenu").ontouchmove = function(e){
-        e.preventDefault();
+    document.ontouchmove = function(e){
+        if (e.target.type != "range"){
+          e.preventDefault();
+        }
     }
-    $("nav").ontouchmove = function(e){
-        e.preventDefault();
-    }
+
 
 </script>
 
