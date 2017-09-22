@@ -59,7 +59,7 @@ function startIntro(){
 
                <h2 style="text-align: center"> Brush Options </h2>
 
-               <p>The menu button
+               The menu button
 
                <button class="btn btn-lg btn-outline-info" style="background-color: #313e50">
                    <i class="fa fa-chevron-up" aria-hidden="true"></i>
@@ -67,8 +67,8 @@ function startIntro(){
 
                gives you options to
                change your
-               </p>
-               <p style="text-align: center">
+
+               <p style="margin:0">
                <i class="fa fa-paint-brush fa-2x tour" style="
                    background: #313e50;
                    color: white;
@@ -79,9 +79,8 @@ function startIntro(){
                    border-radius: 5px;
                "></i>
 
-               <strong>brush size</i></strong></p>
-               <p style="text-align: center">and</p>
-               <p style="text-align: center">
+               <strong>brush size</i></strong> and</p>
+               <p style="margin-top: 3px; margin-bottom: 0;">
                <i class="fa fa-tint fa-2x tour" style="
                    background: #313e50;
                    color: white;
@@ -103,9 +102,9 @@ function startIntro(){
 
                <h2 style="text-align: center"> Image Options </h2>
 
-               <p>You can also change the image
-               </p>
-               <p style="text-align: center">
+                 You can also change the image
+
+               <p style="display: inline; margin: 0">
                <i class="fa fa-sun-o fa-2x tour" style="
                    background: #313e50;
                    color: white;
@@ -116,9 +115,8 @@ function startIntro(){
                    border-radius: 5px;
                "></i>
 
-               <strong>brightness</i></strong></p>
-               <p style="text-align: center">and</p>
-               <p style="text-align: center">
+               <strong>brightness</i></strong></p> and
+               <p style="margin-top: 3px; margin-bottom:0px;">
                <i class="fa fa-adjust fa-2x tour" style="
                    background: #313e50;
                    color: white;
@@ -151,8 +149,16 @@ function startIntro(){
                position: 'top'
              },
              {
-               element: '#submit_button',
-               intro: 'Finally, <strong> submit </strong> your drawing'
+               //element: '#submit_button',
+               intro: `
+               <h2 style="text-align: center"> Submit </h2>
+               When you are done,
+               <button class="btn btn-med btn-primary colorBold">
+                   Submit
+               </button>
+
+                your drawing to evaulate your results
+               `
              }
            ]
          });
