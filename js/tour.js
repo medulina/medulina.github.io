@@ -16,7 +16,7 @@ function startIntro(){
                //element: '#myCanvas',
                intro: `
 
-               <h2 style="text-align: center"> Draw and Fill </h2>
+               <h4 style="text-align: center"> Draw and Fill </h4>
 
                 <p> <strong> Click and Drag </strong> to draw a shape on the image </p>
 
@@ -29,7 +29,7 @@ function startIntro(){
                //element: '#myCanvas',
                intro: `
 
-               <h2 style="text-align: center"> Zoom and Pan </h2>
+               <h4 style="text-align: center"> Zoom and Pan </h4>
 
                 <p> <strong> Scroll </strong>  or <strong> Pinch </strong> to zoom the image </p>
 
@@ -42,7 +42,7 @@ function startIntro(){
                //element: is_small ? null : '#hideshow',
                intro: `
 
-               <h2 style="text-align: center"> Hide and Show </h2>
+               <h4 style="text-align: center"> Hide and Show </h4>
 
 
                Click TMP to <strong>hide</strong>/<strong>show</strong>
@@ -57,7 +57,7 @@ function startIntro(){
                //element: '#menuButton',
                intro: `
 
-               <h2 style="text-align: center"> Brush Options </h2>
+               <h4 style="text-align: center"> Brush Options </h4>
 
                The menu button
 
@@ -100,7 +100,7 @@ function startIntro(){
                //element: '#menuButton',
                intro: `
 
-               <h2 style="text-align: center"> Image Options </h2>
+               <h4 style="text-align: center"> Image Options </h4>
 
                  You can also change the image
 
@@ -136,7 +136,7 @@ function startIntro(){
                //element: '#undoButton',
                intro: `
 
-               <h2 style="text-align: center"> Undo </h2>
+               <h4 style="text-align: center"> Undo </h4>
 
 
                Click
@@ -151,7 +151,7 @@ function startIntro(){
              {
                //element: '#submit_button',
                intro: `
-               <h2 style="text-align: center"> Submit </h2>
+               <h4 style="text-align: center"> Submit </h4>
                When you are done,
                <button class="btn btn-med btn-primary colorBold">
                    Submit
