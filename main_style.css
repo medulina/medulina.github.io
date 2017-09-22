@@ -198,7 +198,7 @@ line-height:91px;
 
 nav {
   display: inline-block;
-  position: fixed;
+  position: fixed !important;
   width: 100%;
   color: white;
   text-align:center;

@@ -45,6 +45,8 @@ function startIntro(){
          });
          intro.onafterchange(function(targetElement) {
             console.log("currentStep is", this._currentStep)
+            window.scrollTo(0,0)
+
               if(this._currentStep == 2){
                   overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
                   console.log(overlay)
@@ -54,7 +56,6 @@ function startIntro(){
                       overlay[i].style.position = 'fixed';
                       overlay[i].style.bottom = '20px';
                       overlay[i].style.top = null;
-                      //window.scrollTo(0,0)
 
                       //Set css properties like this.
                   }
