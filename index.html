@@ -104,35 +104,33 @@
             <!-- End Dropdown menu for user -->
 
             <div class="statusBar colorNeutralBackground">
-                <div v-if="loading" style="color:white;">
-                    <h4>
-                  <a class="btn btn-outline-info btn-xs" href="https://medulina.com" style="padding:0;">
-                    <img src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="27px" style="padding: 2px;">
-                  </a>
+              <h4>
+              <a class="btn btn-outline-info btn-xs" v-on:click="startTour">
+                <i class="fa fa-info" aria-hidden="true"></i>
+              </a>
+                <div v-if="loading" style="color:white; display: inline;">
+
                   <i class="fa fa-cog fa-spin fa-fw"></i>
-                </h4>
+
                     <span class="sr-only">Loading...</span>
                 </div>
-                <div v-else>
-                    <h4 v-if="status == 'Submit'">
-                  <a class="btn btn-outline-info btn-xs" v-on:click="startTour">
-                    <i class="fa fa-info" aria-hidden="true"></i>
-                  </a>
+                <div v-else style="display:inline">
+                    <span v-if="status == 'Submit'">
+
                   {{instruction}}
-                </h4>
-                    <h4 v-if="status == 'Next'">
-                  <a class="btn btn-outline-info btn-xs" v-on:click="startTour">
-                    <i class="fa fa-info" aria-hidden="true"></i>
-                  </a>
+                </span>
+                    <span v-if="status == 'Next'">
+
 
                     <i v-if="appMode=='train'" class="fa fa-bullseye" aria-hidden="true" style="padding-right: 0.25em;"></i>{{score.dice | | formatNumber}}
 
                   <i v-if="appMode=='test'">
                     Congrats, that was a new one!
                   </i>
+                </span>
 
-                </h4>
                 </div>
+                </h4>
             </div>
 
             <!-- Start submit button -->
