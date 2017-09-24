@@ -104,35 +104,33 @@
             <!-- End Dropdown menu for user -->
 
             <div class="statusBar colorNeutralBackground">
-                <div v-if="loading" style="color:white;">
-                    <h4>
-                  <a class="btn btn-outline-info btn-xs" href="https://medulina.com" style="padding:0;">
-                    <img src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="27px" style="padding: 2px;">
-                  </a>
+              <h4>
+              <a class="btn btn-outline-info btn-xs" v-on:click="startTour">
+                <i class="fa fa-info" aria-hidden="true"></i>
+              </a>
+                <div v-if="loading" style="color:white; display: inline;">
+
                   <i class="fa fa-cog fa-spin fa-fw"></i>
-                </h4>
+
                     <span class="sr-only">Loading...</span>
                 </div>
-                <div v-else>
-                    <h4 v-if="status == 'Submit'">
-                  <a class="btn btn-outline-info btn-xs" v-on:click="startTour">
-                    <i class="fa fa-info" aria-hidden="true"></i>
-                  </a>
+                <div v-else style="display:inline">
+                    <span v-if="status == 'Submit'">
+
                   {{instruction}}
-                </h4>
-                    <h4 v-if="status == 'Next'">
-                  <a class="btn btn-outline-info btn-xs" v-on:click="startTour">
-                    <i class="fa fa-info" aria-hidden="true"></i>
-                  </a>
+                </span>
+                    <span v-if="status == 'Next'">
+
 
                     <i v-if="appMode=='train'" class="fa fa-bullseye" aria-hidden="true" style="padding-right: 0.25em;"></i>{{score.dice | | formatNumber}}
 
                   <i v-if="appMode=='test'">
                     Congrats, that was a new one!
                   </i>
+                </span>
 
-                </h4>
                 </div>
+                </h4>
             </div>
 
             <!-- Start submit button -->
@@ -312,10 +310,10 @@
             <h5 class="modal-title">{{content.title}}</h5>
           </div>
           <div class="modal-body">
-            <a v-bind:href="content.url"><img style="width:100%;" v-bind:src="content.image" /> </a>
+            <a v-bind:href="content.url"><img style="width:100%; max-width:200px;" v-bind:src="content.image" class="mx-auto d-block"/> </a>
           </div>
           <div class="modal-footer">
-            {{content.footer}}
+            <a class="btn btn-primary mx-auto d-block" v-bind:href="content.url">{{content.footer}}</button>
           </div>
         </div>
       </div>
@@ -391,7 +389,7 @@
                 n_test: 0,
                 n_try: 0,
                 id: null,
-                footer: 'click the icon to log in with GitHub',
+                footer: 'Log in with GitHub',
                 title: 'Log in with GitHub',
                 url: 'https://github.com/login/oauth/authorize?client_id=' + get_oauth_id(),
                 image: 'images/Octocat1.jpg',
@@ -495,6 +493,18 @@
             },
         },
     });
+
+    /*document.ontouchstart = function(e){
+        e.preventDefault();
+    }*/
+
+    document.ontouchmove = function(e){
+        if (e.target.type != "range"){
+          e.preventDefault();
+        }
+    }
+
+
 </script>
 
 </html>
