@@ -1070,7 +1070,8 @@ mc.on('pinch', function(e) {
     // do something cool
     console.log("pinch", window.mode)
     if (e){
-      if (window.mode == "view"){
+      //if (window.mode == "view"){
+        window.mode = "view"
         e.preventDefault()
         tmpzoom = xfm.clamp(e.scale/window.startScale*window.zoomFactor, 1, 5)
         view.setZoom(tmpzoom)
@@ -1079,7 +1080,7 @@ mc.on('pinch', function(e) {
         //var zf = e.scale/window.zoomFactor
         //window.zoomFactor = zf
         //view.setZoom(window.zoomFactor)
-      }
+      //}
     }
 
 });
