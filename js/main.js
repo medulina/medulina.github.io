@@ -1069,7 +1069,7 @@ var tmpzoom = 1
 // subscribe to events
 mc.on('pinch', function(e) {
     // do something cool
-    console.log("pinch", window.mode)
+    //console.log("pinch", window.mode)
     if (e){
       //if (window.mode == "view"){
         window.mode = "view"
@@ -1088,7 +1088,7 @@ mc.on('pinch', function(e) {
 
 mc.on('pinchend', function(e) {
     // do something cool
-    console.log("pinchend", window.mode)
+    //console.log("pinchend", window.mode)
 
     if (e){
         window.mode = window.prevMode
@@ -1106,7 +1106,7 @@ mc.on('pinchend', function(e) {
 });
 
 mc.on('pinchstart', function(e) {
-    console.log("pinchstart", window.mode)
+    //console.log("pinchstart", window.mode)
     // do something cool
 
     if (e){
