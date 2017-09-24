@@ -836,6 +836,7 @@ dragHandler = function(e){
       break
     case "view":
       doPan(e)
+      window.mode = "paint"
       break;
 
     default:
