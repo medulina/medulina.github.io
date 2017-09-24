@@ -835,7 +835,7 @@ dragHandler = function(e){
       doZoom(e)
       break
     case "view":
-      doPan(e)
+      //doPan(e)
       break;
 
     default:
@@ -1074,6 +1074,7 @@ mc.on('pinch', function(e) {
         e.preventDefault()
         tmpzoom = xfm.clamp(e.scale/window.startScale*window.zoomFactor, 1, 5)
         view.setZoom(tmpzoom)
+        doPan(e)
         //console.log("pinchin", e.scale)
         //var zf = e.scale/window.zoomFactor
         //window.zoomFactor = zf
