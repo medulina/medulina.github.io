@@ -1061,6 +1061,22 @@ onmousewheel = mousewheel
 
 
 function start(base_url) {
+  try {
+    paper.projects[0].clear()
+    draw.history = [
+      []
+    ]
+    window.zoomFactor = 1
+
+    view.setZoom(1);
+    window.panFactor = {
+      x: 0,
+      y: 0
+    }
+  } catch (e) {
+    console.log("starting afresh")
+  }
+
 
   var base = new Raster({
     crossOrigin: 'anonymous',
@@ -1103,6 +1119,7 @@ function start(base_url) {
     doBrightCont()
     //("#currentTool").html(window.mode)
     stopProgress()
+    show_eval()
 
   };
 }
@@ -1133,7 +1150,7 @@ get_images = function(url, callback) {
 
     //var mask_url = get_mask_url(data._items[0])
     //console.log("mask url is", mask_url)
-    callback(base_url)
+    start(base_url)
     window.appMode = "train"
 
     /*$.get(mask_url, function(data, status, jqXhr){

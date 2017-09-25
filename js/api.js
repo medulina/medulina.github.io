@@ -192,25 +192,7 @@ get_next = function() {
 
   })*/
   var url = get_image_url()
-  get_images(url, function(base_url) {
-    base.setSource(base_url)
-
-    roi.clear()
-    draw.history = [
-      []
-    ]
-    window.zoomFactor = 1
-    tp.clear()
-    fp.clear()
-    fn.clear()
-    view.setZoom(1);
-    window.panFactor = {
-      x: 0,
-      y: 0
-    }
-
-    show_eval()
-  })
+  get_images(url)
 
 
 }
