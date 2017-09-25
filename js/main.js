@@ -709,7 +709,7 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
 
   var num_fill = 0
   var to_fill = {}
-  if (targetVal === replacementVal) {
+  if (targetVal == replacementVal) {
     return
   }
   if (roi.pixelLog[node.x][node.y] != targetVal) {
@@ -736,18 +736,18 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
       continue
     }
 
-    while (x > 0 && roi.pixelLog[x - 1][y] === targetVal) {
+    while (x > 0 && roi.pixelLog[x - 1][y] == targetVal) {
       x -= 1;
     }
 
     var nei = neighboors(y);
-    while (x < (roi.width - 1) && roi.pixelLog[x][y] === targetVal) {
+    while (x < (roi.width - 1) && roi.pixelLog[x][y] == targetVal) {
       draw.addHistory(x, y, roi.pixelLog[x][y], replacementVal);
       roi.setPixelLogNoColor(x, y, draw.LUT[replacementVal], replacementVal);
       ++num_fill
       for (i = 0; i < nei.length; i++) {
         var y_nei = nei[i]
-        if (roi.pixelLog[x][y_nei] === targetVal) {
+        if (roi.pixelLog[x][y_nei] == targetVal) {
           queue.push({
             x: x,
             y: y_nei
