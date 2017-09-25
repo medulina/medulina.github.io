@@ -2,7 +2,7 @@ paper.install(window)
 
 window.plotted = false
 
-Vue.filter("formatNumber", function (value) {
+Vue.filter("formatNumber", function(value) {
   return numeral(value).format("0.0[0]"); // displaying other groupings/separators is possible, look at the docs
 });
 
@@ -10,14 +10,16 @@ Vue.filter("formatNumber", function (value) {
   Some D3 highlight options
 */
 
-var highlighterOn = function(d){
+var highlighterOn = function(d) {
   return function(dat) {
     return dat == d ? colors.teal : dat == window.currentClicked ? colors.bright : colors.light
   }
 }
 
-var highlighterOff = function(d){
-  return function(dat) { return dat == window.currentClicked ? colors.bright: colors.light;}
+var highlighterOff = function(d) {
+  return function(dat) {
+    return dat == window.currentClicked ? colors.bright : colors.light;
+  }
 }
 
 var colors = {
@@ -33,8 +35,13 @@ var colors = {
   Prepare the D3 SVG and axis
 */
 
-function prepare(selectorParent, selector, axisLabels){
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+function prepare(selectorParent, selector, axisLabels) {
+  var margin = {
+      top: 20,
+      right: 20,
+      bottom: 30,
+      left: 40
+    },
     width = $(selectorParent).width() - margin.left - margin.right,
     height = $(selectorParent).height() - margin.top - margin.bottom;
 
@@ -46,16 +53,24 @@ function prepare(selectorParent, selector, axisLabels){
    */
 
   // setup x
-  var xValue = function(d) { return d.x;}, // data -> value
-      xScale = d3.scaleLinear().range([0, width]), // value -> display
-      xMap = function(d) { return xScale(xValue(d));}, // data -> display
-      xAxis = d3.axisBottom(xScale);
+  var xValue = function(d) {
+      return d.x;
+    }, // data -> value
+    xScale = d3.scaleLinear().range([0, width]), // value -> display
+    xMap = function(d) {
+      return xScale(xValue(d));
+    }, // data -> display
+    xAxis = d3.axisBottom(xScale);
 
   // setup y
-  var yValue = function(d) { return d.y;}, // data -> value
-      yScale = d3.scaleLinear().range([height, 0]), // value -> display Note order swap (bottom is higher)
-      yMap = function(d) { return yScale(yValue(d));}, // data -> display
-      yAxis = d3.axisLeft(yScale);
+  var yValue = function(d) {
+      return d.y;
+    }, // data -> value
+    yScale = d3.scaleLinear().range([height, 0]), // value -> display Note order swap (bottom is higher)
+    yMap = function(d) {
+      return yScale(yValue(d));
+    }, // data -> display
+    yAxis = d3.axisLeft(yScale);
 
   // setup fill color
   //var cValue = function(d) { return d.Manufacturer;},
@@ -64,93 +79,109 @@ function prepare(selectorParent, selector, axisLabels){
   xScale.range([0, width]).nice();
   yScale.range([height, 0]).nice();
 
-  yAxis.ticks(Math.max(height/50, 2));
-  xAxis.ticks(Math.max(width/50, 2));
+  yAxis.ticks(Math.max(height / 50, 2));
+  xAxis.ticks(Math.max(width / 50, 2));
 
-  xScale.domain([0, 50]);//d3.max(data, prep.xValue)]);
+  xScale.domain([0, 50]); //d3.max(data, prep.xValue)]);
   yScale.domain([0, 1]);
 
   // add the graph canvas to the body of the webpage
   var svg = d3.select(selector)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
     .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   svg.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")") //take X to bottom of SVG
-      .call(xAxis)
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")") //take X to bottom of SVG
+    .call(xAxis)
     .append("text")
-      .attr("class", "label")
-      .attr("x", width)
-      .attr("y", -6)
-      .style("text-anchor", "end")
-      .style("fill", "black")
-      .text(axisLabels.x);
+    .attr("class", "label")
+    .attr("x", width)
+    .attr("y", -6)
+    .style("text-anchor", "end")
+    .style("fill", "black")
+    .text(axisLabels.x);
 
   // y-axis
   svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis)
+    .attr("class", "y axis")
+    .call(yAxis)
     .append("text")
-      .attr("class", "label")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .style("fill", "black")
-      .text(axisLabels.y);
+    .attr("class", "label")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
+    .attr("dy", ".71em")
+    .style("text-anchor", "end")
+    .style("fill", "black")
+    .text(axisLabels.y);
 
-  return {xValue: xValue, yValue:yValue, xScale: xScale,
-          yScale: yScale, xMap: xMap, yMap, yMap,
-          xAxis: xAxis, yAxis: yAxis, svg: svg, margin:margin, width: width, height: height}
+  return {
+    xValue: xValue,
+    yValue: yValue,
+    xScale: xScale,
+    yScale: yScale,
+    xMap: xMap,
+    yMap,
+    yMap,
+    xAxis: xAxis,
+    yAxis: yAxis,
+    svg: svg,
+    margin: margin,
+    width: width,
+    height: height
+  }
 }
 
 /*
   Populate the prepared SVG with data
 */
 
-function populate(data, prep){
+function populate(data, prep) {
 
 
   // update dots (i.e add new ones)
   var foo = prep.svg.selectAll(".dot")
-      .data(data)
+    .data(data)
 
-    foo.enter().append("circle")
-      .attr("class", "dot")
-      .merge(foo)
-      .style("fill", function(d) { return "#87BCDE";})
-       .attr("cx", prep.xMap)
-       .attr("r", 1) // Change size
-      .transition()
-        .duration(1000)
-        .attr("r", 7)
-        //.ease(d3.easeBounce)
-          .attr("cx", prep.xMap)
-          .attr("cy", prep.yMap)
+  foo.enter().append("circle")
+    .attr("class", "dot")
+    .merge(foo)
+    .style("fill", function(d) {
+      return "#87BCDE";
+    })
+    .attr("cx", prep.xMap)
+    .attr("r", 1) // Change size
+    .transition()
+    .duration(1000)
+    .attr("r", 7)
+    //.ease(d3.easeBounce)
+    .attr("cx", prep.xMap)
+    .attr("cy", prep.yMap)
 
 
   prep.svg.selectAll(".dot")
-      .on("mouseover", function(d) {
-          prep.svg.selectAll(".dot").style("fill", highlighterOn(d))
-      })
-      .on("mouseout", function(d) {
-          prep.svg.selectAll(".dot").style("fill", highlighterOff(d))
-      })
-      .on("click", onClick)
+    .on("mouseover", function(d) {
+      prep.svg.selectAll(".dot").style("fill", highlighterOn(d))
+    })
+    .on("mouseout", function(d) {
+      prep.svg.selectAll(".dot").style("fill", highlighterOff(d))
+    })
+    .on("click", onClick)
 
 
   //remove dots
   prep.svg.selectAll(".dot")
-     .data(data)
-     .exit()
-     .transition()
-     .duration(1000)
-      .style('opacity', 1e-6)
-      .attr("cy", function(d){return 0})
-      .remove();
+    .data(data)
+    .exit()
+    .transition()
+    .duration(1000)
+    .style('opacity', 1e-6)
+    .attr("cy", function(d) {
+      return 0
+    })
+    .remove();
 
 }
 
@@ -161,19 +192,19 @@ function populate(data, prep){
 
 window.resizeGraph = function(selector, selectorParent, prep) {
   var width = $(selectorParent).width() - prep.margin.left - prep.margin.right,
-      height = $(selectorParent).height() - prep.margin.top - prep.margin.bottom;
+    height = $(selectorParent).height() - prep.margin.top - prep.margin.bottom;
 
   var svg = d3.select(selector)
-      .attr("width", width + prep.margin.left + prep.margin.right)
-      .attr("height", height + prep.margin.top + prep.margin.bottom)
+    .attr("width", width + prep.margin.left + prep.margin.right)
+    .attr("height", height + prep.margin.top + prep.margin.bottom)
 
   console.log("width is", width, "height is", height)
 
   prep.xScale.range([0, width]).nice();
   prep.yScale.range([height, 0]).nice();
 
-  prep.yAxis.ticks(Math.max(height/50, 2));
-  prep.xAxis.ticks(Math.max(width/50, 2));
+  prep.yAxis.ticks(Math.max(height / 50, 2));
+  prep.xAxis.ticks(Math.max(width / 50, 2));
 
   svg.select('.x.axis')
     .attr("transform", "translate(0," + height + ")")
@@ -189,8 +220,8 @@ window.resizeGraph = function(selector, selectorParent, prep) {
 
 
   svg.selectAll('.dot')
-  .attr("cx", prep.xMap)
-  .attr("cy", prep.yMap)
+    .attr("cx", prep.xMap)
+    .attr("cy", prep.yMap)
 }
 
 /*
@@ -198,13 +229,13 @@ window.resizeGraph = function(selector, selectorParent, prep) {
 */
 
 
-function plotD3(selector, selectorParent, data, axisLabels){
+function plotD3(selector, selectorParent, data, axisLabels) {
   //based on
   // http://bl.ocks.org/weiglemc/6185069
 
   console.log("data is", data)
 
-  if (!window.plotted){
+  if (!window.plotted) {
     window.prep = prepare(selectorParent, selector, axisLabels)
   }
 
@@ -215,54 +246,72 @@ function plotD3(selector, selectorParent, data, axisLabels){
 
 }
 
-var app =  new Vue({
-    el: '#main',
-    data: {
-      user_data: [],
-      user_data_meta: null,
-      user_info: {},
-      all_users: [],
-      current_user: null,
-      current_image: null,
-      hover_idx: null,
-    },
-    computed: {
-      rank: function(){
-        var tmp = _.find(this.all_users, {"username": this.user_info.username})
-        if (tmp){
-          return tmp["rank"] + 1
-        }
-      },
-    },
-    methods: {
-      query: function(){
-        return 'mask?where={"mode":"try","user_id":"' +this.current_user + '"}&max_results=100&sort=-_created'
-      },
-      plotter: function(){
-
-        var to_plot = {x:[], y:[], type:"scatter", mode:'markers', marker:{size:10}}
-        var me = this
-        var dataset = []
-        this.user_data.forEach(function(d, idx, arr){
-                  dataset.push({x: idx+1, y: d.score})
-                })
-        plotD3("#svg","#tester", dataset, {x:"Try #", y:"Dice Coefficient"})
-
-      },
-
-      setPlayer: function(player){
-        //set_user(player)
-        app.current_user = player;
-        a.remove("user_id")
-        a.set("user_id", player)
-        //a.go()
-        console.log("not refreshing?")
-        window.history.pushState({path:a.url},'',a.url);
-        set_user(player)
+var app = new Vue({
+  el: '#main',
+  data: {
+    user_data: [],
+    user_data_meta: null,
+    user_info: {},
+    all_users: [],
+    current_user: null,
+    current_image: null,
+    hover_idx: null,
+  },
+  computed: {
+    rank: function() {
+      var tmp = _.find(this.all_users, {
+        "username": this.user_info.username
+      })
+      if (tmp) {
+        return tmp["rank"] + 1
       }
+    },
+  },
+  methods: {
+    query: function() {
+      return 'mask?where={"mode":"try","user_id":"' + this.current_user + '"}&max_results=100&sort=-_created'
+    },
+    plotter: function() {
 
+      var to_plot = {
+        x: [],
+        y: [],
+        type: "scatter",
+        mode: 'markers',
+        marker: {
+          size: 10
+        }
+      }
+      var me = this
+      var dataset = []
+      this.user_data.forEach(function(d, idx, arr) {
+        dataset.push({
+          x: idx + 1,
+          y: d.score
+        })
+      })
+      plotD3("#svg", "#tester", dataset, {
+        x: "Try #",
+        y: "Dice Coefficient"
+      })
+
+    },
+
+    setPlayer: function(player) {
+      //set_user(player)
+      app.current_user = player;
+      a.remove("user_id")
+      a.set("user_id", player)
+      //a.go()
+      console.log("not refreshing?")
+      window.history.pushState({
+        path: a.url
+      }, '', a.url);
+      set_user(player)
     }
-  })
+
+  }
+})
 
 var url = 'https://api.medulina.com/api/v1/'
 //var init_user = '5991b1bdf441bd00082835a3'
@@ -271,61 +320,62 @@ var url = 'https://api.medulina.com/api/v1/'
 var size = null
 
 
-onClick = function(data){
-    var svg = d3.select("#svg")
-    window.currentClicked = data;
-    svg.selectAll(".dot").style("fill", function(dat) { return dat == data ? "#FF595E": "#87BCDE";})
+onClick = function(data) {
+  var svg = d3.select("#svg")
+  window.currentClicked = data;
+  svg.selectAll(".dot").style("fill", function(dat) {
+    return dat == data ? "#FF595E" : "#87BCDE";
+  })
 
-    app.hover_idx = data.x - 1;
-    if (window.base){
-      console.log("clearing base..")
-      //window.base.clear()
+  app.hover_idx = data.x - 1;
+  if (window.base) {
+    console.log("clearing base..")
+    //window.base.clear()
 
+  }
+  try_data = app.user_data[data.x - 1];
+
+  $.get(url + "image/" + try_data.image_id, function(data) {
+    //app.current_image = "data:image/png;base64," + data.pic
+    console.log("starting a base raster")
+    if (!window.base) {
+      window.base = new Raster({
+        crossOrigin: 'anonymous',
+        source: 'data:image/jpeg;base64,' + data.pic
+      });
+      window.roi = new Raster({})
+    } else {
+      window.base.setSource('data:image/jpeg;base64,' + data.pic)
+      window.roi.clear()
     }
-    try_data = app.user_data[data.x - 1];
-
-    $.get(url+"image/"+try_data.image_id, function(data){
-      //app.current_image = "data:image/png;base64," + data.pic
-      console.log("starting a base raster")
-      if (!window.base){
-        window.base = new Raster({
-         crossOrigin: 'anonymous',
-         source: 'data:image/jpeg;base64,' + data.pic
-        });
-        window.roi = new Raster({})
-      } else{
-        window.base.setSource('data:image/jpeg;base64,' + data.pic)
-        window.roi.clear()
-      }
 
 
-      window.base.onLoad = function(){
-        initializeBaseRaster(window.base)
-        initialize_roi_raster(window.base,window.roi)
-        console.log("initialized rasters")
-        $.get(url+'mask?where={"mode":"truth","image_id":"' + try_data.image_id + '"}', function(data){
-          console.log("got truth", data)
-          //window.roi.fillPixelLog(data._items[0].pic, draw.LUT)
-          window.roi.fillPixelLog(try_data.pic, draw.LUT)
-          window.roi.diff(data._items[0].pic)
-        });
-      }
+    window.base.onLoad = function() {
+      initializeBaseRaster(window.base)
+      initialize_roi_raster(window.base, window.roi)
+      console.log("initialized rasters")
+      $.get(url + 'mask?where={"mode":"truth","image_id":"' + try_data.image_id + '"}', function(data) {
+        console.log("got truth", data)
+        //window.roi.fillPixelLog(data._items[0].pic, draw.LUT)
+        window.roi.fillPixelLog(try_data.pic, draw.LUT)
+        window.roi.diff(data._items[0].pic)
+      });
+    }
 
-    })
+  })
 };
 
-function get_data(url,query, updater, callback){
+function get_data(url, query, updater, callback) {
 
-  if (query != null){
-    $.get(url+query, function(data){
+  if (query != null) {
+    $.get(url + query, function(data) {
       //app.user_data = app.user_data.concat(data._items);
       //console.log(updater)
       updater(data)
-      if (data._links.next){
-        console.log("getting next", url+query)
+      if (data._links.next) {
+        console.log("getting next", url + query)
         get_data(url, data._links.next.href, updater, callback)
-      }
-      else{
+      } else {
         callback()
       }
     });
@@ -334,36 +384,38 @@ function get_data(url,query, updater, callback){
 
 var user_query = "user?sort=-total_score"
 get_data(url,
-         user_query,
-         function(data){app.all_users = app.all_users.concat(data._items);},
-         function(){
-           console.log("done getting all users")
-           app.all_users.forEach(function(val, idx, arr){
-             val["rank"] = idx
-           })
-
-         })
-
-function set_user(user){
-
-  app.current_user = user;
-
-  get_data(url, 'user/'+ user, function(data){
-    console.log("setting rank...")
-    app.user_info = data
+  user_query,
+  function(data) {
+    app.all_users = app.all_users.concat(data._items);
   },
-  function(){
-    console.log("done getting user")
-    app.user_data = []
-
-    $.get(url+app.query(), function(data){
-      app.user_data = data._items.reverse();
-      app.user_data_meta = data._meta;
-      console.log("some user tries are:", data)
-      app.plotter();
+  function() {
+    console.log("done getting all users")
+    app.all_users.forEach(function(val, idx, arr) {
+      val["rank"] = idx
     })
 
   })
+
+function set_user(user) {
+
+  app.current_user = user;
+
+  get_data(url, 'user/' + user, function(data) {
+      console.log("setting rank...")
+      app.user_info = data
+    },
+    function() {
+      console.log("done getting user")
+      app.user_data = []
+
+      $.get(url + app.query(), function(data) {
+        app.user_data = data._items.reverse();
+        app.user_data_meta = data._meta;
+        console.log("some user tries are:", data)
+        app.plotter();
+      })
+
+    })
 }
 
 /*

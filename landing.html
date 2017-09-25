@@ -1,27 +1,27 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Medulina Dashboard</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+  <title>Medulina Dashboard</title>
 
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
-    <!--<link href="https://v4-alpha.getbootstrap.com/examples/album/album.css" rel="stylesheet">-->
-    <style>
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Custom styles for this template -->
+  <link href="css/dashboard.css" rel="stylesheet">
+  <!--<link href="https://v4-alpha.getbootstrap.com/examples/album/album.css" rel="stylesheet">-->
+  <style>
     body {
-      min-height: 75rem; /* Can be removed; just added for demo purposes */
+      min-height: 75rem;
+      /* Can be removed; just added for demo purposes */
     }
 
     .navbar {
@@ -48,7 +48,8 @@
     }
 
     .album {
-      min-height: 50rem; /* Can be removed; just added for demo purposes */
+      min-height: 50rem;
+      /* Can be removed; just added for demo purposes */
       padding-top: 3rem;
       padding-bottom: 3rem;
       background-color: #f7f7f7;
@@ -62,7 +63,7 @@
     }
 
 
-    .card > img {
+    .card>img {
       margin-bottom: .75rem;
     }
 
@@ -112,8 +113,6 @@
     /**
      * Demo Styles
      */
-
-
 
     *,
     *:before,
@@ -173,20 +172,20 @@
     }
 
     @media (min-width: 480px) {
-        .circle__content {
-          font-size: 3em;
+      .circle__content {
+        font-size: 3em;
       }
     }
 
     @media (min-width: 576px) {
-        .circle__content {
-          font-size: 2em;
+      .circle__content {
+        font-size: 2em;
       }
     }
 
     @media (min-width: 768px) {
-        .circle__content {
-          font-size: 2.5em;
+      .circle__content {
+        font-size: 2.5em;
       }
     }
 
@@ -194,15 +193,15 @@
       background-color: #FF595E;
     }
 
-    .purple:after{
+    .purple:after {
       background-color: #33032F;
     }
 
-    .light:after{
+    .light:after {
       background-color: #87BCDE;
     }
 
-    .dark:after{
+    .dark:after {
       background-color: #313E50;
     }
 
@@ -218,28 +217,26 @@
     .nav-link.active {
       background-color: #FF595E !important;
     }
+  </style>
 
-    </style>
-
-    <!-- D3 style stuff -->
-    <style>
-
+  <!-- D3 style stuff -->
+  <style>
     .axis path,
     .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
     }
 
     .dot {
-    stroke: #313E50;
+      stroke: #313E50;
     }
 
     .tooltip {
-    position: absolute;
-    width: 200px;
-    height: 28px;
-    pointer-events: none;
+      position: absolute;
+      width: 200px;
+      height: 28px;
+      pointer-events: none;
     }
 
     .image {
@@ -247,129 +244,126 @@
       background: black;
     }
 
-  .imageh {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
-}
+    .imageh {
+      opacity: 1;
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: .5s ease;
+      backface-visibility: hidden;
+    }
 
-.image1 {
-opacity: 1;
-display: block;
-width: 100%;
-height: auto;
-transition: .5s ease;
-backface-visibility: hidden;
-}
+    .image1 {
+      opacity: 1;
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: .5s ease;
+      backface-visibility: hidden;
+    }
 
-.image2 {
-opacity: 1;
-display: block;
-width: 100%;
-height: auto;
-transition: .5s ease;
-backface-visibility: hidden;
-}
+    .image2 {
+      opacity: 1;
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: .5s ease;
+      backface-visibility: hidden;
+    }
 
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
-}
+    .middle {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%)
+    }
 
-.middle2 {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
-}
+    .middle2 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%)
+    }
 
-.middle3 {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
-}
+    .middle3 {
+      transition: .5s ease;
+      opacity: 0;
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%)
+    }
 
-.card1:hover .imageh {
-  opacity: 0.3;
-}
+    .card1:hover .imageh {
+      opacity: 0.3;
+    }
 
-.card2:hover .image1 {
-  opacity: 0.3;
-}
+    .card2:hover .image1 {
+      opacity: 0.3;
+    }
 
-.card3:hover .image2 {
-  opacity: 0.3;
-}
+    .card3:hover .image2 {
+      opacity: 0.3;
+    }
 
-.card1:hover .middle {
-  opacity: 1;
-}
+    .card1:hover .middle {
+      opacity: 1;
+    }
 
-.card2:hover .middle2 {
-  opacity: 1;
-}
+    .card2:hover .middle2 {
+      opacity: 1;
+    }
 
-.card3:hover .middle3 {
-  opacity: 1;
-}
+    .card3:hover .middle3 {
+      opacity: 1;
+    }
+  </style>
 
+</head>
 
-
-    </style>
-
-  </head>
-
-  <body>
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
-      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<body>
+  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
+    <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="#">
         <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="25px">
       </a>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Medulina <span class="sr-only">(current)</span></a>
-          </li>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Medulina <span class="sr-only">(current)</span></a>
+        </li>
 
-        </ul>
-        <!--<form class="form-inline mt-2 mt-md-0">
+      </ul>
+      <!--<form class="form-inline mt-2 mt-md-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search">
           <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
         </form>-->
-      </div>
-    </nav>
+    </div>
+  </nav>
 
-    <div class="container-fluid" id="main" v-cloak>
-      <section class="jumbotron text-center">
-        <div class="container">
-          <a class="navbar-brand" href="#">
+  <div class="container-fluid" id="main" v-cloak>
+    <section class="jumbotron text-center">
+      <div class="container">
+        <a class="navbar-brand" href="#">
             <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon.png" width="100px">
           </a>
-          <h1 class="jumbotron-heading">Medulina</h1>
-          <p class="lead text-muted"> Help us teach computers to read medical images</p>
-          <a href="/about.html" class="btn btn-primary"> Learn More </a>
-        </div>
-      </section>
+        <h1 class="jumbotron-heading">Medulina</h1>
+        <p class="lead text-muted"> Help us teach computers to read medical images</p>
+        <a href="/about.html" class="btn btn-primary"> Learn More </a>
+      </div>
+    </section>
 
-      <div class="album text-muted">
+    <div class="album text-muted">
       <div class="container">
         <div class="row">
           <div class="card card1 col-lg-4 col-md-12">
@@ -433,8 +427,8 @@ backface-visibility: hidden;
           </div>
         </div>-->
 
+        </div>
       </div>
-    </div>
 
     </div>
 
@@ -454,5 +448,6 @@ backface-visibility: hidden;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://v4-alpha.getbootstrap.com/assets/js/vendor/holder.min.js"></script>
 
-  </body>
+</body>
+
 </html>

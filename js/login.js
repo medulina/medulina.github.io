@@ -1,4 +1,4 @@
-function getUserInfo(user_token, callback){
+function getUserInfo(user_token, callback) {
   /*
 
   Asks the server for user information based on a token from /authenticate/
@@ -18,10 +18,9 @@ function getUserInfo(user_token, callback){
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": config.player_url + "?where=token%3D%3D%22"+user_token+"%22",
+    "url": config.player_url + "?where=token%3D%3D%22" + user_token + "%22",
     "method": "GET",
-    "headers": {
-    },
+    "headers": {},
     "processData": false,
     "contentType": false,
   }
@@ -30,8 +29,8 @@ function getUserInfo(user_token, callback){
   console.log("settings is", settings)
 
   // when the GET is done. set the app variables and run the callback
-  $.get(settings).done(function(data){
-    if (data._meta.total){
+  $.get(settings).done(function(data) {
+    if (data._meta.total) {
       console.log("found user in db", data)
       var score_info = data._items[0]
       console.log("score_info is", score_info)
@@ -90,12 +89,12 @@ Starts the whole process
 
       var oauth_url = auth_url[window.location.host];
 
-      console.log("auth url is", oauth_url+ code)
+      console.log("auth url is", oauth_url + code)
 
 
-      $.getJSON(oauth_url + code, function (data) {
+      $.getJSON(oauth_url + code, function(data) {
         console.log('data token is', data.token);
-        getUserInfo(data.token, function (profile) {
+        getUserInfo(data.token, function(profile) {
           console.log("", profile);
           /*app.login.username = profile.login;
           app.login.avatar = profile.avatar_url;
@@ -103,8 +102,10 @@ Starts the whole process
 
           if (history.pushState) {
             var newurl = window.location.protocol + '//' + window.location.host +
-            window.location.pathname;
-            window.history.pushState({ path: newurl }, '', newurl);
+              window.location.pathname;
+            window.history.pushState({
+              path: newurl
+            }, '', newurl);
           };
 
           store.set('user_token', data.token);

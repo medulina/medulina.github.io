@@ -51,7 +51,7 @@ config = {
   context: context_dict[window.location.host]
 }
 
-if (window.location.host == "test.medulina.com"){
+if (window.location.host == "test.medulina.com") {
   console.log("USING TEST CONFIG")
   config = {
     mask_url: 'https://testapi.medulina.com/api/v1/mask',

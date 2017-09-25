@@ -1,20 +1,19 @@
-function startIntro(){
-       var intro = introJs();
+function startIntro() {
+  var intro = introJs();
 
-       var is_small = window.innerWidth <= 478 ? true : false
+  var is_small = window.innerWidth <= 478 ? true : false
 
-         intro.setOptions({
+  intro.setOptions({
 
-           steps: [
-             {
-               intro: `<h1> Welcome! </h1>
+    steps: [{
+        intro: `<h1> Welcome! </h1>
                 <p> This tutorial will introduce the features of <strong>Medulina</strong> </p>
 
                `
-             },
-             {
-               //element: '#myCanvas',
-               intro: `
+      },
+      {
+        //element: '#myCanvas',
+        intro: `
 
                <h4 style="text-align: center"> Draw and Fill </h4>
 
@@ -24,10 +23,10 @@ function startIntro(){
 
 
                `
-             },
-             {
-               //element: '#myCanvas',
-               intro: `
+      },
+      {
+        //element: '#myCanvas',
+        intro: `
 
                <h4 style="text-align: center"> Zoom and Pan </h4>
 
@@ -37,10 +36,10 @@ function startIntro(){
 
 
                `
-             },
-             {
-               //element: is_small ? null : '#hideshow',
-               intro: `
+      },
+      {
+        //element: is_small ? null : '#hideshow',
+        intro: `
 
                <h4 style="text-align: center"> Hide and Show </h4>
 
@@ -51,11 +50,11 @@ function startIntro(){
                            <i class="fa fa-eye" aria-hidden="true"></i>
                        </button>
                        `),
-               position: 'top'
-             },
-             {
-               //element: '#menuButton',
-               intro: `
+        position: 'top'
+      },
+      {
+        //element: '#menuButton',
+        intro: `
 
                <h4 style="text-align: center"> Brush Options </h4>
 
@@ -94,11 +93,11 @@ function startIntro(){
                "></i>
 
                <strong>brush color</i></strong></p>`,
-               position: 'top'
-             },
-             {
-               //element: '#menuButton',
-               intro: `
+        position: 'top'
+      },
+      {
+        //element: '#menuButton',
+        intro: `
 
                <h4 style="text-align: center"> Image Options </h4>
 
@@ -130,11 +129,11 @@ function startIntro(){
                "></i>
 
                <strong>contrast</i></strong></p>`,
-               position: 'top'
-             },
-             {
-               //element: '#undoButton',
-               intro: `
+        position: 'top'
+      },
+      {
+        //element: '#undoButton',
+        intro: `
 
                <h4 style="text-align: center"> Undo </h4>
 
@@ -146,11 +145,11 @@ function startIntro(){
                </button>
 
                to <strong>undo</strong>`,
-               position: 'top'
-             },
-             {
-               //element: '#submit_button',
-               intro: `
+        position: 'top'
+      },
+      {
+        //element: '#submit_button',
+        intro: `
                <h4 style="text-align: center"> Submit </h4>
                When you are done,
                <button class="btn btn-med btn-primary colorBold">
@@ -159,48 +158,48 @@ function startIntro(){
 
                 your drawing to evaulate your results
                `
-             }
-           ]
-         });
-         intro.onbeforechange(function(targetElement){
-           console.log("before change")
-           console.log("currentStep is", this._currentStep)
+      }
+    ]
+  });
+  intro.onbeforechange(function(targetElement) {
+    console.log("before change")
+    console.log("currentStep is", this._currentStep)
 
-         })
-         intro.onafterchange(function(targetElement) {
-            console.log("currentStep is", this._currentStep)
-            //window.scrollTo(0,0)
+  })
+  intro.onafterchange(function(targetElement) {
+    console.log("currentStep is", this._currentStep)
+    //window.scrollTo(0,0)
 
-              /*if(this._currentStep == 3){
-                  overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
-                  console.log(overlay)
-                  for(i=0; i<overlay.length; i++) {
-                      //overlay[i].style.left = '10px';
-                      //overlay[i].style.right = '10px';
-                      overlay[i].style.position = 'fixed';
-                      overlay[i].style.bottom = '20px';
-                      overlay[i].style.top = null;
+    /*if(this._currentStep == 3){
+        overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
+        console.log(overlay)
+        for(i=0; i<overlay.length; i++) {
+            //overlay[i].style.left = '10px';
+            //overlay[i].style.right = '10px';
+            overlay[i].style.position = 'fixed';
+            overlay[i].style.bottom = '20px';
+            overlay[i].style.top = null;
 
-                      //Set css properties like this.
-                  }
-              }*/
-              //"introjs-fixedTooltip" is the other thing
-              if(this._currentStep == 4){
-                  app.show = true;
-              }
+            //Set css properties like this.
+        }
+    }*/
+    //"introjs-fixedTooltip" is the other thing
+    if (this._currentStep == 4) {
+      app.show = true;
+    }
 
-              if(this._currentStep == 6){
-                  app.show = false;
-              }
-              /*if(this._currentStep == 5){
-                  overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
-                  console.log(overlay)
-                  for(i=0; i<overlay.length; i++) {
-                    overlay[i].style.position = 'fixed';
-                      overlay[i].style.bottom = '20px';
-                      overlay[i].style.top = null;
-                  }
-              }*/
-         });
-         intro.start();
-     }
+    if (this._currentStep == 6) {
+      app.show = false;
+    }
+    /*if(this._currentStep == 5){
+        overlay = document.getElementsByClassName("introjs-tooltipReferenceLayer");
+        console.log(overlay)
+        for(i=0; i<overlay.length; i++) {
+          overlay[i].style.position = 'fixed';
+            overlay[i].style.bottom = '20px';
+            overlay[i].style.top = null;
+        }
+    }*/
+  });
+  intro.start();
+}

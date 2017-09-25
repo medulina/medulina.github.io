@@ -1,34 +1,34 @@
-$("#brightness_slider").change(function(e){
+$("#brightness_slider").change(function(e) {
   //doBright(e.target.value)
   doBrightCont()
 })
-$("#contrast_slider").change(function(e){
+$("#contrast_slider").change(function(e) {
   //doCont(e.target.value)
   doBrightCont()
 })
-$("#brightness_slider").on("mouseup",function(e){
+$("#brightness_slider").on("mouseup", function(e) {
   //doBright(e.target.value)
   doBrightCont()
 })
-$("#contrast_slider").on("mouseup",function(e){
+$("#contrast_slider").on("mouseup", function(e) {
   //doCont(e.target.value)
   doBrightCont()
 })
 
 
-function startProgress(){
+function startProgress() {
   //var spot = $("#pbar")
   //spot.show()
   app.loading = true
 }
 
-function stopProgress(){
+function stopProgress() {
   //var spot = $("#pbar")
   //spot.hide()
   app.loading = false
 }
 
-function setMenuIcon(mode){
+function setMenuIcon(mode) {
 
   var all_classnames = "mdi mdi-format-color-fill mdi-eraser-variant mdi-format-clear mdi-arrow-all"
   var component = $(".mdl-layout__header .mdl-layout__drawer-button i")
@@ -67,7 +67,7 @@ function setMenuIcon(mode){
   }
 }
 
-blockContextMenu = function (evt) {
+blockContextMenu = function(evt) {
   evt.preventDefault();
 };
 
@@ -75,17 +75,17 @@ myElement = $('#myCanvas').on('contextmenu', blockContextMenu);
 
 
 
-show_eval = function(){
+show_eval = function() {
   //var output =  Mustache.render('<h4>Color the MS Lesions <button class="btn btn-primary btn-xsmall" onclick="do_eval()">Evaluate</button></h4>')
   //$("#submit_button").html("Submit")
   app.status = "Submit"
-  $("#submit_button").prop("disabled",false);
+  $("#submit_button").prop("disabled", false);
   console.log("setting click to do_eval")
   //$("#submit_button").attr("onclick", "do_eval()")
   //$("#titlebar").html("Color the Lesions")
 }
 
-show_save = function(score){
+show_save = function(score) {
 
   /*score["acc"] = score["accuracy"].toString()
   score["acc"] = score["acc"].slice(0,4)
@@ -102,7 +102,7 @@ show_save = function(score){
   //var output = Mustache.render('<h4> accuracy: {{acc}}, points: {{xp}} <button class="btn btn-success btn-xsmall" onclick="get_next()">Next</button> </h4>', score)
   //$("#submit_button").html("Next")
   */
-  if (window.mode == "error"){
+  if (window.mode == "error") {
     app.score.points = "error"
     app.score.dice = "error"
   }
@@ -110,7 +110,7 @@ show_save = function(score){
 
   console.log("setting click to get_next")
   //$("#submit_button").attr("onclick", "get_next()")
-  $("#submit_button").prop("disabled",false);
+  $("#submit_button").prop("disabled", false);
 
 
 }

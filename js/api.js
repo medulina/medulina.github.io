@@ -1,43 +1,45 @@
+$.ajaxSetup({
+  cache: false
+});
 
-
-
-$.ajaxSetup({ cache: false });
-
-get_url = function(random){
+get_url = function(random) {
   return config.mask_url + random
 }
 
-get_image_url = function(){
+get_image_url = function() {
   var url = config.image_url + '?where={"task":"' + config.task + '"}'
   url = url + "&max_results=1"
-  if (config.use_random){
-    var random = getRandomInt(1,config.total_num_images)
-    url="&page=" +url + random
+  if (config.use_random) {
+    var random = getRandomInt(1, config.total_num_images)
+    url = "&page=" + url + random
   } else {
-    url = url + "&user_id="+app.login.id+"&token="+app.login.token
+    url = url + "&user_id=" + app.login.id + "&token=" + app.login.token
   }
   console.log("URL FOR GET IS", url)
   return url
 }
 
-get_mask_url = function(image_info){
+get_mask_url = function(image_info) {
   var url = config.mask_url + '?where={"mode":"truth","image_id":"' + image_info._id + '"}'
   console.log('Mask URL is', url)
   return url
 }
 
-do_eval = function(){
+do_eval = function() {
   console.log('DOING EVAL\n\n')
 
   var data = window.currentData._items[0]
 
   var profile = store.get('github_profile')
-  var score = {'name': app.login.username, 'edit_data_id': data._id}
+  var score = {
+    'name': app.login.username,
+    'edit_data_id': data._id
+  }
 
-  if (draw.history.length == 1 && draw.history[0].length == 0){
-    if (confirm("Are you sure you want to submit an empty drawing?")){
+  if (draw.history.length == 1 && draw.history[0].length == 0) {
+    if (confirm("Are you sure you want to submit an empty drawing?")) {
       startProgress()
-      $('#submit_button').prop('disabled',true);
+      $('#submit_button').prop('disabled', true);
       var segmentation = roi.getNonZeroPixels()
       stopProgress()
       do_save(score, JSON.stringify(segmentation))
@@ -49,7 +51,7 @@ do_eval = function(){
 
   } else {
     startProgress()
-    $('#submit_button').prop('disabled',true);
+    $('#submit_button').prop('disabled', true);
     var segmentation = roi.getNonZeroPixels()
     stopProgress()
     do_save(score, JSON.stringify(segmentation))
@@ -58,9 +60,9 @@ do_eval = function(){
   //})
 }
 
-function create_request(data, url){
+function create_request(data, url) {
   var form = new FormData();
-  for (key in data){
+  for (key in data) {
     form.append(key, data[key])
   }
   var settings = {
@@ -80,20 +82,19 @@ function create_request(data, url){
   return settings
 }
 
-function create_json_request(data, url, auth){
+function create_json_request(data, url, auth) {
 
   var settings = {
     'async': true,
     'crossDomain': true,
     'url': url,
     'method': 'POST',
-    'headers': {
-    },
+    'headers': {},
     'processData': false,
     'data': JSON.stringify(data)
   }
 
-  if (auth){
+  if (auth) {
     settings.headers["authorization"] = auth
   }
 
@@ -101,7 +102,7 @@ function create_json_request(data, url, auth){
 
 }
 
-do_save = function(score, edits){
+do_save = function(score, edits) {
   startProgress()
   var imgbody = {
     'image_id': window.currentData._items[0]._id,
@@ -126,16 +127,18 @@ do_save = function(score, edits){
   //settings.headers['password'] = store.get("user_token")
   //settings.url = "://" + app.login.id + ":" + store.get("user_token") + "@" + settings.url.replace("http://", "")
   console.log("settings are", settings)
-  settings["error"] = function(e){
+  settings["error"] = function(e) {
     alert("there has been an error", e, "settings were", settings)
     console.log("there has been an error", e, "settings were", settings)
 
     stopProgress()
     window.appMode = "error"
-    show_save({"accuracy": "Err"})
+    show_save({
+      "accuracy": "Err"
+    })
   }
 
-  $.ajax(settings).done(function(response){
+  $.ajax(settings).done(function(response) {
     show_save(score)
     console.log("response is", response)
     window.response = response;
@@ -150,7 +153,7 @@ do_save = function(score, edits){
 
 
     var profile = store.get('user_token');
-    getUserInfo(profile, function(){
+    getUserInfo(profile, function() {
       stopProgress()
       show_save(score)
     })
@@ -162,9 +165,9 @@ do_save = function(score, edits){
 
 }
 
-get_next = function(){
+get_next = function() {
 
-  $('#submit_button').prop('disabled',true);
+  $('#submit_button').prop('disabled', true);
   startProgress()
   /*$.get(get_url(page), function(data, status, jqXhr){
     view.setZoom(1)
@@ -189,17 +192,22 @@ get_next = function(){
 
   })*/
   var url = get_image_url()
-  get_images(url, function(base_url){
-    base.setSource('data:image/jpeg;base64,'+base_url)
+  get_images(url, function(base_url) {
+    base.setSource('data:image/jpeg;base64,' + base_url)
 
     roi.clear()
-    draw.history = [[]]
+    draw.history = [
+      []
+    ]
     window.zoomFactor = 1
     tp.clear()
     fp.clear()
     fn.clear()
     view.setZoom(1);
-    window.panFactor = {x:0, y:0}
+    window.panFactor = {
+      x: 0,
+      y: 0
+    }
 
     show_eval()
   })
