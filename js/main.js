@@ -1062,15 +1062,12 @@ onmousewheel = mousewheel
 
 function start(base_url) {
   try {
-    base.clear()
-    roi.clear()
+    paper.projects[0].clear()
     draw.history = [
       []
     ]
     window.zoomFactor = 1
-    tp.clear()
-    fp.clear()
-    fn.clear()
+
     view.setZoom(1);
     window.panFactor = {
       x: 0,
