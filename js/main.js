@@ -939,6 +939,7 @@ dragHandler = function(e) {
       break
     case "view":
       doPan(e)
+      window.mode = "paint"
       break;
 
     default:
@@ -1175,24 +1176,26 @@ var tmpzoom = 1
 
 // subscribe to events
 mc.on('pinch', function(e) {
-  // do something cool
-
-  if (e) {
-    if (window.mode == "view") {
-      e.preventDefault()
-      tmpzoom = xfm.clamp(e.scale / window.startScale * window.zoomFactor, 1, 5)
-      view.setZoom(tmpzoom)
-      //console.log("pinchin", e.scale)
-      //var zf = e.scale/window.zoomFactor
-      //window.zoomFactor = zf
-      //view.setZoom(window.zoomFactor)
+    // do something cool
+    //console.log("pinch", window.mode)
+    if (e){
+      //if (window.mode == "view"){
+        window.mode = "view"
+        e.preventDefault()
+        tmpzoom = xfm.clamp(e.scale/window.startScale*window.zoomFactor, 1, 5)
+        view.setZoom(tmpzoom)
+        //doPan(e)
+        //console.log("pinchin", e.scale)
+        //var zf = e.scale/window.zoomFactor
+        //window.zoomFactor = zf
+        //view.setZoom(window.zoomFactor)
+      //}
     }
-  }
-
 });
 
 mc.on('pinchend', function(e) {
-  // do something cool
+    // do something cool
+    //console.log("pinchend", window.mode)
 
   if (e) {
     window.mode = window.prevMode
