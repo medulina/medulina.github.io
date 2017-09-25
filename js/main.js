@@ -762,7 +762,12 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
   if (num_fill < 30000) {
     roi.fillPixelLogFlat(draw.history[draw.history.length - 1], replacementVal, draw.LUT)
   } else {
-    alert("You are filling too much, close your loops")
+    app.alert.do_dismiss = false
+    $('#alertModal').modal({
+      backdrop: 'static',
+      keyboard: false,
+    });
+    //alert("You are filling too much, close your loops")
     //draw.history = [[]]
     //console.log(draw.history)
     console.log("starting revert", draw.history)
@@ -777,6 +782,7 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
     }
     console.log("ending revert", draw.history)
     stopProgress()
+    app.alert.do_dismiss = true
   }
   return
 }

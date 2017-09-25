@@ -238,6 +238,8 @@
         </div>
 
         <modal v-bind:content="login" id="loginModal"></modal>
+        <modal v-bind:content="alert" id="alertModal"></modal>
+
 
         <div id="legend" style="z-index:99999; background:rgba(1,1,1,1); position: fixed; right:3px; top:45px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px;" v-if="status=='Next'">
 
@@ -278,7 +280,7 @@
 <script src="js/store.everything.min.js"></script>
 <script src="js/mustache.min.js"></script>
 <script src="js/jquery.min.js"></script>
-<script src="js/paper.full.min.js"></script>
+<script src="js/paper-full.js"></script>
 <script src="js/hammer.min.js"></script>
 <script src="js/mustache.min.js"></script>
 <script src="js/login.js"></script>
@@ -316,10 +318,14 @@
             <h5 class="modal-title">{{content.title}}</h5>
           </div>
           <div class="modal-body">
-            <a v-bind:href="content.url"><img style="width:100%; max-width:200px;" v-bind:src="content.image" class="mx-auto d-block"/> </a>
+            <a v-if="content.url" v-bind:href="content.url"><img style="width:100%; max-width:200px;" v-bind:src="content.image" class="mx-auto d-block"/> </a>
+            <p v-if="content.text">
+            {{content.text}}
+            </p>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-primary mx-auto d-block" v-bind:href="content.url">{{content.footer}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-if="content.do_dismiss">Close</button>
+            <a v-if="content.footer" class="btn btn-primary mx-auto d-block" v-bind:href="content.url">{{content.footer}}</a>
           </div>
         </div>
       </div>
@@ -385,11 +391,18 @@
                 "incorrect": true,
                 "correct": true
             },
+            alert: {
+              title: "Error!",
+              image: "image/x.jpg",
+              do_dismiss: false,
+              text: "You are filling too much! Try closing your loops first."
+            },
             login: {
                 username: null,
                 avatar: 'images/Octocat1.jpg',
                 github_id: null,
                 total_score: 0,
+                do_dismiss: false,
                 ave_score: 0,
                 n_subs: 0,
                 n_test: 0,
