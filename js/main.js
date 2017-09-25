@@ -119,7 +119,7 @@ add_fp = function(data) {
 
 }
 
-add_fn = function(data) {
+add_fn = function(data, add_events) {
   fn = new Raster({})
   fn.setSize(base.size)
 
@@ -132,7 +132,16 @@ add_fn = function(data) {
   }
   fn.fillPixelLog(data, LUT)
   fn.fitBounds(base.bounds)
-  //fn.onMouseDrag = dragHandler
+
+  if (add_events){
+    // ROI events
+    fn.onMouseDrag = dragHandler
+    fn.onMouseDown = mousedownHandler
+    fn.onMouseUp = draw.reset
+    //fn.onClick = clickHandler
+    //fn.onDoubleClick = dblClickHandler
+    //fn.onMouseDrag = dragHandler
+  }
 
 }
 

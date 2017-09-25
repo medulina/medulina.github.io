@@ -143,11 +143,11 @@ do_save = function(score, edits) {
     console.log("response is", response)
     window.response = response;
 
-    roi.clear()
+    roi.remove()
     add_tp(response.tp)
     add_fp(response.fp)
-    add_fn(response.fn)
-    roi.insertAbove(fn)
+    add_fn(response.fn, true)
+    //roi.insertAbove(fn)
 
     app.score.dice = response.score;
 
@@ -193,6 +193,7 @@ get_next = function() {
   })*/
   var url = get_image_url()
   get_images(url)
+
 
 
 }
