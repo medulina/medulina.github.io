@@ -9,7 +9,7 @@ var auth_id = {
 var auth_url = {
   "dg.medulina.com": "https://api.medulina.com/api/authenticate/dg/github/",
   "localhost:8000": "https://api.medulina.com/api/authenticate/dg/githublocal/",
-  "test.medulina.com": "https://testapi.medulina.com/api/authenticate/githubtest/",
+  "test.medulina.com": "https://testapi.medulina.com/api/authenticate/test/github/",
   "stroke.medulina.com": "https://api.medulina.com/api/authenticate/stroke/github/",
   "tumor.medulina.com": "https://api.medulina.com/api/authenticate/tumor/github/"
 }
@@ -19,7 +19,8 @@ var task_dict = {
   "stroke.medulina.com": "atlas_lesions",
   "tumor.medulina.com": "meningioma001",
   "dg.medulina.com": "db_cor_context03",
-  "localhost:8000": "atlas_lesions"
+  "localhost:8000": "atlas_lesions",
+  "test.medulina.com": "meningioma001"
 }
 
 var title_dict = {
@@ -27,6 +28,7 @@ var title_dict = {
   "tumor.medulina.com": "Meningioma",
   "dg.medulina.com": "Dentate Gyrus",
   "localhost:8000": "Stroke",
+  "test.medulina.com": "Meningioma"
 }
 
 var context_dict = {
@@ -34,6 +36,7 @@ var context_dict = {
   "tumor.medulina.com": false,
   "localhost:8000": false,
   "dg.medulina.com": true,
+  "test.medulina.com": false,
 }
 
 
@@ -64,5 +67,7 @@ if (window.location.host == "test.medulina.com") {
     task: "atlas_lesions",
     num: 15,
     total_num_images: 50,
+    title: title_dict[window.location.host],
+    context: context_dict[window.location.host]
   }
 }
