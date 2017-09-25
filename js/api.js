@@ -193,7 +193,7 @@ get_next = function() {
   })*/
   var url = get_image_url()
   get_images(url, function(base_url) {
-    base.setSource('data:image/jpeg;base64,' + base_url)
+    base.setSource(base_url)
 
     roi.clear()
     draw.history = [
