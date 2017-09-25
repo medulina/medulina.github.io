@@ -41,6 +41,7 @@ var context_dict = {
 config = {
   mask_url: 'https://api.medulina.com/api/v1/mask',
   image_url: 'https://api.medulina.com/api/v1/image/',
+  base_url: "https://api.medulina.com",
   player_url: 'https://api.medulina.com/api/v1/user/',
   edit_url: 'https://api.medulina.com/api/v1/mask',
   use_random: false,
@@ -56,6 +57,7 @@ if (window.location.host == "test.medulina.com") {
   config = {
     mask_url: 'https://testapi.medulina.com/api/v1/mask',
     image_url: 'https://testapi.medulina.com/api/v1/image/',
+    base_url: "https://testapi.medulina.com",
     player_url: 'https://testapi.medulina.com/api/v1/user',
     edit_url: 'https://testapi.medulina.com/api/v1/mask',
     use_random: false,

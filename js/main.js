@@ -1064,7 +1064,7 @@ function start(base_url) {
 
   var base = new Raster({
     crossOrigin: 'anonymous',
-    source: 'data:image/jpeg;base64,' + base_url,
+    source: base_url, //'data:image/jpeg;base64,' + base_url,
     position: view.center
   });
 
@@ -1117,7 +1117,7 @@ get_images = function(url, callback) {
       return 0
     }
 
-    var base_url = data._items[0].pic
+    var base_url = config.base_url + data._items[0].pic
     var sliceNo = parseInt(data._items[0].slice).toString()
     console.log(sliceNo, sliceNo.length)
     app.current_slice = data._items[0]
