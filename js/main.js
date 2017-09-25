@@ -1103,6 +1103,7 @@ function start(base_url) {
     doBrightCont()
     //("#currentTool").html(window.mode)
     stopProgress()
+    show_eval()
 
   };
 }
@@ -1133,7 +1134,7 @@ get_images = function(url, callback) {
 
     //var mask_url = get_mask_url(data._items[0])
     //console.log("mask url is", mask_url)
-    callback(base_url)
+    start(base_url)
     window.appMode = "train"
 
     /*$.get(mask_url, function(data, status, jqXhr){
