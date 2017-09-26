@@ -239,6 +239,7 @@
 
         <modal v-bind:content="login" id="loginModal"></modal>
         <modal v-bind:content="alert" id="alertModal"></modal>
+        <modal v-bind:content="fill" id="fillModal" action="runFillEval"></modal>
 
 
         <div id="legend" style="z-index:99999; background:rgba(1,1,1,1); position: fixed; right:3px; top:45px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px;" v-if="status=='Next'">
@@ -319,11 +320,15 @@
           </div>
           <div class="modal-body">
             <a v-if="content.url" v-bind:href="content.url"><img style="width:100%; max-width:200px;" v-bind:src="content.image" class="mx-auto d-block"/> </a>
-            <p v-if="content.text">
-            {{content.text}}
+            <p v-if="content.text" v-html="content.text">
+
             </p>
           </div>
           <div class="modal-footer">
+            <span v-if="content.extra_buttons">
+            <!-- TODO: undo hardcoding here!! -->
+            <button v-for="btn in content.extra_buttons" class="btn btn-danger" data-dismiss="modal" onclick="app.has_filled=true;console.log('hi'); do_eval()">{{btn.name}}</button>
+            </span>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-if="content.do_dismiss">Close</button>
             <a v-if="content.footer" class="btn btn-primary mx-auto d-block" v-bind:href="content.url">{{content.footer}}</a>
           </div>
@@ -381,6 +386,18 @@
             },
             tutorial: false,
             has_filled: false,
+            fill: {
+              title: "Have you filled your shape?",
+              do_dismiss: true,
+              image: "image/x.jpg",
+              text: `Remember, <strong>Double Tap</strong> to fill your shape.
+              Hit Close to keep drawing. Or press, "Submit Anyway"`,
+              extra_buttons: [{name: "Submit Anyway", action: function(){
+                console.log("hello, i'm here")
+                app.has_filled = true;
+                do_eval()
+              }}]
+            },
             overlay: true,
             loading: true,
             context: null,
@@ -507,7 +524,6 @@
                         null;
                 }
             },
-
             startTour: function() {
                 startIntro()
             },

@@ -33,9 +33,16 @@ do_eval = function(){
 
   var profile = store.get('github_profile')
   var score = {'name': app.login.username, 'edit_data_id': data._id}
+  console.log("app.has_filled", app.has_filled)
+  if (!app.has_filled && task_config[task_dict[window.location.host]].care_about_fill){
 
-  if (!app.has_filled){
+    $('#fillModal').modal({
+      backdrop: 'static',
+      keyboard: false,
+    });
+    console.log("YOU HAVE NOT FILLED")
 
+    return
   }
 
   if (draw.history.length == 1 && draw.history[0].length == 0){

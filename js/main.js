@@ -1186,6 +1186,9 @@ get_images = function(url, callback) {
 
 startProgress()
 Login(function() {
+  if (app.login.n_try <= 10){
+    startIntro()
+  }
   var url = get_image_url()
   console.log('url is', url);
   get_images(url, start);
