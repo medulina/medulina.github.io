@@ -119,7 +119,7 @@ add_fp = function(data) {
 
 }
 
-add_fn = function(data) {
+add_fn = function(data, add_events) {
   fn = new Raster({})
   fn.setSize(base.size)
 
@@ -132,7 +132,16 @@ add_fn = function(data) {
   }
   fn.fillPixelLog(data, LUT)
   fn.fitBounds(base.bounds)
-  //fn.onMouseDrag = dragHandler
+
+  if (add_events){
+    // ROI events
+    fn.onMouseDrag = dragHandler
+    fn.onMouseDown = mousedownHandler
+    fn.onMouseUp = draw.reset
+    //fn.onClick = clickHandler
+    //fn.onDoubleClick = dblClickHandler
+    //fn.onMouseDrag = dragHandler
+  }
 
 }
 
@@ -700,7 +709,7 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
 
   var num_fill = 0
   var to_fill = {}
-  if (targetVal === replacementVal) {
+  if (targetVal == replacementVal) {
     return
   }
   if (roi.pixelLog[node.x][node.y] != targetVal) {
@@ -727,18 +736,18 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
       continue
     }
 
-    while (x > 0 && roi.pixelLog[x - 1][y] === targetVal) {
+    while (x > 0 && roi.pixelLog[x - 1][y] == targetVal) {
       x -= 1;
     }
 
     var nei = neighboors(y);
-    while (x < (roi.width - 1) && roi.pixelLog[x][y] === targetVal) {
+    while (x < (roi.width - 1) && roi.pixelLog[x][y] == targetVal) {
       draw.addHistory(x, y, roi.pixelLog[x][y], replacementVal);
       roi.setPixelLogNoColor(x, y, draw.LUT[replacementVal], replacementVal);
       ++num_fill
       for (i = 0; i < nei.length; i++) {
         var y_nei = nei[i]
-        if (roi.pixelLog[x][y_nei] === targetVal) {
+        if (roi.pixelLog[x][y_nei] == targetVal) {
           queue.push({
             x: x,
             y: y_nei
@@ -753,7 +762,12 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
   if (num_fill < 30000) {
     roi.fillPixelLogFlat(draw.history[draw.history.length - 1], replacementVal, draw.LUT)
   } else {
-    alert("You are filling too much, close your loops")
+    app.alert.do_dismiss = false
+    $('#alertModal').modal({
+      backdrop: 'static',
+      keyboard: false,
+    });
+    //alert("You are filling too much, close your loops")
     //draw.history = [[]]
     //console.log(draw.history)
     console.log("starting revert", draw.history)
@@ -768,6 +782,7 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
     }
     console.log("ending revert", draw.history)
     stopProgress()
+    app.alert.do_dismiss = true
   }
   return
 }
@@ -995,18 +1010,19 @@ clickHandler = function(e) {
 dblClickHandler = function(e) {
   var me = this
   var mode = "paintFill"
-  if (window.prevMode != "view") {
-    switch (mode) {
-      case "paintFill":
-        //setPaintbrush("1")
-        doFloodFill(e, me)
-        break;
-      case "eraseFill":
-        //setPaintbrush("0")
-        doFloodFill(e, me)
-        break;
-      default:
-        break
+  if (window.prevMode != "view"){
+  switch (mode) {
+    case "paintFill":
+      //setPaintbrush("1")
+      app.has_filled = true;
+      doFloodFill(e, me)
+      break;
+    case "eraseFill":
+      //setPaintbrush("0")
+      doFloodFill(e, me)
+      break;
+    default:
+      break
 
     }
   }
@@ -1170,6 +1186,9 @@ get_images = function(url, callback) {
 
 startProgress()
 Login(function() {
+  if (app.login.n_try <= 10){
+    startIntro()
+  }
   var url = get_image_url()
   console.log('url is', url);
   get_images(url, start);

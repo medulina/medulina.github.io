@@ -39,6 +39,12 @@ var context_dict = {
   "test.medulina.com": false,
 }
 
+var task_config = {
+  "meningioma001": {care_about_fill: true},
+  "atlas_lesions": {care_about_fill: true},
+  "db_cor_context03": {care_about_fill: false},
+}
+
 
 
 config = {
