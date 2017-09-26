@@ -35,11 +35,7 @@ do_eval = function(){
   var score = {'name': app.login.username, 'edit_data_id': data._id}
 
   if (!app.has_filled){
-    if (confirm("Are you sure you want to submit? Remember to double-tap to fill closed shapes.")){
 
-    } else {
-      return
-    }
   }
 
   if (draw.history.length == 1 && draw.history[0].length == 0){

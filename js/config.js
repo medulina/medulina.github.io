@@ -9,7 +9,7 @@ var auth_id = {
 var auth_url = {
   "dg.medulina.com": "https://api.medulina.com/api/authenticate/dg/github/",
   "localhost:8000": "https://api.medulina.com/api/authenticate/dg/githublocal/",
-  "test.medulina.com": "https://testapi.medulina.com/api/authenticate/githubtest/",
+  "test.medulina.com": "https://testapi.medulina.com/api/authenticate/test/github/",
   "stroke.medulina.com": "https://api.medulina.com/api/authenticate/stroke/github/",
   "tumor.medulina.com": "https://api.medulina.com/api/authenticate/tumor/github/"
 }
@@ -51,7 +51,7 @@ config = {
   context: context_dict[window.location.host]
 }
 
-if (window.location.host == "test.medulina.com"){
+if (window.location.host == "test.medulina.com") {
   console.log("USING TEST CONFIG")
   config = {
     mask_url: 'https://testapi.medulina.com/api/v1/mask',

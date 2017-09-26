@@ -2,109 +2,115 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A game to segment the brain">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="A game to segment the brain">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
 
-    <title>Medulina</title>
+  <title>Medulina</title>
 
-    <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
-    <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Medulina">
-    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+  <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Medulina">
+  <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
 
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-    <meta name="msapplication-TileColor" content="#3372DF">
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+  <meta name="msapplication-TileColor" content="#3372DF">
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-default.css" rel="stylesheet">
-    <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
-    <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@2.8.0-alpha.1/minified/introjs.min.css">
-    <link rel="stylesheet" href="main_style.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-default.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
+  <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@2.8.0-alpha.1/minified/introjs.min.css">
+  <link rel="stylesheet" href="main_style.css">
 
 
-    <style>
-        [v-cloak] {
-            display: none;
-        }
-        .missed {
-            width: 45px;
-            height: 45px;
-            margin-right: 5px;
-            background-color: black;
-            border-color: #FF595E;
-            border-style: solid;
-            border-radius: 10px;
-        }
-        .missed.view {
-            background-color: #FF595E;
-        }
-        .incorrect {
-            width: 45px;
-            height: 45px;
-            margin-right: 5px;
-            background-color: black;
-            border-color: #87BCDE;
-            border-style: solid;
-            border-radius: 10px;
-        }
-        .incorrect.view {
-            background-color: #87BCDE;
-        }
-        .correct {
-            width: 45px;
-            height: 45px;
-            margin-right: 5px;
-            background-color: black;
-            border-color: darkviolet;
-            border-style: solid;
-            border-radius: 10px;
-        }
-        .correct.view {
-            background-color: darkviolet;
-        }
-    </style>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+
+    .missed {
+      width: 45px;
+      height: 45px;
+      margin-right: 5px;
+      background-color: black;
+      border-color: #FF595E;
+      border-style: solid;
+      border-radius: 10px;
+    }
+
+    .missed.view {
+      background-color: #FF595E;
+    }
+
+    .incorrect {
+      width: 45px;
+      height: 45px;
+      margin-right: 5px;
+      background-color: black;
+      border-color: #87BCDE;
+      border-style: solid;
+      border-radius: 10px;
+    }
+
+    .incorrect.view {
+      background-color: #87BCDE;
+    }
+
+    .correct {
+      width: 45px;
+      height: 45px;
+      margin-right: 5px;
+      background-color: black;
+      border-color: darkviolet;
+      border-style: solid;
+      border-radius: 10px;
+    }
+
+    .correct.view {
+      background-color: darkviolet;
+    }
+  </style>
 
 </head>
 
 <body oncontextmenu="return false;">
 
-    <div class="main" id="main" v-cloak>
+  <div class="main" id="main" v-cloak>
 
-        <nav>
-            <div class="dropdown">
-                <a class="" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="avatar">
-                        <img v-bind:src="login.avatar" v-bind:alt="login.username" class="rounded-circle colorOutline" style="width:100%;">
-                    </div>
-                </a>
+    <nav>
+      <div class="dropdown">
+        <a class="" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="avatar">
+            <img v-bind:src="login.avatar" v-bind:alt="login.username" class="rounded-circle colorOutline" style="width:100%;">
+          </div>
+        </a>
 
-                <div class="dropdown-menu colorNeutralBackground colorOutline" aria-labelledby="dropdownMenuLink">
-                    <h6 class="dropdown-header">{{login.username}}</h6>
+        <div class="dropdown-menu colorNeutralBackground colorOutline" aria-labelledby="dropdownMenuLink">
+          <h6 class="dropdown-header">{{login.username}}</h6>
 
-                    <a v-if="current_slice" class="dropdown-item" v-bind:href="'/slices.html?image_id=' + current_slice._id">Slice Stats</a>
-                    <a class="dropdown-item" v-bind:href="'/dashboard.html?user_id=' + login.id">Leaderboard</a>
-                    <a class="dropdown-item" href="#" onclick="logout()">Log Out</a>
-                </div>
-            </div>
-            <!-- End Dropdown menu for user -->
+          <a v-if="current_slice" class="dropdown-item" v-bind:href="'/slices.html?image_id=' + current_slice._id">Slice Stats</a>
+          <a class="dropdown-item" v-bind:href="'/dashboard.html?user_id=' + login.id">Leaderboard</a>
+          <a class="dropdown-item" href="#" onclick="logout()">Log Out</a>
+        </div>
+      </div>
+      <!-- End Dropdown menu for user -->
 
-            <div class="statusBar colorNeutralBackground">
-              <h4>
+      <div class="statusBar colorNeutralBackground">
+        <h4>
               <a class="btn btn-outline-info btn-xs" v-on:click="startTour">
                 <i class="fa fa-info" aria-hidden="true"></i>
               </a>
@@ -131,23 +137,23 @@
 
                 </div>
                 </h4>
-            </div>
+      </div>
 
-            <!-- Start submit button -->
-            <div class="submitButton">
+      <!-- Start submit button -->
+      <div class="submitButton">
 
 
-                <button class="btn btn-med btn-primary colorBold" style="position:fixed; right:0; top:0;" id="submit_button" v-on:click="runEval">
+        <button class="btn btn-med btn-primary colorBold" style="position:fixed; right:0; top:0;" id="submit_button" v-on:click="runEval">
                     {{status}}
                 </button>
 
-            </div>
+      </div>
 
-        </nav>
+    </nav>
 
 
-        <div class="img-container">
-            <canvas id="myCanvas" resize>
+    <div class="img-container">
+      <canvas id="myCanvas" resize>
         </div>
 
         <transition name="fade">
@@ -232,6 +238,8 @@
         </div>
 
         <modal v-bind:content="login" id="loginModal"></modal>
+        <modal v-bind:content="alert" id="alertModal"></modal>
+
 
         <div id="legend" style="z-index:99999; background:rgba(1,1,1,1); position: fixed; right:3px; top:45px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px;" v-if="status=='Next'">
 
@@ -310,10 +318,14 @@
             <h5 class="modal-title">{{content.title}}</h5>
           </div>
           <div class="modal-body">
-            <a v-bind:href="content.url"><img style="width:100%; max-width:200px;" v-bind:src="content.image" class="mx-auto d-block"/> </a>
+            <a v-if="content.url" v-bind:href="content.url"><img style="width:100%; max-width:200px;" v-bind:src="content.image" class="mx-auto d-block"/> </a>
+            <p v-if="content.text">
+            {{content.text}}
+            </p>
           </div>
           <div class="modal-footer">
-            <a class="btn btn-primary mx-auto d-block" v-bind:href="content.url">{{content.footer}}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" v-if="content.do_dismiss">Close</button>
+            <a v-if="content.footer" class="btn btn-primary mx-auto d-block" v-bind:href="content.url">{{content.footer}}</a>
           </div>
         </div>
       </div>
@@ -380,11 +392,18 @@
                 "incorrect": true,
                 "correct": true
             },
+            alert: {
+              title: "Error!",
+              image: "image/x.jpg",
+              do_dismiss: false,
+              text: "You are filling too much! Try closing your loops first."
+            },
             login: {
                 username: null,
                 avatar: 'images/Octocat1.jpg',
                 github_id: null,
                 total_score: 0,
+                do_dismiss: false,
                 ave_score: 0,
                 n_subs: 0,
                 n_test: 0,

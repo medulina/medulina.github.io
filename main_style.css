@@ -1,11 +1,10 @@
-html,
-body {
-    font-family: "Helvetica", "Arial", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 20px;
-    margin: 0;
-    color: rgba(0, 0, 0, .87);
+html, body {
+  font-family: "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+  color: rgba(0, 0, 0, .87);
 }
 
 #myCanvas {
@@ -31,130 +30,127 @@ body {
 }
 
 .main {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    -webkit-align-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    margin: 0 auto;
-    padding: 0;
-    border: 0;
-    margin: 0;
-    position: absolute;
-    min-height: 100% !important;
-    min-width: 100% !important;
-    background-color: #000 !important
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  position: absolute;
+  min-height: 100% !important;
+  min-width: 100% !important;
+  background-color: #000 !important
 }
-
 
 .img-container {
   align-items: center;
   width: 100%;
 }
 
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity .75s
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+
+.fade-enter, .fade-leave-to
+/* .fade-leave-active in <2.1.8 */
+
+  {
   opacity: 0
 }
 
 .menu {
-  background-color:rgba(255,255,255,0);
-  height:90px;
+  background-color: rgba(255, 255, 255, 0);
+  height: 90px;
   width: 100%;
-  z-index:999;
-  position:fixed;
-  bottom:56px;
+  z-index: 999;
+  position: fixed;
+  bottom: 56px;
   left: 0;
 }
 
 .bottomMenu {
-  background-color:rgba(255,255,255,0);
-  height:35.56px;
+  background-color: rgba(255, 255, 255, 0);
+  height: 35.56px;
   width: 100%;
   left: 0;
   /*z-index:999;*/
   position: fixed !important;
-  bottom:20px;
+  bottom: 20px;
 }
 
-
-
-button{
+button {
   margin: 5px;
   box-shadow: 0 0 0 0px;
   border-width: thin;
   border-color: #dfdfe0;
   background-color: white;
   border-radius: 5px;
-  padding:5px;
+  padding: 5px;
 }
 
 .wrapper {
-    margin: auto;
-    background-color: rgba(255,255,255,0);
-    text-align: center;
-    position: relative;
-
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
+  margin: auto;
+  background-color: rgba(255, 255, 255, 0);
+  text-align: center;
+  position: relative;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
-
 
 .scrolls {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    /*overflow: hidden;*/
-    white-space:nowrap
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /*overflow: hidden;*/
+  white-space: nowrap
 }
-.imageDiv {
-    border-style: solid;
-    /*background-color: rgba(0,0,0,1);*/
-    border-width: 1px;
-    border-radius: 5px;
-    /*border-color: #6B6D76;
-    color: #CCC9A1;*/
-    margin: 2px;
-    width: 75px;
-    height: 75px;
 
-    /*max-height: 50px;*/
-    cursor: pointer;
-    display:inline-block;
-    *display:inline;
-    *zoom:1;
-    vertical-align:middle;
+.imageDiv {
+  border-style: solid;
+  /*background-color: rgba(0,0,0,1);*/
+  border-width: 1px;
+  border-radius: 5px;
+  /*border-color: #6B6D76;
+    color: #CCC9A1;*/
+  margin: 2px;
+  width: 75px;
+  height: 75px;
+  /*max-height: 50px;*/
+  cursor: pointer;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle;
 }
 
 .imageDivPart {
-    border-style: solid;
-    position: fixed;
-    background-color: rgba(0,0,0,1);
-    border-width: 0px;
-    border-radius: 5px;
-    border-color: #dfdfe0;
-    color: white;
-    margin: 2px;
-    width: 3em;
-    height: 3em;
-
-    /*max-height: 50px;*/
-    cursor: pointer;
-    display:inline-block;
-    *display:inline;
-    *zoom:1;
-    vertical-align:middle;
+  border-style: solid;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 1);
+  border-width: 0px;
+  border-radius: 5px;
+  border-color: #dfdfe0;
+  color: white;
+  margin: 2px;
+  width: 3em;
+  height: 3em;
+  /*max-height: 50px;*/
+  cursor: pointer;
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle;
 }
 
-.imageDiv span{
-line-height:91px;
+.imageDiv span {
+  line-height: 91px;
 }
 
 .optTitle p {
@@ -180,7 +176,7 @@ line-height:91px;
   position: fixed;
 }
 
-.dropdown-menu{
+.dropdown-menu {
   top: 40px;
   left: 5px;
   border-style: solid;
@@ -189,11 +185,11 @@ line-height:91px;
   background-color: black;
 }
 
-.dropdown-menu a{
+.dropdown-menu a {
   color: white;
 }
 
-.dropdown-header{
+.dropdown-header {
   color: #5bc0de;
 }
 
@@ -202,7 +198,7 @@ nav {
   position: fixed !important;
   width: 100%;
   color: white;
-  text-align:center;
+  text-align: center;
 }
 
 nav h4 {
@@ -217,9 +213,7 @@ nav h4 {
   border-color: #5bc0de;
 }
 
-
-
-.submitButton{
+.submitButton {
   display: inline-block;
 }
 
@@ -229,26 +223,26 @@ nav h4 {
 
 .left {
   position: fixed;
-  left:0;
-  bottom:0;
+  left: 0;
+  bottom: 0;
 }
 
-.right{
+.right {
   position: fixed;
-  right:0;
-  bottom:0;
+  right: 0;
+  bottom: 0;
 }
 
 .optLabel {
   position: relative;
   bottom: 25%;
-  color:#fff;
-  width:75px;
+  color: #fff;
+  width: 75px;
   font-size: 1.5em;
 }
 
 .colorDarkBackground {
-    background-color: #613F75;
+  background-color: #613F75;
 }
 
 .colorNeutralBackground {
@@ -264,16 +258,13 @@ nav h4 {
   color: #fff;
   background-color: #87BCDE;
   border-color: #87BCDE;
-
 }
 
 .btn-outline-info {
-  color:  #87BCDE;
+  color: #87BCDE;
   background-color: transparent;
   border-color: #87BCDE;
-
 }
-
 
 .colorBold {
   background-color: #FF595E;
@@ -297,11 +288,11 @@ nav h4 {
 }
 
 .showOption {
-  height:75px;
-  width:100%;
+  height: 75px;
+  width: 100%;
   max-width: 323px;
   /*background-color:rgba(0,0,0,1); */
-  border-radius:5px;
+  border-radius: 5px;
   color: white;
   border-width: 1px;
   /*border-color: white; */
@@ -338,7 +329,7 @@ nav h4 {
   border-bottom-right-radius: 5px;
 }
 
-.introjs-tooltiptext h1{
+.introjs-tooltiptext h1 {
   text-align: center;
 }
 
@@ -359,48 +350,45 @@ nav h4 {
 }
 
 .introjs-helperLayer {
-  background: rgba(255,255,255, 0);
+  background: rgba(255, 255, 255, 0);
   visibility: hidden;
   /*border-style: solid;
   border-color: white;
   border-width: 2px;*/
 }
 
-
 .introjs-button {
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.25;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    user-select: none;
-    font-size: 1rem;
-    border-width: 1px;
-    border-style: solid;
-    border-color: transparent;
-    border-image: initial;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    transition: all 0.2s ease-in-out;
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  font-size: 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-image: initial;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
 }
 
-
-
 .introjs-button {
-    color: white !important;
-    background: rgb(2, 117, 216);
-    border-color: rgb(2, 117, 216);
-    text-shadow: unset;
-    margin: 2px;
+  color: white !important;
+  background: rgb(2, 117, 216);
+  border-color: rgb(2, 117, 216);
+  text-shadow: unset;
+  margin: 2px;
 }
 
 .introjs-skipbutton {
-    background-color: #FF595E;
-    background: #FF595E !important;
-    border-color: #FF595E;
-    color: white;
-    text-shadow: unset;
+  background-color: #FF595E;
+  background: #FF595E !important;
+  border-color: #FF595E;
+  color: white;
+  text-shadow: unset;
 }
 
 .introjs-disabled {
@@ -414,11 +402,11 @@ strong {
 }
 
 .introjs-fixParent {
-    z-index: auto !important;
-    opacity: 1.0 !important;
-    position: absolute;
-  }
+  z-index: auto !important;
+  opacity: 1.0 !important;
+  position: absolute;
+}
 
-  .introjs-overlay {
-    background: unset !important;
-  }
+.introjs-overlay {
+  background: unset !important;
+}
