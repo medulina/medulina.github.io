@@ -895,6 +895,7 @@ dblClickHandler = function(e){
   switch (mode) {
     case "paintFill":
       //setPaintbrush("1")
+      app.has_filled = true;
       doFloodFill(e, me)
       break;
     case "eraseFill":
