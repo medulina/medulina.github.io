@@ -26,6 +26,7 @@ var task_dict = {
 var title_dict = {
   "stroke.medulina.com": "Stroke",
   "tumor.medulina.com": "Meningioma",
+  "test.medulina.com": "Meningioma"
   "dg.medulina.com": "Dentate Gyrus",
   "localhost:8000": "Stroke",
 }
