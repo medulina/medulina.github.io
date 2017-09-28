@@ -147,10 +147,10 @@ do_save = function(score, edits){
   }
 
   $.ajax(settings).done(function(response){
-    show_save(score)
     console.log("response is", response)
     window.response = response;
     if (app.appMode == "train"){
+      show_save(score)
       roi.clear()
       add_tp(response.tp)
       add_fp(response.fp)
