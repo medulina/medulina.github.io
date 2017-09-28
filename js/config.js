@@ -69,6 +69,7 @@ if (window.location.host == "test.medulina.com") {
     edit_url: 'https://testapi.medulina.com/api/v1/mask',
     use_random: false,
     task: task_dict[window.location.host],
+    title: title_dict[window.location.host],
     num: 15,
     total_num_images: 50,
   }
