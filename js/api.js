@@ -150,20 +150,26 @@ do_save = function(score, edits){
     show_save(score)
     console.log("response is", response)
     window.response = response;
+    if (app.appMode == "train"){
+      roi.clear()
+      add_tp(response.tp)
+      add_fp(response.fp)
+      add_fn(response.fn)
+      roi.insertAbove(fn)
 
-    roi.clear()
-    add_tp(response.tp)
-    add_fp(response.fp)
-    add_fn(response.fn)
-    roi.insertAbove(fn)
-
-    app.score.dice = response.score;
+      app.score.dice = response.score;
+    }
 
 
     var profile = store.get('user_token');
     getUserInfo(profile, function(){
       stopProgress()
-      show_save(score)
+      console.log("APP Mode", app.appMode)
+      if (app.appMode == "test"){
+          get_next()
+      } else{
+        show_save(score)
+      }
     })
   })
 

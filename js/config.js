@@ -19,7 +19,8 @@ var task_dict = {
   "stroke.medulina.com": "atlas_lesions",
   "tumor.medulina.com": "meningioma001",
   "dg.medulina.com": "db_cor_context03",
-  "localhost:8000": "atlas_lesions"
+  "localhost:8000": "atlas_lesions",
+  "test.medulina.com": "cheng_et_al_000"
 }
 
 var title_dict = {
@@ -39,6 +40,7 @@ var context_dict = {
 var task_config = {
   "meningioma001": {care_about_fill: true},
   "atlas_lesions": {care_about_fill: true},
+  "cheng_et_al_000": {care_about_fill: true},
   "db_cor_context03": {care_about_fill: false},
 }
 
@@ -65,7 +67,7 @@ if (window.location.host == "test.medulina.com") {
     player_url: 'https://testapi.medulina.com/api/v1/user',
     edit_url: 'https://testapi.medulina.com/api/v1/mask',
     use_random: false,
-    task: "atlas_lesions",
+    task: task_dict[window.location.host],
     num: 15,
     total_num_images: 50,
   }
