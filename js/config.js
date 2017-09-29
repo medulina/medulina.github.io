@@ -19,7 +19,7 @@ var task_dict = {
   "stroke.medulina.com": "atlas_lesions",
   "tumor.medulina.com": "cheng_et_al_001",
   "dg.medulina.com": "db_cor_context03",
-  "localhost:8000": "atlas_lesions",
+  "localhost:8000": "cheng_et_al_001",
   "test.medulina.com": "cheng_et_al_000"
 }
 
@@ -28,7 +28,7 @@ var title_dict = {
   "tumor.medulina.com": "Meningioma",
   "test.medulina.com": "Meningioma",
   "dg.medulina.com": "Dentate Gyrus",
-  "localhost:8000": "Stroke",
+  "localhost:8000": "Meningioma",
 }
 
 var context_dict = {

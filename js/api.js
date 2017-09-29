@@ -161,6 +161,7 @@ do_save = function(score, edits){
       //roi.insertAbove(fn)
 
       app.score.dice = response.score;
+      
     }
 
 
@@ -169,6 +170,7 @@ do_save = function(score, edits){
       stopProgress()
       console.log("APP Mode", app.appMode)
       if (app.appMode == "test"){
+          app.firework()
           get_next()
       } else{
         show_save(score)

@@ -154,6 +154,9 @@
 
     <div class="img-container">
       <canvas id="myCanvas" resize>
+
+
+
         </div>
 
         <transition name="fade">
@@ -271,7 +274,7 @@
 
     </div>
 
-
+<canvas class="fireworks" style="position:absolute;" resize>
 
 
 </body>
@@ -285,6 +288,8 @@
 <script src="js/hammer.min.js"></script>
 <script src="js/mustache.min.js"></script>
 <script src="js/login.js"></script>
+<script src="js/anime.min.js"></script>
+<script src="js/firework.js"></script>
 <script src="js/api.js"></script>
 <script src="js/ui.js"></script>
 
@@ -297,12 +302,15 @@
 
 
 <script src="js/tour.js"></script>
+
 <script src="js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/intro.js@2.8.0-alpha.1/minified/intro.min.js"></script>
 <script type="text/paperscript" canvas="myCanvas" src="js/main.js"></script>
 
 
 <script>
+    $(".fireworks").hide()
+
     Vue.filter("formatNumber", function(value) {
         return numeral(value).format("0.0[0]"); // displaying other groupings/separators is possible, look at the docs
     });
@@ -465,6 +473,16 @@
                 this.view_feedback_foo.correct = this.overlay;
             },
 
+            firework: function(){
+              $(".fireworks").show()
+              animateParticules(
+                anime.random(centerX-50, centerX+50),
+                anime.random(centerY-50, centerY+50)
+              )
+              anime({duration: 500}).finished.then(function(){
+                $(".fireworks").hide()
+              })
+            },
 
             toggle: function(opt) {
                 switch (opt) {
