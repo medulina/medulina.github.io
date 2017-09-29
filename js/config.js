@@ -17,7 +17,7 @@ var auth_url = {
 // name of project in database
 var task_dict = {
   "stroke.medulina.com": "atlas_lesions",
-  "tumor.medulina.com": "meningioma001",
+  "tumor.medulina.com": "cheng_et_al_001",
   "dg.medulina.com": "db_cor_context03",
   "localhost:8000": "atlas_lesions",
   "test.medulina.com": "cheng_et_al_000"
@@ -41,7 +41,7 @@ var context_dict = {
 var task_config = {
   "meningioma001": {care_about_fill: true},
   "atlas_lesions": {care_about_fill: true},
-  "cheng_et_al_000": {care_about_fill: true},
+  "cheng_et_al_001": {care_about_fill: true},
   "db_cor_context03": {care_about_fill: false},
 }
 
