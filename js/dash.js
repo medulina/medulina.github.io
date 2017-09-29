@@ -386,7 +386,7 @@ function get_data(url, query, updater, callback) {
 
 var task = task_dict[window.location.host]
 console.log("task is", task)
-var user_query = 'score?where={"task":"' +task+ '"}&sort=-total_score'
+var user_query = 'score?where={"task":"' +task+ '"}&sort=-n_test'
 console.log(user_query)
 get_data(url,
   user_query,
