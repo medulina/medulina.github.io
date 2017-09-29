@@ -258,7 +258,7 @@
               <h2 class="score">{{user_info.ave_score | formatNumber}}</h2>-->
 
               <h4 >Average Score</h4>
-              <div class="text-muted">Overall average score</div>
+              <div class="text-muted">Overall average score on training</div>
 
 
 
@@ -274,13 +274,13 @@
               </div>
 
               <h4 class="">Rolling Average</h4>
-              <span class="text-muted ">Average of the past 10 runs</span>
+              <span class="text-muted ">Average of the past 10 training runs</span>
             </div>
             <div class="col-6 col-sm-3 placeholder">
               <div class="circle bright">
                 <div class="circle__inner">
                   <div class="circle__wrapper">
-                    <div class="circle__content">{{user_info.n_test | formatNumber}}</div>
+                    <div class="circle__content">{{user_info.n_test}}</div>
                   </div>
                 </div>
               </div>
@@ -288,7 +288,7 @@
 
 
               <h4 class="">Total Points</h4>
-              <span class="text-muted">Sum of all scores</span>
+              <span class="text-muted">Number of new images you've painted</span>
             </div>
             <div class="col-6 col-sm-3 placeholder">
               <div class="circle dark">
@@ -302,7 +302,7 @@
 
 
               <h4 class="">Rank</h4>
-              <span class="text-muted">Rank based on total score</span>
+              <span class="text-muted">Rank based on total points</span>
             </div>
 
           </section>
