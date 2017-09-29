@@ -9,7 +9,7 @@ var numberOfParticules = 30;
 var pointerX = 0;
 var pointerY = 0;
 var tap = ('ontouchstart' in window || navigator.msMaxTouchPoints) ? 'touchstart' : 'mousedown';
-var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C'];
+var colors = ['#FF595E','#313E50', '#87BCDE', 'darkviolet'];
 
 function setCanvasSize() {
   canvasEl.width = window.innerWidth * 2;
@@ -124,9 +124,9 @@ var render = anime({
 var centerX = window.innerWidth / 2;
 var centerY = window.innerHeight / 2;
 
-function autoClick() {
+function autoClick(end_callback) {
   console.log("fwork")
-  if (window.human) return;
+  if (app.status == "Submit") end_callback();
   animateParticules(
     anime.random(centerX-50, centerX+50),
     anime.random(centerY-50, centerY+50)
