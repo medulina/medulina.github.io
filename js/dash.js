@@ -382,7 +382,10 @@ function get_data(url, query, updater, callback) {
   }
 }
 
-var user_query = "user?sort=-total_score"
+var task = task_dict[window.location.host]
+console.log("task is", task)
+var user_query = 'score?where={"task":"' +task+ '"}&sort=-total_score'
+console.log(user_query)
 get_data(url,
   user_query,
   function(data) {
