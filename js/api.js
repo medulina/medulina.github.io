@@ -124,6 +124,9 @@ do_save = function(score, edits){
     'user_agent': navigator.userAgent,
     'resolution': [window.innerWidth, window.innerHeight]
   }
+  if (app.appMode == "test"){
+    imgbody["mode"] = "test"
+  }
   var timeDiff = new Date() - app.startTime // in miliseconds
   imgbody["time"] = timeDiff
 
