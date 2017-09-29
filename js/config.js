@@ -20,7 +20,7 @@ var task_dict = {
   "tumor.medulina.com": "cheng_et_al_001",
   "dg.medulina.com": "db_cor_context03",
   "localhost:8000": "cheng_et_al_001",
-  "test.medulina.com": "cheng_et_al_000"
+  "test.medulina.com": "cheng_et_al_001"
 }
 
 var title_dict = {
