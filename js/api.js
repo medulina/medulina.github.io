@@ -167,7 +167,7 @@ do_save = function(score, edits){
 
     var profile = store.get('user_token');
     getUserInfo(profile, function(){
-      stopProgress()
+      //stopProgress()
       console.log("APP Mode", app.appMode)
       if (app.appMode == "test"){
           app.firework()

@@ -5,7 +5,7 @@ window.human = false;
 
 var canvasEl = document.querySelector('.fireworks');
 var ctx = canvasEl.getContext('2d');
-var numberOfParticules = 30;
+var numberOfParticules = 60;
 var pointerX = 0;
 var pointerY = 0;
 var tap = ('ontouchstart' in window || navigator.msMaxTouchPoints) ? 'touchstart' : 'mousedown';
@@ -26,7 +26,7 @@ function updateCoords(e) {
 
 function setParticuleDirection(p) {
   var angle = anime.random(0, 360) * Math.PI / 180;
-  var value = anime.random(50, 180);
+  var value = anime.random(50, 180) * 2 ; //this is total radius of direction 
   var radius = [-1, 1][anime.random(0, 1)] * value;
   return {
     x: p.x + radius * Math.cos(angle),
@@ -87,13 +87,13 @@ function animateParticules(x, y) {
     x: function(p) { return p.endPos.x; },
     y: function(p) { return p.endPos.y; },
     radius: 0.1,
-    duration: anime.random(1200, 1800),
+    duration: anime.random(4200, 4800),
     easing: 'easeOutExpo',
     update: renderParticule
   })
     .add({
     targets: circle,
-    radius: anime.random(80, 160),
+    radius: anime.random(280, 360), //circle radius
     lineWidth: 0,
     alpha: {
       value: 0,
@@ -128,8 +128,8 @@ function autoClick(end_callback) {
   console.log("fwork")
   if (app.status == "Submit") end_callback();
   animateParticules(
-    anime.random(centerX-50, centerX+50),
-    anime.random(centerY-50, centerY+50)
+    anime.random(centerX, centerX),
+    anime.random(centerY, centerY)
   );
   anime({duration: 200}).finished.then(autoClick);
 }
