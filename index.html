@@ -475,12 +475,12 @@
 
             firework: function(){
               $(".fireworks").show()
-              for (var i=0; i<5; i++){
+              //for (var i=0; i<5; i++){
                 animateParticules(
-                  anime.random(centerX-50, centerX+50),
-                  anime.random(centerY-50, centerY+50)
+                  anime.random(centerX, centerX),
+                  anime.random(centerY, centerY)
                 )
-              }
+
               anime({duration: 600}).finished.then(function(){
                 $(".fireworks").hide()
               })
