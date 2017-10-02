@@ -1186,7 +1186,10 @@ get_images = function(url, callback) {
 
 startProgress()
 Login(function() {
-  if (app.login.n_try <= 10){
+  if(window.location.host=="tumor.medulina.com"){
+    $("#tutorial_nice").modal()
+  }
+  else if (app.login.n_try <= 10){
     startIntro()
   }
   var url = get_image_url()
