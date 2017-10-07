@@ -57,7 +57,7 @@ function getUserInfo(user_token, callback) {
       });
 
     }
-    stopProgress();
+    ui.stopProgress();
   });
 }
 
@@ -83,7 +83,7 @@ Starts the whole process
     //callback();
   } else {
     try {
-      startProgress();
+      ui.startProgress();
       var code = window.location.href.match(/\?code=(.*)/)[1];
 
 

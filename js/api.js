@@ -44,22 +44,22 @@ api.do_eval = function(){
 
   if (draw.history.length == 1 && draw.history[0].length == 0){
     if (confirm("Are you sure you want to submit an empty drawing?")){
-      startProgress()
+      ui.startProgress()
       $('#submit_button').prop('disabled',true);
       var segmentation = roi.getNonZeroPixels()
-      stopProgress()
+      ui.stopProgress()
       api.do_save(score, JSON.stringify(segmentation))
 
     } else {
-      stopProgress()
+      ui.stopProgress()
 
     }
 
   } else {
-    startProgress()
+    ui.startProgress()
     $('#submit_button').prop('disabled',true);
     var segmentation = roi.getNonZeroPixels()
-    stopProgress()
+    ui.stopProgress()
     api.do_save(score, JSON.stringify(segmentation))
   }
 
@@ -89,7 +89,7 @@ api.create_json_request = function(data, url, auth){
 }
 
 api.do_save = function(score, edits){
-  startProgress()
+  ui.startProgress()
   var imgbody = {
     'image_id': window.currentData._items[0]._id,
     'pic': edits,
@@ -115,16 +115,16 @@ api.do_save = function(score, edits){
     alert("there has been an error", e, "settings were", settings)
     console.log("there has been an error", e, "settings were", settings)
 
-    stopProgress()
+    ui.stopProgress()
     window.appMode = "error"
-    show_save({"accuracy": "Err"})
+    ui.show_save({"accuracy": "Err"})
   }
 
   $.ajax(settings).done(function(response){
     console.log("response is", response)
     window.response = response;
     if (app.appMode == "train"){
-      show_save(score)
+      ui.show_save(score)
       roi.remove()
       add_tp(response.tp)
       add_fp(response.fp)
@@ -138,13 +138,12 @@ api.do_save = function(score, edits){
 
     var profile = store.get('user_token');
     getUserInfo(profile, function(){
-      //stopProgress()
       console.log("APP Mode", app.appMode)
       if (app.appMode == "test"){
           app.firework()
           api.get_next()
       } else{
-        show_save(score)
+        ui.show_save(score)
       }
     })
   })
@@ -155,7 +154,7 @@ api.do_save = function(score, edits){
 api.get_next = function(){
 
   $('#submit_button').prop('disabled',true);
-  startProgress()
+  ui.startProgress()
 
   var url = api.get_image_url()
   get_images(url, function(base_url){
@@ -170,7 +169,7 @@ api.get_next = function(){
     view.setZoom(1);
     window.panFactor = {x:0, y:0}
 
-    show_eval()
+    ui.show_eval()
   })
 
 

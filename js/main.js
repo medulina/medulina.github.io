@@ -771,7 +771,7 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
     //draw.history = [[]]
     //console.log(draw.history)
     console.log("starting revert", draw.history)
-    startProgress()
+    ui.startProgress()
     if (draw.history.length == 1) {
       //omg WHY anisha this is so hacky. write better
       draw.history.push([])
@@ -781,7 +781,7 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
       draw.revert(roi, 0)
     }
     console.log("ending revert", draw.history)
-    stopProgress()
+    ui.stopProgress()
     app.alert.do_dismiss = true
   }
   return
@@ -800,16 +800,11 @@ changeMode = function(e) {
     window.prevMode = window.mode
   } else {
     if (e == "view") {
-      /*$("#zoompan").removeClass("mdl-button--colored")*/
       e = window.prevMode
     }
   }
 
   window.mode = e
-  //console.log("setting menu icon", window.mode)
-
-  setMenuIcon(window.mode)
-  //$("#currentTool").html(window.mode)
 
 }
 
@@ -1208,8 +1203,8 @@ function start(base_url) {
     window.view = view
     doBrightCont()
     //("#currentTool").html(window.mode)
-    stopProgress()
-    show_eval()
+    ui.stopProgress()
+    ui.show_eval()
 
   };
 }
@@ -1245,7 +1240,7 @@ get_images = function(url, callback) {
   })
 }
 
-startProgress()
+ui.startProgress()
 Login(function() {
   if(window.location.host=="tumor.medulina.com"){
     $("#tutorial_nice").modal()
