@@ -354,7 +354,7 @@
           <div class="modal-footer">
             <span v-if="content.extra_buttons">
             <!-- TODO: undo hardcoding here!! -->
-            <button v-for="btn in content.extra_buttons" class="btn btn-danger" data-dismiss="modal" onclick="app.has_filled=true;console.log('hi'); do_eval()">{{btn.name}}</button>
+            <button v-for="btn in content.extra_buttons" class="btn btn-danger" data-dismiss="modal" onclick="app.has_filled=true;console.log('hi'); api.do_eval()">{{btn.name}}</button>
             </span>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" v-if="content.do_dismiss">Close</button>
             <a v-if="content.footer" class="btn btn-primary mx-auto d-block" v-bind:href="content.url">{{content.footer}}</a>
@@ -422,7 +422,7 @@
               extra_buttons: [{name: "Submit Anyway", action: function(){
                 console.log("hello, i'm here")
                 app.has_filled = true;
-                do_eval()
+                api.do_eval()
               }}]
             },
             overlay: true,
@@ -555,7 +555,7 @@
             runEval: function() {
                 switch (this.status) {
                     case 'Submit':
-                        do_eval();
+                        api.do_eval();
                         break;
                     case 'Next':
                         get_next();

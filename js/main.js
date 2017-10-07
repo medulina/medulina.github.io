@@ -1070,6 +1070,80 @@ function mousewheel(event) {
 
 onmousewheel = mousewheel
 
+var stage = document.getElementById('myCanvas');
+var mc = new Hammer.Manager(stage, {
+  stopPropagation: true,
+  preventDefault: true
+});
+var Pinch = new Hammer.Pinch();
+
+// add the recognizer
+mc.add(Pinch);
+
+
+window.prevZoom
+var tmpzoom = 1
+
+// subscribe to events
+mc.on('pinch', function(e) {
+    // do something cool
+    //console.log("pinch", window.mode)
+    if (e){
+      //if (window.mode == "view"){
+        window.mode = "view"
+        e.preventDefault()
+        tmpzoom = xfm.clamp(e.scale/window.startScale*window.zoomFactor, 1, 5)
+        view.setZoom(tmpzoom)
+        //doPan(e)
+        //console.log("pinchin", e.scale)
+        //var zf = e.scale/window.zoomFactor
+        //window.zoomFactor = zf
+        //view.setZoom(window.zoomFactor)
+      //}
+    }
+});
+
+mc.on('pinchend', function(e) {
+    // do something cool
+    //console.log("pinchend", window.mode)
+
+  if (e) {
+    window.mode = window.prevMode
+    window.prevMode = "view"
+    e.preventDefault()
+
+    window.zoomFactor = tmpzoom
+    window.panMouseDown = null
+    //var zf = e.scale/window.zoomFactor
+    //window.zoomFactor = zf
+    //view.setZoom(window.zoomFactor)
+
+  }
+
+});
+
+mc.on('pinchstart', function(e) {
+  // do something cool
+
+  if (e) {
+    window.prevMode = window.mode
+    window.mode = "view"
+    //console.log("e from hammer", e)
+    /*window.panMouseDown = {point:{}}
+    window.panMouseDown.point.x = base.position._x //e.srcEvent.offsetX
+    window.panMouseDown.point.y = base.position._y //e.srcEvent.offsetY*/
+    e.preventDefault()
+
+    window.startScale = e.scale
+    //var zf = e.scale/window.zoomFactor
+    //window.zoomFactor = zf
+    //view.setZoom(window.zoomFactor)
+
+  }
+
+});
+
+
 /* =============================================================================
                                     MAIN
 ==============================================================================*/
@@ -1158,29 +1232,16 @@ get_images = function(url, callback) {
       sliceNo = "0" + sliceNo
     }
     console.log(sliceNo)
-    context_url = "data:image/jpeg;base64," + data._items[0].context //"https://cdn.rawgit.com/medulina/context/f48d59e5/slice"+sliceNo+".jpg"
+    context_url = "data:image/jpeg;base64," + data._items[0].context
     app.context = context_url;
 
     config.total_num_images = data._meta.total;
     console.log("going to start")
 
-    //var mask_url = get_mask_url(data._items[0])
-    //console.log("mask url is", mask_url)
+
     start(base_url)
     app.appMode = data._items[0].mode
 
-    /*$.get(mask_url, function(data, status, jqXhr){
-      console.log("mask data is", data)
-      if (data._items.length){
-        var truth_data = data._items[0].pic
-        window.truthData = data;
-        window.appMode = "train"
-      }
-      else{
-        window.appMode = "test"
-      }
-
-    })*/
   })
 }
 
@@ -1192,85 +1253,8 @@ Login(function() {
   else if (app.login.n_try <= 10){
     startIntro()
   }
-  var url = get_image_url()
+  var url = api.get_image_url()
   console.log('url is', url);
   get_images(url, start);
 
 })
-
-
-var stage = document.getElementById('myCanvas');
-var mc = new Hammer.Manager(stage, {
-  stopPropagation: true,
-  preventDefault: true
-});
-var Pinch = new Hammer.Pinch();
-
-// add the recognizer
-mc.add(Pinch);
-
-
-window.prevZoom
-var tmpzoom = 1
-
-// subscribe to events
-mc.on('pinch', function(e) {
-    // do something cool
-    //console.log("pinch", window.mode)
-    if (e){
-      //if (window.mode == "view"){
-        window.mode = "view"
-        e.preventDefault()
-        tmpzoom = xfm.clamp(e.scale/window.startScale*window.zoomFactor, 1, 5)
-        view.setZoom(tmpzoom)
-        //doPan(e)
-        //console.log("pinchin", e.scale)
-        //var zf = e.scale/window.zoomFactor
-        //window.zoomFactor = zf
-        //view.setZoom(window.zoomFactor)
-      //}
-    }
-});
-
-mc.on('pinchend', function(e) {
-    // do something cool
-    //console.log("pinchend", window.mode)
-
-  if (e) {
-    window.mode = window.prevMode
-    window.prevMode = "view"
-    e.preventDefault()
-
-    window.zoomFactor = tmpzoom
-    window.panMouseDown = null
-    //var zf = e.scale/window.zoomFactor
-    //window.zoomFactor = zf
-    //view.setZoom(window.zoomFactor)
-
-  }
-
-});
-
-mc.on('pinchstart', function(e) {
-  // do something cool
-
-  if (e) {
-    window.prevMode = window.mode
-    window.mode = "view"
-    //console.log("e from hammer", e)
-    /*window.panMouseDown = {point:{}}
-    window.panMouseDown.point.x = base.position._x //e.srcEvent.offsetX
-    window.panMouseDown.point.y = base.position._y //e.srcEvent.offsetY*/
-    e.preventDefault()
-
-    window.startScale = e.scale
-    //var zf = e.scale/window.zoomFactor
-    //window.zoomFactor = zf
-    //view.setZoom(window.zoomFactor)
-
-  }
-
-});
-
-
-//start("images/brain.jpg")
