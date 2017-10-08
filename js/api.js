@@ -9,7 +9,7 @@ window.api = {}
 $.ajaxSetup({ cache: false });
 
 api.get_image_url = function(){
-  var url = config.image_url + '?where={"task":"' + config.task + '"}'
+  var url = config.config.image_url + '?where={"task":"' + config.config.task + '"}'
   url = url + "&max_results=1"
   url = url + "&user_id="+app.login.id+"&token="+app.login.token
 
@@ -18,7 +18,7 @@ api.get_image_url = function(){
 }
 
 api.get_mask_url = function(image_info){
-  var url = config.mask_url + '?where={"mode":"truth","image_id":"' + image_info._id + '"}'
+  var url = config.config.mask_url + '?where={"mode":"truth","image_id":"' + image_info._id + '"}'
   console.log('Mask URL is', url)
   return url
 }
@@ -94,7 +94,7 @@ api.do_save = function(score, edits){
     'image_id': window.currentData._items[0]._id,
     'pic': edits,
     'mode': 'try',
-    'task': config.task,
+    'task': config.config.task,
     //'score': score.accuracy,
     'user_id': app.login.id, //score['name']
     'user_agent': navigator.userAgent,
@@ -107,7 +107,7 @@ api.do_save = function(score, edits){
   imgbody["time"] = timeDiff
 
   var token = "NnrP65CXaSnZ0aLPZ8Ox64d0pDlSKS0R8wpymwLr";
-  var settings = api.create_json_request(imgbody, config.edit_url, token)
+  var settings = api.create_json_request(imgbody, config.config.edit_url, token)
   settings.headers['content-type'] = 'application/json'
 
   console.log("settings are", settings)

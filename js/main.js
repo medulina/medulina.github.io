@@ -1230,7 +1230,7 @@ get_images = function(url, callback) {
     context_url = "data:image/jpeg;base64," + data._items[0].context
     app.context = context_url;
 
-    config.total_num_images = data._meta.total;
+    config.config.total_num_images = data._meta.total;
     console.log("going to start")
 
 

@@ -368,7 +368,7 @@
 
 
     function get_oauth_id() {
-        var oauth_id = auth_id[window.location.host];
+        var oauth_id = config.auth_id[window.location.host];
         return oauth_id
     }
 
@@ -456,7 +456,7 @@
                 token: null
             },
             status: 'Submit',
-            instruction: config.title,
+            instruction: config.config.title,
             score: {
                 dice: 0,
                 points: 0,
