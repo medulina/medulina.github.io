@@ -410,3 +410,49 @@ strong {
 .introjs-overlay {
   background: unset !important;
 }
+
+[v-cloak] {
+  display: none;
+}
+
+.missed {
+  width: 45px;
+  height: 45px;
+  margin-right: 5px;
+  background-color: black;
+  border-color: #FF595E;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.missed.view {
+  background-color: #FF595E;
+}
+
+.incorrect {
+  width: 45px;
+  height: 45px;
+  margin-right: 5px;
+  background-color: black;
+  border-color: #87BCDE;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.incorrect.view {
+  background-color: #87BCDE;
+}
+
+.correct {
+  width: 45px;
+  height: 45px;
+  margin-right: 5px;
+  background-color: black;
+  border-color: darkviolet;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.correct.view {
+  background-color: darkviolet;
+}

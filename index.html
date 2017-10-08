@@ -27,62 +27,15 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-default.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
-  <link href="https://cdn.rawgit.com/HubSpot/shepherd/master/dist/css/shepherd-theme-arrows.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@2.8.0-alpha.1/minified/introjs.min.css">
-  <link rel="stylesheet" href="main_style.css">
+  <link rel="stylesheet" href="css/main_style.css">
 
 
   <style>
-    [v-cloak] {
-      display: none;
-    }
 
-    .missed {
-      width: 45px;
-      height: 45px;
-      margin-right: 5px;
-      background-color: black;
-      border-color: #FF595E;
-      border-style: solid;
-      border-radius: 10px;
-    }
-
-    .missed.view {
-      background-color: #FF595E;
-    }
-
-    .incorrect {
-      width: 45px;
-      height: 45px;
-      margin-right: 5px;
-      background-color: black;
-      border-color: #87BCDE;
-      border-style: solid;
-      border-radius: 10px;
-    }
-
-    .incorrect.view {
-      background-color: #87BCDE;
-    }
-
-    .correct {
-      width: 45px;
-      height: 45px;
-      margin-right: 5px;
-      background-color: black;
-      border-color: darkviolet;
-      border-style: solid;
-      border-radius: 10px;
-    }
-
-    .correct.view {
-      background-color: darkviolet;
-    }
   </style>
 
 </head>
@@ -104,7 +57,7 @@
 
           <a v-if="current_slice" class="dropdown-item" v-bind:href="'/slices.html?image_id=' + current_slice._id">Slice Stats</a>
           <a class="dropdown-item" v-bind:href="'/dashboard.html?user_id=' + login.id">Leaderboard</a>
-          <a class="dropdown-item" href="#" onclick="logout()">Log Out</a>
+          <a class="dropdown-item" href="#" onclick="login.logout()">Log Out</a>
         </div>
       </div>
       <!-- End Dropdown menu for user -->
@@ -424,7 +377,7 @@
             overlay: true,
             loading: true,
             context: null,
-            use_context: config["context"],
+            use_context: config.config["context"],
             startTime: null,
             current_slice: null,
             view_feedback_foo: {
@@ -560,7 +513,7 @@
                 }
             },
             startTour: function() {
-                startIntro()
+                tour.startIntro()
             },
         },
     });

@@ -1,4 +1,6 @@
-function getUserInfo(user_token, callback) {
+window.login = {}
+
+login.getUserInfo =function(user_token, callback) {
   /*
 
   Asks the server for user information based on a token from /authenticate/
@@ -64,7 +66,7 @@ function getUserInfo(user_token, callback) {
 
 
 
-function Login(callback) {
+login.Login =function(callback) {
   /*
 Starts the whole process
 
@@ -77,7 +79,7 @@ Starts the whole process
     app.login.github_id = profile.id;*/
     console.log("profile exists")
 
-    getUserInfo(profile, callback)
+    login.getUserInfo(profile, callback)
 
 
     //callback();
@@ -94,7 +96,7 @@ Starts the whole process
 
       $.getJSON(oauth_url + code, function(data) {
         console.log('data token is', data.token);
-        getUserInfo(data.token, function(profile) {
+        login.getUserInfo(data.token, function(profile) {
           console.log("", profile);
           /*app.login.username = profile.login;
           app.login.avatar = profile.avatar_url;
@@ -127,7 +129,7 @@ Starts the whole process
 
 }
 
-function logout() {
+login.logout =function() {
   store.clearAll();
   window.location.href = '/';
 }

@@ -137,7 +137,7 @@ api.do_save = function(score, edits){
 
 
     var profile = store.get('user_token');
-    getUserInfo(profile, function(){
+    login.getUserInfo(profile, function(){
       console.log("APP Mode", app.appMode)
       if (app.appMode == "test"){
           app.firework()

@@ -1,4 +1,5 @@
-function startIntro() {
+window.tour = {}
+tour.startIntro =function() {
   var intro = introJs();
 
   var is_small = window.innerWidth <= 478 ? true : false

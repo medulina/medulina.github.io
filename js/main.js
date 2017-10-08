@@ -501,7 +501,7 @@ main.drawLineRad = function(local, me, rad) {
     me.setPixelLog(local.x + val.x, local.y + val.y, draw.LUT[main.paintVal], main.paintVal)
 
     if (draw.last != null) {
-      
+
       draw.line(local.x + val.x,
         local.y + val.y,
         draw.last.x + val.x,
@@ -1222,12 +1222,12 @@ main.get_images = function(url, callback) {
 }
 
 ui.startProgress()
-Login(function() {
+login.Login(function() {
   if(window.location.host=="tumor.medulina.com"){
     $("#tutorial_nice").modal()
   }
   else if (app.login.n_try <= 10){
-    startIntro()
+    tour.startIntro()
   }
   var url = api.get_image_url()
   console.log('url is', url);
