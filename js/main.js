@@ -2,9 +2,11 @@
                               RASTER FUNCTIONS
 ============================================================================= */
 
-var allRasters = [];
-window.allRasters = allRasters;
-allRastersDict = {}
+window.main = {}
+
+main.allRasters = [];
+window.allRasters = main.allRasters;
+
 
 window.onresize = function() {
   /*
@@ -14,15 +16,15 @@ window.onresize = function() {
   //allRasters.map(function(r){r.fitBounds(view.bounds)})
   //console.log("resizing")
 
-  view.setZoom(1);
-  base.fitBounds(view.bounds);
-  roi.fitBounds(view.bounds);
-  window.zoomFactor = 1;
+  main.view.setZoom(1);
+  main.base.fitBounds(view.bounds);
+  main.roi.fitBounds(view.bounds);
+  main.zoomFactor = 1;
 
   try {
-    fp.fitBounds(view.bounds)
-    tp.fitBounds(view.bounds)
-    fn.fitBounds(view.bounds)
+    main.fp.fitBounds(view.bounds)
+    main.tp.fitBounds(view.bounds)
+    main.fn.fitBounds(view.bounds)
   } catch (e) {
 
   } finally {
@@ -41,7 +43,7 @@ function copyImageData(ctx, src) {
   return dst;
 }
 
-var initializeBaseRaster = function(raster) {
+main.initializeBaseRaster = function(raster) {
   /*
     Initialize the base image raster so that its visible, centered, and takes up
     the width of the window.
@@ -62,85 +64,83 @@ var initializeBaseRaster = function(raster) {
     raster.canvas.getContext("2d").getImageData(0, 0, raster.width, raster.height))
 
   //allRasters[0] = raster
-  if (!allRasters.length) {
-    allRasters.push(raster)
+  if (!main.allRasters.length) {
+    main.allRasters.push(raster)
   } else {
-    allRasters[0] = raster
+    main.allRasters[0] = raster
   }
 }
 
 
 
-initialize_roi_raster = function(base_raster, roi_raster, alpha) {
+main.initialize_roi_raster = function(base_raster, roi_raster, alpha) {
   /*
     Initialize the roi image so that its the same size and position of the
     base image, and also set the opacity to alpha (0.25 by default)
   */
   alpha = alpha || 0.25
   roi_raster.setSize(base_raster.size)
-  initializeBaseRaster(roi_raster)
+  main.initializeBaseRaster(roi_raster)
   roi_raster.opacity = alpha //0.25
   roi_raster.initPixelLog()
-  if (allRasters.length == 1) {
-    allRasters.push(roi_raster)
+  if (main.allRasters.length == 1) {
+    main.allRasters.push(roi_raster)
   } else {
-    allRasters[1] = roi_raster
+    main.allRasters[1] = roi_raster
   }
 
 }
 
-add_tp = function(tp_data) {
-  tp = new Raster({})
-  tp.setSize(base.size)
-  tp.position = view.center
+main.add_tp = function(tp_data) {
+  main.tp = new Raster({})
+  main.tp.setSize(main.base.size)
+  main.tp.position = main.view.center
 
-  tp.opacity = 0.5
-  tp.initPixelLog()
-  tp.fillPixelLog(tp_data, draw.LUT)
-  tp.fitBounds(base.bounds)
+  main.tp.opacity = 0.5
+  main.tp.initPixelLog()
+  main.tp.fillPixelLog(tp_data, draw.LUT)
+  main.tp.fitBounds(main.base.bounds)
   //tp.onMouseDrag = dragHandlerPan
 
 }
 
-add_fp = function(data) {
-  fp = new Raster({})
-  fp.setSize(base.size)
+main.add_fp = function(data) {
+  main.fp = new Raster({})
+  main.fp.setSize(main.base.size)
 
-  fp.opacity = 0.5
-  fp.position = view.center
-  fp.initPixelLog()
+  main.fp.opacity = 0.5
+  main.fp.position = main.view.center
+  main.fp.initPixelLog()
   var LUT = {
     0: draw.LUT[0],
     1: "#87BCDE"
   }
-  fp.fillPixelLog(data, LUT)
-  fp.fitBounds(base.bounds)
+  main.fp.fillPixelLog(data, LUT)
+  main.fp.fitBounds(main.base.bounds)
   //fp.onMouseDrag = dragHandlerPan
 
 }
 
-add_fn = function(data, add_events) {
-  fn = new Raster({})
-  fn.setSize(base.size)
+main.add_fn = function(data, add_events) {
+  main.fn = new Raster({})
+  main.fn.setSize(main.base.size)
 
-  fn.opacity = 0.5
-  fn.position = view.center
-  fn.initPixelLog()
+  main.fn.opacity = 0.5
+  main.fn.position = main.view.center
+  main.fn.initPixelLog()
   var LUT = {
     0: draw.LUT[0],
     1: "#FF595E"
   }
-  fn.fillPixelLog(data, LUT)
-  fn.fitBounds(base.bounds)
+  main.fn.fillPixelLog(data, LUT)
+  main.fn.fitBounds(main.base.bounds)
 
   if (add_events){
     // ROI events
-    fn.onMouseDrag = dragHandler
-    fn.onMouseDown = mousedownHandler
-    fn.onMouseUp = draw.reset
-    //fn.onClick = clickHandler
-    //fn.onDoubleClick = dblClickHandler
-    //fn.onMouseDrag = dragHandler
+    main.fn.onMouseDrag = main.dragHandler
+    main.fn.onMouseDown = main.mousedownHandler
+    main.fn.onMouseUp = draw.reset
+
   }
 
 }
@@ -364,51 +364,50 @@ Raster.prototype.brightness_contrast = function(bright, level) {
                           Filling and Painting FUNCTIONS
 ============================================================================= */
 
-function doFloodFill(e, me) {
+main.doFloodFill = function(e, me) {
   /*
     Starts the recursive flood fill on the raster starting from e.point
   */
   var local = xfm.get_local(e)
   console.log(local.x, local.y)
   console.log("targetVal", me.pixelLog[local.x][local.y])
-  console.log("replacementVal", window.paintVal)
+  console.log("replacementVal", main.paintVal)
   if (!$.isNumeric(me.pixelLog[local.x][local.y])) {
     console.log("is not a number!!")
     return
   }
-  draw.floodFill(me, local, me.pixelLog[local.x][local.y], window.paintVal)
+  draw.floodFill(me, local, me.pixelLog[local.x][local.y], main.paintVal)
   draw.reset()
 }
 
-function drawLine(e, me) {
+main.drawLine =function(e, me) {
   /*
     Draws a line from e.point to the previous point
   */
   var local = xfm.get_local(e)
 
-  //console.log("paintval to", draw.LUT[window.paintVal])
   draw.addHistory(local.x, local.y,
     me.pixelLog[local.x][local.y],
-    window.paintVal)
-  me.setPixelLog(local.x, local.y, draw.LUT[window.paintVal], window.paintVal)
+    main.paintVal)
+  me.setPixelLog(local.x, local.y, draw.LUT[main.paintVal], main.paintVal)
 
   if (draw.last != null) {
 
     draw.line(local.x,
       local.y,
       draw.last.x,
-      draw.last.y, draw.LUT[window.paintVal], me, paintVal)
+      draw.last.y, draw.LUT[main.paintVal], me, main.paintVal)
   }
 
   if (window.paintSize > 1) {
-    drawLineRad(local, me, window.paintSize)
+    main.drawLineRad(local, me, main.paintSize)
   }
 
   draw.last = local
 
 }
 
-var sizeMapper = {
+main.sizeMapper = {
   2: [{
       x: -1,
       y: 0
@@ -493,13 +492,13 @@ var sizeMapper = {
   ]
 }
 
-function drawLineRad(local, me, rad) {
+main.drawLineRad = function(local, me, rad) {
 
-  sizeMapper[rad].forEach(function(val, idx, arr) {
+  main.sizeMapper[rad].forEach(function(val, idx, arr) {
     draw.addHistory(local.x + val.x, local.y + val.y,
       me.pixelLog[local.x + val.x][local.y + val.y],
-      window.paintVal)
-    me.setPixelLog(local.x + val.x, local.y + val.y, draw.LUT[window.paintVal], window.paintVal)
+      main.paintVal)
+    me.setPixelLog(local.x + val.x, local.y + val.y, draw.LUT[main.paintVal], main.paintVal)
 
     if (draw.last != null) {
 
@@ -507,7 +506,7 @@ function drawLineRad(local, me, rad) {
         local.y + val.y,
         draw.last.x + val.x,
         draw.last.y + val.y,
-        draw.LUT[window.paintVal], me, paintVal)
+        draw.LUT[main.paintVal], me, paintVal)
     }
   })
 
@@ -550,11 +549,11 @@ xfm.get_local = function(e) {
     clamp the point, and then move 0,0 back to the top left for raster pixel
     refence space.
   */
-  var width = base.size.width
-  var height = base.size.height
+  var width = main.base.size.width
+  var height = main.base.size.height
   var half_w = width / 2
   var half_h = height / 2
-  var local = base.globalToLocal(e.point)
+  var local = main.base.globalToLocal(e.point)
   var local = xfm.clampPoint(local, 0 - half_w, half_w, 0 - half_h, half_h)
   local.x = Math.floor(local.x + half_w)
   local.y = Math.floor(local.y + half_h)
@@ -593,8 +592,8 @@ draw.reset = function() {
 
   draw.last = null
   draw.counter = 0
-  window.panFactor.x = 0
-  window.panFactor.y = 0
+  main.panFactor.x = 0
+  main.panFactor.y = 0
   if (draw.history[draw.history.length - 1].length) {
     draw.history.push([])
   }
@@ -792,7 +791,7 @@ draw.floodFill = function(roi, node, targetVal, replacementVal) {
                             CONTROLLER FUNCTIONS
 =============================================================================*/
 
-changeMode = function(e) {
+main.changeMode = function(e) {
   /*
     Set the window's mode to e. e is a string. Examples "fill", "paint", etc
   */
@@ -811,9 +810,10 @@ changeMode = function(e) {
 
 
 
-window.paintVal = 1
-window.paintSize = 1
-setPaintbrush = function(e) {
+main.paintVal = 1
+main.paintSize = 1
+
+main.setPaintbrush = function(e) {
   /*
     Set paintbrush value to integer(e). If e is not in the draw.LUT, set to 0.
   */
@@ -823,56 +823,56 @@ setPaintbrush = function(e) {
     e = 0
   }
 
-  window.paintVal = parseInt(e)
+  main.paintVal = parseInt(e)
 }
 
-setPaintSize = function(e) {
+main.setPaintSize = function(e) {
   console.log("setting paint size")
-  window.paintSize = e
+  main.paintSize = e
 }
 
-window.zoomFactor = 1
+main.zoomFactor = 1
 
-doZoom = function(e) {
+main.doZoom = function(e) {
   /*
     Zoom based on how far the user drags in the y direction
   */
-  var zoomFactor = window.zoomFactor + e.deltaY / 200
-  window.zoomFactor = xfm.clamp(zoomFactor, 1, 3)
-  view.setZoom(window.zoomFactor)
+  var zoomFactor = main.zoomFactor + e.deltaY / 200
+  main.zoomFactor = xfm.clamp(zoomFactor, 1, 3)
+  view.setZoom(main.zoomFactor)
 }
 
-window.panFactor = {
+main.panFactor = {
   x: 0,
   y: 0
 }
-window.panMouseDown = null
-doPan = function(e) {
+main.panMouseDown = null
+main.doPan = function(e) {
   /*
     Pan based on how far the user drags in the x/y direction
   */
-  if (window.panMouseDown == null) {
-    window.panMouseDown = e
+  if (main.panMouseDown == null) {
+    main.panMouseDown = e
   }
-  window.panFactor.x = e.point.x - window.panMouseDown.point.x
-  window.panFactor.y = e.point.y - window.panMouseDown.point.y
+  main.panFactor.x = e.point.x - main.panMouseDown.point.x
+  main.panFactor.y = e.point.y - main.panMouseDown.point.y
 
-  view.translate(window.panFactor.x, window.panFactor.y)
+  view.translate(main.panFactor.x, main.panFactor.y)
 
 }
 
-window.brightness = 50;
-window.contrast = 50;
+main.brightness = 50;
+main.contrast = 50;
 
-setBrightness = function(val) {
-  window.brightness = val
+main.setBrightness = function(val) {
+  main.brightness = val
 }
 
-setContrast = function(val) {
-  window.contrast = val
+main.setContrast = function(val) {
+  main.contrast = val
 }
 
-doBright = function(e) {
+main.doBright = function(e) {
   /*
     TODO: apply contrast value here too, this isn't right
   */
@@ -883,7 +883,7 @@ doBright = function(e) {
   return amount
 }
 
-doCont = function(e) {
+main.doCont = function(e) {
   /*
     Adjust brightness based on how far left/right of the center is clicked.
     Adjust contrast based on how far up/down of the center is clicked.
@@ -896,39 +896,32 @@ doCont = function(e) {
 
 }
 
-doBrightCont = function() {
-  var bright = doBright(window.brightness)
-  var cont = doCont(window.contrast)
-  base.brightness_contrast(bright, cont)
+main.doBrightCont = function() {
+  var bright = main.doBright(main.brightness)
+  var cont = main.doCont(main.contrast)
+  main.base.brightness_contrast(bright, cont)
 }
 
-hide = function() {
-  allRasters[1].visible = !allRasters[1].visible
+main.hide = function() {
+  main.allRasters[1].visible = !main.allRasters[1].visible
   try {
-    tp.visible = !tp.visible
-    fp.visible = !fp.visible
-    fn.visible = !fn.visible
+    main.tp.visible = !main.tp.visible
+    main.fp.visible = !main.fp.visible
+    main.fn.visible = !main.fn.visible
   } catch (e) {
 
   }
-  /*if (allRasters[1].visible){
-    $("#show").show()
-    $("#noshow").hide()
-  }
-  else{
-    $("#noshow").show()
-    $("#show").hide()
-  }*/
+
 }
 
-dragHandler = function(e) {
+main.dragHandler = function(e) {
   /*
     What to do when the user drags based on the window.mode
   */
 
   if (e.event.buttons == 2) {
     //right click and drag
-    doPan(e)
+    main.doPan(e)
     window.prevMode = "view"
     return
   }
@@ -938,17 +931,17 @@ dragHandler = function(e) {
   switch (mode) {
     case "paint":
       //setPaintbrush("1")
-      drawLine(e, me)
+      main.drawLine(e, me)
       break
     case "erase":
       //setPaintbrush("0")
-      drawLine(e, me)
+      main.drawLine(e, me)
       break
     case "zoom":
-      doZoom(e)
+      main.doZoom(e)
       break
     case "view":
-      doPan(e)
+      main.doPan(e)
       window.mode = "paint"
       break;
 
@@ -957,22 +950,8 @@ dragHandler = function(e) {
   }
 }
 
-dragHandlerPan = function(e) {
 
-  /*
-    What to do when the user drags based on the window.mode
-  */
-
-  if (e.event.buttons == 2) {
-    //right click and drag
-    doPan(e)
-    window.prevMode = "view"
-    return
-  }
-
-}
-
-clickHandler = function(e) {
+main.clickHandler = function(e) {
   /*
     What to do when the user clicks based on window.mode
   */
@@ -985,14 +964,14 @@ clickHandler = function(e) {
     switch (mode) {
       case "paintFill":
         //setPaintbrush("1")
-        doFloodFill(e, me)
+        main.doFloodFill(e, me)
         break;
       case "eraseFill":
         //setPaintbrush("0")
-        doFloodFill(e, me)
+        main.doFloodFill(e, me)
         break;
       case "brightness":
-        doBright(e)
+        main.doBright(e)
         break
       default:
         break
@@ -1002,7 +981,7 @@ clickHandler = function(e) {
   window.prevMode = mode
 }
 
-dblClickHandler = function(e) {
+main.dblClickHandler = function(e) {
   var me = this
   var mode = "paintFill"
   if (window.prevMode != "view"){
@@ -1010,11 +989,11 @@ dblClickHandler = function(e) {
     case "paintFill":
       //setPaintbrush("1")
       app.has_filled = true;
-      doFloodFill(e, me)
+      main.doFloodFill(e, me)
       break;
     case "eraseFill":
       //setPaintbrush("0")
-      doFloodFill(e, me)
+      main.doFloodFill(e, me)
       break;
     default:
       break
@@ -1024,7 +1003,7 @@ dblClickHandler = function(e) {
   window.prevMode = mode
 }
 
-mousedownHandler = function(e) {
+main.mousedownHandler = function(e) {
   /*
     What to do when the user mouses down based on window.mode
   */
@@ -1035,12 +1014,12 @@ mousedownHandler = function(e) {
 
   if (e.event.button == 2) {
     //right click and drag
-    window.panMouseDown = e
+    main.panMouseDown = e
   }
 
   switch (mode) {
     case "view":
-      window.panMouseDown = e
+      main.panMouseDown = e
       break;
     case "paint":
       //setPaintbrush("1")
@@ -1059,11 +1038,20 @@ function mousewheel(event) {
   event.stopPropagation();
   event.delta = {}
   event.delta.y = event.deltaY
-  doZoom(event)
+  main.doZoom(event)
 
 }
 
 onmousewheel = mousewheel
+
+
+/*
+==========
+
+Touch events
+
+==========
+*/
 
 var stage = document.getElementById('myCanvas');
 var mc = new Hammer.Manager(stage, {
@@ -1076,7 +1064,7 @@ var Pinch = new Hammer.Pinch();
 mc.add(Pinch);
 
 
-window.prevZoom
+
 var tmpzoom = 1
 
 // subscribe to events
@@ -1087,14 +1075,9 @@ mc.on('pinch', function(e) {
       //if (window.mode == "view"){
         window.mode = "view"
         e.preventDefault()
-        tmpzoom = xfm.clamp(e.scale/window.startScale*window.zoomFactor, 1, 5)
+        tmpzoom = xfm.clamp(e.scale/window.startScale*main.zoomFactor, 1, 5)
         view.setZoom(tmpzoom)
-        //doPan(e)
-        //console.log("pinchin", e.scale)
-        //var zf = e.scale/window.zoomFactor
-        //window.zoomFactor = zf
-        //view.setZoom(window.zoomFactor)
-      //}
+
     }
 });
 
@@ -1107,11 +1090,11 @@ mc.on('pinchend', function(e) {
     window.prevMode = "view"
     e.preventDefault()
 
-    window.zoomFactor = tmpzoom
-    window.panMouseDown = null
-    //var zf = e.scale/window.zoomFactor
-    //window.zoomFactor = zf
-    //view.setZoom(window.zoomFactor)
+    main.zoomFactor = tmpzoom
+    main.panMouseDown = null
+    //var zf = e.scale/main.zoomFactor
+    //main.zoomFactor = zf
+    //view.setZoom(main.zoomFactor)
 
   }
 
@@ -1123,16 +1106,13 @@ mc.on('pinchstart', function(e) {
   if (e) {
     window.prevMode = window.mode
     window.mode = "view"
-    //console.log("e from hammer", e)
-    /*window.panMouseDown = {point:{}}
-    window.panMouseDown.point.x = base.position._x //e.srcEvent.offsetX
-    window.panMouseDown.point.y = base.position._y //e.srcEvent.offsetY*/
+
     e.preventDefault()
 
     window.startScale = e.scale
-    //var zf = e.scale/window.zoomFactor
-    //window.zoomFactor = zf
-    //view.setZoom(window.zoomFactor)
+    //var zf = e.scale/main.zoomFactor
+    //main.zoomFactor = zf
+    //view.setZoom(main.zoomFactor)
 
   }
 
@@ -1145,16 +1125,16 @@ mc.on('pinchstart', function(e) {
 
 
 
-function start(base_url) {
+main.start =function(base_url) {
   try {
     paper.projects[0].clear()
     draw.history = [
       []
     ]
-    window.zoomFactor = 1
+    main.zoomFactor = 1
 
     view.setZoom(1);
-    window.panFactor = {
+    main.panFactor = {
       x: 0,
       y: 0
     }
@@ -1171,19 +1151,19 @@ function start(base_url) {
 
   base.onLoad = function() {
     //THIS ALWAYS RUNS -- will this break things??
-    initializeBaseRaster(base)
+    main.initializeBaseRaster(base)
     app.startTime = new Date()
 
     //Load the (blank) ROI image
     var roi = new Raster({});
-    initialize_roi_raster(base, roi, 0.35)
+    main.initialize_roi_raster(base, roi, 0.35)
 
     // ROI events
-    roi.onMouseDrag = dragHandler
-    roi.onMouseDown = mousedownHandler
+    roi.onMouseDrag = main.dragHandler
+    roi.onMouseDown = main.mousedownHandler
     roi.onMouseUp = draw.reset
-    roi.onClick = clickHandler
-    roi.onDoubleClick = dblClickHandler
+    roi.onClick = main.clickHandler
+    roi.onDoubleClick = main.dblClickHandler
 
     // base events if ROI is hidden
     base.onClick = function(e) {
@@ -1194,14 +1174,15 @@ function start(base_url) {
 
     //default mode:
     if (!window.mode) {
-      changeMode("paint")
+      main.changeMode("paint")
     }
+
     //DEBUG: Set some global variables
-    window.base = base
-    window.roi = roi
+    main.base = base
+    main.roi = roi
     console.log("view is", view)
-    window.view = view
-    doBrightCont()
+    main.view = view
+    main.doBrightCont()
     //("#currentTool").html(window.mode)
     ui.stopProgress()
     ui.show_eval()
@@ -1209,7 +1190,7 @@ function start(base_url) {
   };
 }
 
-get_images = function(url, callback) {
+main.get_images = function(url, callback) {
   $.get(url, function(data, status, jqXhr) {
     window.currentData = data
     console.log("got data", url, data)
@@ -1234,7 +1215,7 @@ get_images = function(url, callback) {
     console.log("going to start")
 
 
-    start(base_url)
+    main.start(base_url)
     app.appMode = data._items[0].mode
 
   })
@@ -1250,6 +1231,6 @@ Login(function() {
   }
   var url = api.get_image_url()
   console.log('url is', url);
-  get_images(url, start);
+  main.get_images(url, main.start);
 
 })

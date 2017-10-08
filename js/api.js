@@ -31,7 +31,7 @@ api.do_eval = function(){
   var profile = store.get('github_profile')
   var score = {'name': app.login.username, 'edit_data_id': data._id}
   console.log("app.has_filled", app.has_filled)
-  if (!app.has_filled && task_config[task_dict[window.location.host]].care_about_fill){
+  if (!app.has_filled && config.task_config[config.task_dict[window.location.host]].care_about_fill){
 
     $('#fillModal').modal({
       backdrop: 'static',
@@ -46,7 +46,7 @@ api.do_eval = function(){
     if (confirm("Are you sure you want to submit an empty drawing?")){
       ui.startProgress()
       $('#submit_button').prop('disabled',true);
-      var segmentation = roi.getNonZeroPixels()
+      var segmentation = main.roi.getNonZeroPixels()
       ui.stopProgress()
       api.do_save(score, JSON.stringify(segmentation))
 
@@ -58,7 +58,7 @@ api.do_eval = function(){
   } else {
     ui.startProgress()
     $('#submit_button').prop('disabled',true);
-    var segmentation = roi.getNonZeroPixels()
+    var segmentation = main.roi.getNonZeroPixels()
     ui.stopProgress()
     api.do_save(score, JSON.stringify(segmentation))
   }
@@ -125,10 +125,10 @@ api.do_save = function(score, edits){
     window.response = response;
     if (app.appMode == "train"){
       ui.show_save(score)
-      roi.remove()
-      add_tp(response.tp)
-      add_fp(response.fp)
-      add_fn(response.fn, 1)
+      main.roi.remove()
+      main.add_tp(response.tp)
+      main.add_fp(response.fp)
+      main.add_fn(response.fn, 1)
       //roi.insertAbove(fn)
 
       app.score.dice = response.score;
@@ -157,16 +157,16 @@ api.get_next = function(){
   ui.startProgress()
 
   var url = api.get_image_url()
-  get_images(url, function(base_url){
-    base.setSource('data:image/jpeg;base64,'+base_url)
+  main.get_images(url, function(base_url){
+    main.base.setSource('data:image/jpeg;base64,'+base_url)
 
-    roi.clear()
+    main.roi.clear()
     draw.history = [[]]
-    window.zoomFactor = 1
-    tp.clear()
-    fp.clear()
-    fn.clear()
-    view.setZoom(1);
+    main.zoomFactor = 1
+    main.tp.clear()
+    main.fp.clear()
+    main.fn.clear()
+    main.view.setZoom(1);
     window.panFactor = {x:0, y:0}
 
     ui.show_eval()
