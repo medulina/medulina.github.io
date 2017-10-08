@@ -399,7 +399,7 @@ main.drawLine =function(e, me) {
       draw.last.y, draw.LUT[main.paintVal], me, main.paintVal)
   }
 
-  if (window.paintSize > 1) {
+  if (main.paintSize > 1) {
     main.drawLineRad(local, me, main.paintSize)
   }
 
@@ -501,12 +501,12 @@ main.drawLineRad = function(local, me, rad) {
     me.setPixelLog(local.x + val.x, local.y + val.y, draw.LUT[main.paintVal], main.paintVal)
 
     if (draw.last != null) {
-
+      
       draw.line(local.x + val.x,
         local.y + val.y,
         draw.last.x + val.x,
         draw.last.y + val.y,
-        draw.LUT[main.paintVal], me, paintVal)
+        draw.LUT[main.paintVal], me, main.paintVal)
     }
   })
 
