@@ -1,32 +1,29 @@
+// globals:
+// app (from index.html)
+// config (from js/config.js)
+// roi, get_images (from js/main.js)
+// jquery, store
 
-
+window.api = {}
 
 $.ajaxSetup({ cache: false });
 
-get_url = function(random){
-  return config.mask_url + random
-}
-
-get_image_url = function(){
-  var url = config.image_url + '?where={"task":"' + config.task + '"}'
+api.get_image_url = function(){
+  var url = config.config.image_url + '?where={"task":"' + config.config.task + '"}'
   url = url + "&max_results=1"
-  if (config.use_random){
-    var random = getRandomInt(1,config.total_num_images)
-    url="&page=" +url + random
-  } else {
-    url = url + "&user_id="+app.login.id+"&token="+app.login.token
-  }
+  url = url + "&user_id="+app.login.id+"&token="+app.login.token
+
   console.log("URL FOR GET IS", url)
   return url
 }
 
-get_mask_url = function(image_info){
-  var url = config.mask_url + '?where={"mode":"truth","image_id":"' + image_info._id + '"}'
+api.get_mask_url = function(image_info){
+  var url = config.config.mask_url + '?where={"mode":"truth","image_id":"' + image_info._id + '"}'
   console.log('Mask URL is', url)
   return url
 }
 
-do_eval = function(){
+api.do_eval = function(){
   console.log('DOING EVAL\n\n')
 
   var data = window.currentData._items[0]
@@ -34,7 +31,7 @@ do_eval = function(){
   var profile = store.get('github_profile')
   var score = {'name': app.login.username, 'edit_data_id': data._id}
   console.log("app.has_filled", app.has_filled)
-  if (!app.has_filled && task_config[task_dict[window.location.host]].care_about_fill){
+  if (!app.has_filled && config.task_config[config.task_dict[window.location.host]].care_about_fill){
 
     $('#fillModal').modal({
       backdrop: 'static',
@@ -47,51 +44,30 @@ do_eval = function(){
 
   if (draw.history.length == 1 && draw.history[0].length == 0){
     if (confirm("Are you sure you want to submit an empty drawing?")){
-      startProgress()
+      ui.startProgress()
       $('#submit_button').prop('disabled',true);
-      var segmentation = roi.getNonZeroPixels()
-      stopProgress()
-      do_save(score, JSON.stringify(segmentation))
+      var segmentation = main.roi.getNonZeroPixels()
+      ui.stopProgress()
+      api.do_save(score, JSON.stringify(segmentation))
 
     } else {
-      stopProgress()
+      ui.stopProgress()
 
     }
 
   } else {
-    startProgress()
+    ui.startProgress()
     $('#submit_button').prop('disabled',true);
-    var segmentation = roi.getNonZeroPixels()
-    stopProgress()
-    do_save(score, JSON.stringify(segmentation))
+    var segmentation = main.roi.getNonZeroPixels()
+    ui.stopProgress()
+    api.do_save(score, JSON.stringify(segmentation))
   }
 
   //})
 }
 
-function create_request(data, url){
-  var form = new FormData();
-  for (key in data){
-    form.append(key, data[key])
-  }
-  var settings = {
-    'async': true,
-    'crossDomain': true,
-    'url': url,
-    'method': 'POST',
-    'headers': {
-      'cache-control': 'no-cache'
-    },
-    'processData': false,
-    'contentType': false,
-    'mimeType': 'multipart/form-data',
-    'data': form
-  }
 
-  return settings
-}
-
-function create_json_request(data, url, auth){
+api.create_json_request = function(data, url, auth){
 
   var settings = {
     'async': true,
@@ -112,114 +88,89 @@ function create_json_request(data, url, auth){
 
 }
 
-do_save = function(score, edits){
-  startProgress()
+api.do_save = function(score, edits){
+  ui.startProgress()
   var imgbody = {
     'image_id': window.currentData._items[0]._id,
     'pic': edits,
     'mode': 'try',
-    'task': config.task,
+    'task': config.config.task,
     //'score': score.accuracy,
     'user_id': app.login.id, //score['name']
     'user_agent': navigator.userAgent,
     'resolution': [window.innerWidth, window.innerHeight]
   }
+  if (app.appMode == "test"){
+    imgbody["mode"] = "test"
+  }
   var timeDiff = new Date() - app.startTime // in miliseconds
   imgbody["time"] = timeDiff
 
   var token = "NnrP65CXaSnZ0aLPZ8Ox64d0pDlSKS0R8wpymwLr";
-  var settings = create_json_request(imgbody, config.edit_url, token)
+  var settings = api.create_json_request(imgbody, config.config.edit_url, token)
   settings.headers['content-type'] = 'application/json'
-  /*settings["beforeSend"] = function (xhr) {
-    xhr.setRequestHeader ("Authorization", "Basic " + btoa(app.login.id+ ":" + store.get("user_token")));
-  }*/
-  //settings.headers['username'] = app.login.id
-  //settings.headers['password'] = store.get("user_token")
-  //settings.url = "://" + app.login.id + ":" + store.get("user_token") + "@" + settings.url.replace("http://", "")
+
   console.log("settings are", settings)
   settings["error"] = function(e){
     alert("there has been an error", e, "settings were", settings)
     console.log("there has been an error", e, "settings were", settings)
 
-    stopProgress()
+    ui.stopProgress()
     window.appMode = "error"
-    show_save({"accuracy": "Err"})
+    ui.show_save({"accuracy": "Err"})
   }
 
   $.ajax(settings).done(function(response){
-    show_save(score)
     console.log("response is", response)
     window.response = response;
+    if (app.appMode == "train"){
+      ui.show_save(score)
+      main.roi.remove()
+      main.add_tp(response.tp)
+      main.add_fp(response.fp)
+      main.add_fn(response.fn, 1)
+      //roi.insertAbove(fn)
 
-    roi.clear()
-    add_tp(response.tp)
-    add_fp(response.fp)
-    add_fn(response.fn)
-    roi.insertAbove(fn)
+      app.score.dice = response.score;
 
-    app.score.dice = response.score;
+    }
 
 
     var profile = store.get('user_token');
     getUserInfo(profile, function(){
-      stopProgress()
-      show_save(score)
+      console.log("APP Mode", app.appMode)
+      if (app.appMode == "test"){
+          app.firework()
+          api.get_next()
+      } else{
+        ui.show_save(score)
+      }
     })
   })
 
 
-
-  //TODO: send a GET to /user/{userID}
-
 }
 
-get_next = function(){
+api.get_next = function(){
 
   $('#submit_button').prop('disabled',true);
-  startProgress()
-  /*$.get(get_url(page), function(data, status, jqXhr){
-    view.setZoom(1)
-    console.log("data now is", data)
-    var truth_data = data._items[0].pic
-    window.truthData = truth_data;
-    window.currentData = data
+  ui.startProgress()
 
-    $.get(config.image_url + data._items[0].image_id, function(data, status, jqXhr){
-      console.log(data)
-      var base_url = data.pic
-      base.setSource('data:image/jpeg;base64,'+base_url)
+  var url = api.get_image_url()
+  main.get_images(url, function(base_url){
+    main.base.setSource('data:image/jpeg;base64,'+base_url)
 
-      roi.clear()
-      draw.history = [[]]
-      window.zoomFactor = 1
-      window.panFactor = {x:0, y:0}
-
-      show_eval()
-    })
-
-
-  })*/
-  var url = get_image_url()
-  get_images(url, function(base_url){
-    base.setSource('data:image/jpeg;base64,'+base_url)
-
-    roi.clear()
+    main.roi.clear()
     draw.history = [[]]
-    window.zoomFactor = 1
-    tp.clear()
-    fp.clear()
-    fn.clear()
-    view.setZoom(1);
+    main.zoomFactor = 1
+    main.tp.clear()
+    main.fp.clear()
+    main.fn.clear()
+    main.view.setZoom(1);
     window.panFactor = {x:0, y:0}
 
-    show_eval()
+    ui.show_eval()
   })
 
 
-}
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

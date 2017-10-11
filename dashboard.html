@@ -225,7 +225,7 @@
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
             <li class="nav-item" v-for="user in all_users">
-              <a v-bind:class="{ 'nav-link active': user._id == current_user, 'nav-link': user._id != current_user }" v-on:click="setPlayer(user._id)">{{user.username}} <span class="sr-only">(current)</span> </a>
+              <a v-bind:class="{ 'nav-link active': user.user_id == current_user, 'nav-link': user.user_id != current_user }" v-on:click="setPlayer(user.user_id)">{{user.username}} <span class="sr-only">(current)</span> </a>
             </li>
 
           </ul>
@@ -258,7 +258,7 @@
               <h2 class="score">{{user_info.ave_score | formatNumber}}</h2>-->
 
               <h4 >Average Score</h4>
-              <div class="text-muted">Overall average score</div>
+              <div class="text-muted">Overall average score on training</div>
 
 
 
@@ -274,21 +274,21 @@
               </div>
 
               <h4 class="">Rolling Average</h4>
-              <span class="text-muted ">Average of the past 10 runs</span>
+              <span class="text-muted ">Average of the past 10 training runs</span>
             </div>
             <div class="col-6 col-sm-3 placeholder">
               <div class="circle bright">
                 <div class="circle__inner">
                   <div class="circle__wrapper">
-                    <div class="circle__content">{{user_info.total_score | formatNumber}}</div>
+                    <div class="circle__content">{{user_info.n_test}}</div>
                   </div>
                 </div>
               </div>
 
 
 
-              <h4 class="">Total Score</h4>
-              <span class="text-muted">Sum of all scores</span>
+              <h4 class="">Total Points</h4>
+              <span class="text-muted">Number of new images you've painted</span>
             </div>
             <div class="col-6 col-sm-3 placeholder">
               <div class="circle dark">
@@ -302,7 +302,7 @@
 
 
               <h4 class="">Rank</h4>
-              <span class="text-muted">Rank based on total score</span>
+              <span class="text-muted">Rank based on total points</span>
             </div>
 
           </section>
@@ -357,6 +357,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.js"></script>
     <script type="text/paperscript" canvas="currentImg" src="js/paper_stuff.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/dash.js"></script>
 
 

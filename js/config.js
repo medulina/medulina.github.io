@@ -1,4 +1,6 @@
-var auth_id = {
+window.config = {}
+
+config.auth_id = {
   "dg.medulina.com": "d0dee0089411bc5134ae",
   "localhost:8000": "f586bf4498f82125fc48",
   "test.medulina.com": "7a33c7349ef2968b7480",
@@ -6,7 +8,7 @@ var auth_id = {
   "tumor.medulina.com": "d0df9c1af2484144b134"
 }
 
-var auth_url = {
+config.auth_url = {
   "dg.medulina.com": "https://api.medulina.com/api/authenticate/dg/github/",
   "localhost:8000": "https://api.medulina.com/api/authenticate/dg/githublocal/",
   "test.medulina.com": "https://testapi.medulina.com/api/authenticate/test/github/",
@@ -15,23 +17,23 @@ var auth_url = {
 }
 
 // name of project in database
-var task_dict = {
+config.task_dict = {
   "stroke.medulina.com": "atlas_lesions",
-  "tumor.medulina.com": "meningioma001",
+  "tumor.medulina.com": "cheng_et_al_001",
   "dg.medulina.com": "db_cor_context03",
-  "localhost:8000": "atlas_lesions",
-  "test.medulina.com": "atlas_lesions"
+  "localhost:8000": "cheng_et_al_001",
+  "test.medulina.com": "cheng_et_al_001"
 }
 
-var title_dict = {
+config.title_dict = {
   "stroke.medulina.com": "Stroke",
   "tumor.medulina.com": "Meningioma",
+  "test.medulina.com": "Meningioma",
   "dg.medulina.com": "Dentate Gyrus",
-  "localhost:8000": "Stroke",
-  "test.medulina.com": "Meningioma"
+  "localhost:8000": "Meningioma",
 }
 
-var context_dict = {
+config.context_dict = {
   "stroke.medulina.com": false,
   "tumor.medulina.com": false,
   "localhost:8000": false,
@@ -39,38 +41,40 @@ var context_dict = {
   "test.medulina.com": false,
 }
 
-var task_config = {
+config.task_config = {
   "meningioma001": {care_about_fill: true},
   "atlas_lesions": {care_about_fill: true},
+  "cheng_et_al_001": {care_about_fill: true},
   "db_cor_context03": {care_about_fill: false},
 }
 
 
 
-config = {
+config.config = {
   mask_url: 'https://api.medulina.com/api/v1/mask',
   image_url: 'https://api.medulina.com/api/v1/image/',
   base_url: "https://api.medulina.com",
   player_url: 'https://api.medulina.com/api/v1/user/',
   edit_url: 'https://api.medulina.com/api/v1/mask',
   use_random: false,
-  task: task_dict[window.location.host],
+  task: config.task_dict[window.location.host],
   num: 15,
   total_num_images: 50,
-  title: title_dict[window.location.host],
-  context: context_dict[window.location.host]
+  title: config.title_dict[window.location.host],
+  context: config.context_dict[window.location.host]
 }
 
 if (window.location.host == "test.medulina.com") {
   console.log("USING TEST CONFIG")
-  config = {
+  config.config = {
     mask_url: 'https://testapi.medulina.com/api/v1/mask',
     image_url: 'https://testapi.medulina.com/api/v1/image/',
     base_url: "https://testapi.medulina.com",
     player_url: 'https://testapi.medulina.com/api/v1/user',
     edit_url: 'https://testapi.medulina.com/api/v1/mask',
     use_random: false,
-    task: task_dict[window.location.host],
+    task: config.task_dict[window.location.host],
+    title: config.title_dict[window.location.host],
     num: 15,
     total_num_images: 50,
     title: title_dict[window.location.host],

@@ -380,7 +380,7 @@ function getTries(image_id, callback) {
 }
 
 function getTruth(image_id, callback) {
-  console.log(url + 'mask/?where={"mode":"try","image_id":"' + image_id + '"}')
+  console.log(url + 'mask/?where={"mode":"truth","image_id":"' + image_id + '"}')
   $.get(url + 'mask/?where={"mode":"truth","image_id":"' + image_id + '"}', callback)
 
 }

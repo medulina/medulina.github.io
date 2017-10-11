@@ -18,7 +18,7 @@ function getUserInfo(user_token, callback) {
   var settings = {
     "async": true,
     "crossDomain": true,
-    "url": config.player_url + "?where=token%3D%3D%22" + user_token + "%22",
+    "url": config.config.player_url + "?where=token%3D%3D%22" + user_token + "%22",
     "method": "GET",
     "headers": {},
     "processData": false,
@@ -57,7 +57,7 @@ function getUserInfo(user_token, callback) {
       });
 
     }
-    stopProgress();
+    ui.stopProgress();
   });
 }
 
@@ -83,11 +83,11 @@ Starts the whole process
     //callback();
   } else {
     try {
-      startProgress();
+      ui.startProgress();
       var code = window.location.href.match(/\?code=(.*)/)[1];
 
 
-      var oauth_url = auth_url[window.location.host];
+      var oauth_url = config.auth_url[window.location.host];
 
       console.log("auth url is", oauth_url + code)
 

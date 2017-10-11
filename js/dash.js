@@ -269,7 +269,9 @@ var app = new Vue({
   },
   methods: {
     query: function() {
-      return 'mask?where={"mode":"try","user_id":"' + this.current_user + '"}&max_results=100&sort=-_created'
+      var q = 'mask?where={"mode":"try", "task":"TASK", "user_id":"' + this.current_user + '"}&max_results=100&sort=-_created'
+      q = q.replace("TASK", task)
+      return q
     },
     plotter: function() {
 
@@ -382,7 +384,10 @@ function get_data(url, query, updater, callback) {
   }
 }
 
-var user_query = "user?sort=-total_score"
+var task = task_dict[window.location.host]
+console.log("task is", task)
+var user_query = 'score?where={"task":"' +task+ '"}&sort=-n_test'
+console.log(user_query)
 get_data(url,
   user_query,
   function(data) {
@@ -392,6 +397,7 @@ get_data(url,
     console.log("done getting all users")
     app.all_users.forEach(function(val, idx, arr) {
       val["rank"] = idx
+      val["user_id"] = val.user_project_id.split("__")[0]
     })
 
   })
