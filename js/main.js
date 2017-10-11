@@ -1138,6 +1138,12 @@ main.start =function(base_url) {
       x: 0,
       y: 0
     }
+    app.overlay = true;
+    app.view_feedback_foo = {
+        "missed": true,
+        "incorrect": true,
+        "correct": true
+    }
   } catch (e) {
     console.log("starting afresh")
   }
