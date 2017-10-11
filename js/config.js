@@ -77,7 +77,7 @@ if (window.location.host == "test.medulina.com") {
     title: config.title_dict[window.location.host],
     num: 15,
     total_num_images: 50,
-    title: title_dict[window.location.host],
-    context: context_dict[window.location.host]
+    title: config.title_dict[window.location.host],
+    context: config.context_dict[window.location.host]
   }
 }
