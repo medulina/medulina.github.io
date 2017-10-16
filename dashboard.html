@@ -162,6 +162,16 @@
         background-color: #FF595E !important;
       }
 
+      nav {
+        height: 56px !important;
+      }
+
+      .navbar-nav .nav-item .nav-link {
+        padding-left: 0px;
+
+      }
+
+
     </style>
 
     <!-- D3 style stuff -->
@@ -190,7 +200,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
+    <!--<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
       <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -218,7 +228,44 @@
           <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
+    </nav>-->
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue justify-content-between flex-row">
+
+      <a class="navbar-brand" href="http://www.medulina.com">
+        <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="25px">
+      </a>
+
+      <button class="navbar-toggler navbar-toggler-left hidden-lg-up"
+              type="button" data-toggle="collapse"
+              data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse w-100" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto" >
+
+          <li class="nav-item active">
+            <a class="nav-link" v-bind:href="'/dashboard.html?user_id=' + login.id">Leaderboard <span class="sr-only">(current)</span> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/"> Play {{instruction}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-bind:href="'/slices.html?image_id=' + current_slice._id" v-if="current_slice"> Images </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="startTour" >Help</a>
+          </li>
+
+        </ul>
+
+      </div>
+
     </nav>
+
 
     <div class="container-fluid" id="main" v-cloak>
       <div class="row">
