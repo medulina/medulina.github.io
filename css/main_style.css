@@ -158,21 +158,16 @@ button {
   margin-bottom: 0px;
 }
 
-.avatar {
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  z-index: 9999;
-}
+
 
 .avatar img {
-  border-style: solid;
-  border-width: thin;
+  width: 25px;
+  height: 25px;
+  /*border-style: solid;
+  border-width: thin;*/
 }
 
-.dropdown {
+/*.dropdown {
   position: fixed;
 }
 
@@ -191,6 +186,19 @@ button {
 
 .dropdown-header {
   color: #5bc0de;
+}*/
+
+.dropdown-menu {
+  background-color: #333e51;
+  text-align: center;
+}
+
+.dropdown-menu a {
+  color: rgba(255,255,255,.5);
+}
+
+.dropdown-toggle a {
+  color: white;
 }
 
 nav {

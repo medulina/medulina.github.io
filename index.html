@@ -13,7 +13,6 @@
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="icon" sizes="192x192" href="images/android-desktop.png">
-  <link href="css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css" />
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -36,6 +35,41 @@
 
   <style>
 
+  .bg-blue {
+    background-color: #313E50 !important;
+  }
+
+  .navbar-toggler-left {
+    position: unset;
+  }
+
+  nav {
+    height: 56px !important;
+  }
+
+.navbar-nav {
+  background-color: #313E50 !important;
+}
+
+.collapsing {
+  position: absolute;
+  left: 0px;
+  top: 56px;
+}
+
+.collapse.show {
+  position: absolute;
+  left: 0px;
+  top: 56px;
+}
+
+.navbar-nav .nav-item .nav-link {
+
+  font-size: 1.1em;
+}
+
+
+
   </style>
 
 </head>
@@ -44,7 +78,7 @@
 
   <div class="main" id="main" v-cloak>
 
-    <nav>
+    <!--<nav>
       <div class="dropdown">
         <a class="" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <div class="avatar">
@@ -60,7 +94,7 @@
           <a class="dropdown-item" href="#" onclick="login.logout()">Log Out</a>
         </div>
       </div>
-      <!-- End Dropdown menu for user -->
+
 
       <div class="statusBar colorNeutralBackground">
         <h4>
@@ -92,7 +126,7 @@
                 </h4>
       </div>
 
-      <!-- Start submit button -->
+
       <div class="submitButton">
 
 
@@ -102,8 +136,59 @@
 
       </div>
 
-    </nav>
+    </nav>-->
 
+    <nav class="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-blue justify-content-between flex-row">
+
+      <a class="navbar-brand" href="http://www.medulina.com">
+        <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="25px">
+      </a>
+
+      <button class="navbar-toggler navbar-toggler-left hidden-lg-up"
+              type="button" data-toggle="collapse"
+              data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse w-100" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item">
+            <a class="nav-link" v-bind:href="'/dashboard.html?user_id=' + login.id">Leaderboard</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link"> Play {{instruction}} <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-bind:href="'/slices.html?image_id=' + current_slice._id" v-if="current_slice"> Images </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" v-on:click="startTour" style="cursor: pointer;">Help</a>
+          </li>
+          <li class="nav-item dropdown">
+           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+             {{login.username}}
+              <span class="caret"></span>
+           </a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="#" onclick="login.logout()">Logout</a></li>
+           </ul>
+          </li>
+        </ul>
+
+      </div>
+
+
+      <div class="navbar-text pull-right">
+        <a class="btn btn-med btn-primary colorBold navbar-btn pull-right" style="color:white !important; cursor: pointer;" id="submit_button" v-on:click="runEval">
+          <span v-if="loading"><i class="fa fa-cog fa-spin fa-fw"></i></span><span v-else>{{status}}</span>
+        </a>
+      </div>
+
+    </nav>
 
     <div class="img-container">
       <canvas id="myCanvas" resize>
@@ -217,7 +302,7 @@
         </div>
 
 
-        <div id="legend" style="z-index:99999; background:rgba(1,1,1,1); position: fixed; right:3px; top:45px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px;" v-if="status=='Next'">
+        <div id="legend" style="z-index:99999; background:rgba(1,1,1,1); position: fixed; right:3px; top:55px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px;" v-if="status=='Next'">
 
             <div style="display:inline-flex;text-align:center;">
                 <div id="falsePos" v-bind:class="{'missed': !view_feedback_foo.missed, 'missed view': view_feedback_foo.missed}" v-on:click="toggle('missed')"></div>
@@ -275,11 +360,13 @@
 
 <script src="js/tour.js"></script>
 <script type="text/paperscript" canvas="myCanvas" src="js/main.js"></script>
+<script src="js/vendor/qs.min.js"></script>
 
 
 <script>
 
-
+var qparams = new QS()
+var params = qparams.getAll()
 
 </script>
 
