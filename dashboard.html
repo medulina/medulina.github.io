@@ -162,14 +162,11 @@
         background-color: #FF595E !important;
       }
 
-      nav {
+      .topnav {
         height: 56px !important;
       }
 
-      .navbar-nav .nav-item .nav-link {
-        padding-left: 0px;
 
-      }
 
 
     </style>
@@ -229,18 +226,19 @@
         </form>
       </div>
     </nav>-->
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue justify-content-between flex-row">
+    <nav class="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-blue justify-content-between flex-row" id="topnav">
 
       <a class="navbar-brand" href="http://www.medulina.com">
         <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="25px">
       </a>
 
-      <button class="navbar-toggler navbar-toggler-left hidden-lg-up"
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up"
               type="button" data-toggle="collapse"
               data-target="#navbarsExampleDefault"
               aria-controls="navbarsExampleDefault"
               aria-expanded="false"
-              aria-label="Toggle navigation">
+              aria-label="Toggle navigation"
+              >
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -365,19 +363,22 @@
               Score: {{user_data[hover_idx].score | formatNumber}}
             </h3>
           </div>
-          <div id="imageLoad">
-            <canvas id="currentImg" class="mx-auto d-block" resize>
-          </div>
-          <br>
-          <div>
-            <a v-if="hover_idx != null && user_data[hover_idx]"
-             class="btn btn-primary mx-auto d-block"
-             role="button"
-             v-bind:href="'/slices.html?image_id=' + user_data[hover_idx].image_id"
-             style="width:120px;">Slice Stats</a>
-          </div>
+
           <br>
         </div>
+
+        <div id="imageLoad">
+          <canvas id="currentImg" class="mx-auto d-block" resize>
+        </div>
+        <br>
+        <div>
+          <a v-if="hover_idx != null && user_data[hover_idx]"
+           class="btn btn-primary mx-auto d-block"
+           role="button"
+           v-bind:href="'/slices.html?image_id=' + user_data[hover_idx].image_id"
+           style="width:120px;">Slice Stats</a>
+        </div>
+
         <div id="test"></div>
         </main>
       </div>
