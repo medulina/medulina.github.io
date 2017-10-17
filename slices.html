@@ -185,7 +185,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
+  <!--<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
     <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -213,6 +213,44 @@
         <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
+  </nav>-->
+
+  <nav class="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-blue justify-content-between flex-row" id="topnav">
+
+    <a class="navbar-brand" href="http://www.medulina.com">
+      <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="25px">
+    </a>
+
+    <button class="navbar-toggler navbar-toggler-right hidden-lg-up"
+            type="button" data-toggle="collapse"
+            data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse w-100" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto" >
+
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard.html">Leaderboard  </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/"> Play {{instruction}}</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link"> Images <span class="sr-only">(current)</span> </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Help</a>
+        </li>
+
+      </ul>
+
+    </div>
+
   </nav>
 
   <div class="container-fluid" id="main" v-cloak>
@@ -332,6 +370,14 @@
     <script src="https://cdn.plot.ly/plotly-latest.js"></script>
     <script type="text/paperscript" canvas="currentImg" src="js/paper_stuff.js"></script>
     <script src="js/slices.js"></script>
+    <script>
+    var nav = new Vue({
+      el:"#topnav",
+      data: {
+        instruction: config.title_dict[window.location.host]
+      }
+    })
+    </script>
 
 
   </body>

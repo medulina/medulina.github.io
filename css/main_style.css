@@ -262,6 +262,16 @@ nav h4 {
   border-color: #87BCDE;
 }
 
+.colorLightBlue {
+  background-color: #87BCDE;
+  border-color: #87BCDE;
+}
+
+.colorLightBlue:hover {
+  border-color: #597c93;
+  background-color: #87BCDE;
+}
+
 .btn-outline-info:hover {
   color: #fff;
   background-color: #87BCDE;
@@ -274,7 +284,10 @@ nav h4 {
   border-color: #87BCDE;
 }
 
+
+
 .colorBold {
+  cursor: pointer;
   background-color: #FF595E;
   border-color: #FF595E;
   color: white;

@@ -149,7 +149,7 @@ Vue.component('consent', {
                 </div>
 
                 <div class="form-check form-check-inline disabled">
-                <button class="btn btn-primary colorBold" v-bind:disabled="!(age && consent)" data-dismiss="modal">Submit</button>
+                <button class="btn btn-primary colorBold" v-bind:disabled="!(age && consent)" data-dismiss="modal" v-on:click="app.afterConsent()">Submit</button>
               </div>
 
 
@@ -158,7 +158,10 @@ Vue.component('consent', {
           </div>
         </div>
 `,
-props: ["age", "consent"]})
+props: ["age", "consent"],
+
+
+})
 
 
 function get_oauth_id() {
@@ -360,6 +363,29 @@ var app = new Vue({
         startTour: function() {
             tour.startIntro()
         },
+
+        showConsent: function(){
+          $("#consent_form").modal({
+            backdrop: 'static',
+            keyboard: false
+          })
+        },
+
+        afterConsent: function(){
+          console.log("AFTER CONSENT")
+          if (app.login.token !=null){
+            //send consent to server
+            var url = api.get_image_url()
+            main.get_images(url, main.start);
+          } else {
+            $("#login2").modal({
+              backdrop: 'static',
+              keyboard: false
+            })
+          }
+
+        }
+
     },
 });
 
