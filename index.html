@@ -310,16 +310,16 @@
             </div>
         </div>
 
-        <modal v-bind:content="login" id="loginModal"></modal>
+        <!--<modal v-bind:content="login" id="loginModal"></modal>-->
         <modal v-bind:content="alert" id="alertModal"></modal>
         <modal v-bind:content="fill" id="fillModal" action="runFillEval"></modal>
-        <consent v-bind:age="consent.age" v-bind:consent="consent.consent"></consent>
+        <consent v-bind:age="consent.age" v-bind:consent="consent.consent" v-bind:afterConsent="afterConsent"></consent>
 
         <div class="modal fade" id="tutorial_nice">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Take the Tutorial</h5>
+                <h5 class="modal-title">Take the tutorial</h5>
               </div>
               <div class="modal-body">
                 <a class="btn btn-primary mx-auto d-block" href="http://medulina.com/meningioma">Click for Tutorial</a>
@@ -332,6 +332,116 @@
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="login2">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Log In</h5>
+              </div>
+              <div class="modal-body">
+                <form>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Choose a Nickname</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter nickname" v-model="login.username" v-on:change="save_to_storage('nickname', login.username)">
+                    <small id="emailHelp" class="form-text text-muted">We will show your nickname on the leaderboard.</small>
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" v-model="login.use_profile_pic" v-on:change="save_to_storage('profile_pic', login.use_profile_pic)">
+                      Use my profile picture
+                      <small id="emailHelp" class="form-text text-muted">We will show your profile pic on the leaderboard.</small>
+                    </label>
+                  </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" v-model="login.send_emails" v-on:change="save_to_storage('profile_pic', login.send_emails)">
+                      Its ok to send me emails
+                      <small id="emailHelp" class="form-text text-muted">We will send occasional emails about new games on Medulina.</small>
+                    </label>
+                  </div>
+
+                  <p>Login with:</p>
+                  <a class="btn btn-primary colorLightBlue" v-bind:href="login.url">
+                    <img src="images/GitHub-Mark-Light-32px.png" style="width:20px; margin: 1.5px;">
+                    GitHub
+                  </a>
+
+                </form>
+
+              </div>
+              <div class="modal-footer">
+
+                Please log in to play Medulina
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="loginModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Log In</h5>
+              </div>
+              <div class="modal-body">
+
+                  <p style="text-align: center;">
+                    <h4 style="text-align: center;">Welcome to Medulina!</h4>
+                    Medulina is a game to train computers to read brain images. To begin, please log in:
+                    <br>
+
+                  </p>
+
+                    <div class="row">
+
+                      <div class="col-6 col-sm-6" style="text-align: center; border-right-style: solid; border-right-color: rgba(51,62,81,0.5); border-right-width: thin;">
+                        <h5>New User</h5>
+                        <p>Get started:</p>
+                        <a class="btn btn-primary colorBold" v-on:click="showConsent" data-dismiss="modal" style="color:white;">
+                          <img src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" style="width:20px;">
+                          Register
+                        </a>
+                      </div>
+                      <div class="col-6 col-sm-6" style="text-align: center;">
+                        <h5>Returning User</h5>
+                        <p>Login with:</p>
+                        <a class="btn btn-primary colorLightBlue" v-bind:href="login.url">
+                          <img src="images/GitHub-Mark-Light-32px.png" style="width:20px; margin: 1.5px;">
+                          GitHub
+                        </a>
+                      </div>
+                    </div>
+                    <br>
+                    <p style="text-align:center;">
+                      If you want to try it out first:
+                      <p style="text-align:center;">
+                        <button data-dismiss="modal" class="btn btn-primary colorDarkBackground pull-center" v-on:click="anonymousLogin" style="color:white">
+                          Anonymous Log In
+                        </button>
+                        <p style="text-align:center;"><small>You can try out the game and log in later</small></p>
+                      </p>
+                    </p>
+
+
+
+              </div>
+              <div class="modal-footer">
+
+                <!--<button type="button" class="btn btn-secondary" data-dismiss="modal"> I know how to play </button>-->
+                <small> Please log in to play! </small>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
 
 
 
@@ -402,13 +512,41 @@
 
 var qparams = new QS()
 var params = qparams.getAll()
-$("#consent_form").modal({
-  backdrop: 'static',
-  keyboard: false
-})
 
+window.onload = function(){
+  ui.startProgress()
+  login.Login(function() {
+    if(window.location.host=="tumor.medulina.com"){
+      $("#tutorial_nice").modal()
+    }
+    else if (app.login.n_try <= 10){
+      tour.startIntro()
+    }
+    var url = api.get_image_url()
+    console.log('url is', url);
 
+    if (!app.consent.consent){
+      $("#consent_form").modal({
+        backdrop: 'static',
+        keyboard: false
+      })
+    }
 
+    main.get_images(url, main.start);
+
+  })
+}
+
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108369695-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108369695-1');
 </script>
 
 </html>

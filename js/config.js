@@ -48,7 +48,7 @@ config.task_config = {
   "db_cor_context03": {care_about_fill: false},
 }
 
-
+config.anon_url = "https://testapi.medulina.com/api/anonymous?has_consented="
 
 config.config = {
   mask_url: 'https://api.medulina.com/api/v1/mask',
@@ -64,7 +64,7 @@ config.config = {
   context: config.context_dict[window.location.host]
 }
 
-if (window.location.host == "test.medulina.com") {
+if (window.location.host == "test.medulina.com" || "localhost:8000") {
   console.log("USING TEST CONFIG")
   config.config = {
     mask_url: 'https://testapi.medulina.com/api/v1/mask',
