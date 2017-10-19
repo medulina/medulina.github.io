@@ -341,17 +341,29 @@
               </div>
               <div class="modal-body">
                 <form>
+
                   <div class="form-group">
                     <label for="exampleInputEmail1">Choose a Nickname</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter nickname">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter nickname" v-model="login.username" v-on:change="save_to_storage('nickname', login.username)">
                     <small id="emailHelp" class="form-text text-muted">We will show your nickname on the leaderboard.</small>
                   </div>
+
                   <div class="form-check">
                     <label class="form-check-label">
-                      <input type="checkbox" class="form-check-input">
-                      Send me occasional emails about new tasks on Medulina
+                      <input type="checkbox" class="form-check-input" v-model="login.use_profile_pic" v-on:change="save_to_storage('profile_pic', login.use_profile_pic)">
+                      Use my profile picture
+                      <small id="emailHelp" class="form-text text-muted">We will show your profile pic on the leaderboard.</small>
                     </label>
                   </div>
+
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input type="checkbox" class="form-check-input" v-model="login.send_emails" v-on:change="save_to_storage('profile_pic', login.send_emails)">
+                      Its ok to send me emails
+                      <small id="emailHelp" class="form-text text-muted">We will send occasional emails about new games on Medulina.</small>
+                    </label>
+                  </div>
+
                   <p>Login with:</p>
                   <a class="btn btn-primary colorLightBlue" v-bind:href="login.url">
                     <img src="images/GitHub-Mark-Light-32px.png" style="width:20px; margin: 1.5px;">
@@ -378,7 +390,12 @@
               </div>
               <div class="modal-body">
 
-                  <p style="text-align: center;"> I am a ... </p>
+                  <p style="text-align: center;">
+                    <h4 style="text-align: center;">Welcome to Medulina!</h4>
+                    Medulina is a game to train computers to read brain images. To begin, please log in:
+                    <br>
+
+                  </p>
 
                     <div class="row">
 
@@ -399,6 +416,16 @@
                         </a>
                       </div>
                     </div>
+                    <br>
+                    <p style="text-align:center;">
+                      If you want to try it out first:
+                      <p style="text-align:center;">
+                        <button data-dismiss="modal" class="btn btn-primary colorDarkBackground pull-center" v-on:click="anonymousLogin" style="color:white">
+                          Anonymous Log In
+                        </button>
+                        <p style="text-align:center;"><small>You can try out the game and log in later</small></p>
+                      </p>
+                    </p>
 
 
 
@@ -486,32 +513,40 @@
 var qparams = new QS()
 var params = qparams.getAll()
 
-ui.startProgress()
-login.Login(function() {
-  if(window.location.host=="tumor.medulina.com"){
-    $("#tutorial_nice").modal()
-  }
-  else if (app.login.n_try <= 10){
-    tour.startIntro()
-  }
-  var url = api.get_image_url()
-  console.log('url is', url);
+window.onload = function(){
+  ui.startProgress()
+  login.Login(function() {
+    if(window.location.host=="tumor.medulina.com"){
+      $("#tutorial_nice").modal()
+    }
+    else if (app.login.n_try <= 10){
+      tour.startIntro()
+    }
+    var url = api.get_image_url()
+    console.log('url is', url);
 
-  if (!app.consent.consent){
-    $("#consent_form").modal({
-      backdrop: 'static',
-      keyboard: false
-    })
-  }
+    if (!app.consent.consent){
+      $("#consent_form").modal({
+        backdrop: 'static',
+        keyboard: false
+      })
+    }
 
-  main.get_images(url, main.start);
+    main.get_images(url, main.start);
 
-})
+  })
+}
 
+</script>
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108369695-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-
-
+  gtag('config', 'UA-108369695-1');
 </script>
 
 </html>

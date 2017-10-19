@@ -149,7 +149,7 @@ Vue.component('consent', {
                 </div>
 
                 <div class="form-check form-check-inline disabled">
-                <button class="btn btn-primary colorBold" v-bind:disabled="!(age && consent)" data-dismiss="modal" v-on:click="app.afterConsent()">Submit</button>
+                <button class="btn btn-primary colorBold" v-bind:disabled="!(age && consent)" data-dismiss="modal" v-on:click="app.afterConsent(this, this)">Submit</button>
               </div>
 
 
@@ -225,6 +225,7 @@ var app = new Vue({
           age: false,
           consent: false
         },
+        loginType: null,
         use_context: config.config["context"],
         startTime: null,
         current_slice: null,
@@ -244,6 +245,8 @@ var app = new Vue({
             avatar: 'images/Octocat1.jpg',
             github_id: null,
             total_score: 0,
+            use_profile_pic: null,
+            send_emails: null,
             do_dismiss: false,
             ave_score: 0,
             n_subs: 0,
@@ -254,6 +257,8 @@ var app = new Vue({
             title: 'Log in with GitHub',
             url: 'https://github.com/login/oauth/authorize?client_id=' + get_oauth_id(),
             image: 'images/Octocat1.jpg',
+            transfer_token:null,
+            user_id: null,
             token: null
         },
         status: 'Submit',
@@ -369,21 +374,52 @@ var app = new Vue({
             backdrop: 'static',
             keyboard: false
           })
+
         },
 
-        afterConsent: function(){
-          console.log("AFTER CONSENT")
-          if (app.login.token !=null){
+        afterConsent: function(age, consent){
+          console.log("AFTER CONSENT", age, consent)
+          this.consent.consent = true; //TODO: fix 2 way binding w/ custom component
+          this.consent.age = true; //TODO: fix 2 way binding w/ custom component
+          this.save_to_storage("consent", true)
+          if (this.loginType == "anon"){
+            $.get(config.anon_url+app.consent.consent, function(data){
+              console.log("anon data is", data)
+              app.login.token = data.token;
+              store.set('user_token', data.token);
+              app.login.user_id = data.user_id;
+              app.login.transfer_token = data.transfer_token;
+              login.getUserInfo(app.login.user_id, function(){
+                var url = api.get_image_url()
+                main.get_images(url, main.start);
+              })
+
+            });
+          }
+          else {
+            if (app.login.token !=null){
             //send consent to server
             var url = api.get_image_url()
             main.get_images(url, main.start);
-          } else {
-            $("#login2").modal({
-              backdrop: 'static',
-              keyboard: false
-            })
+            }
+            else {
+              $("#login2").modal({
+                backdrop: 'static',
+                keyboard: false
+              })
+            }
           }
 
+        },
+
+        anonymousLogin: function(){
+          this.loginType = "anon"
+          this.showConsent()
+        },
+
+        save_to_storage(key,value){
+          console.log("saving", key, value)
+          store.set(key, value)
         }
 
     },

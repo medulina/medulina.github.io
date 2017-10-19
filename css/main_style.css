@@ -251,6 +251,15 @@ nav h4 {
 
 .colorDarkBackground {
   background-color: #613F75;
+  border-color: #613F75;
+  cursor: pointer;
+  color: white;
+}
+
+.colorDarkBackground:hover {
+  background-color: #613F75;
+  color: white;
+  border-color: #b97cde;
 }
 
 .colorNeutralBackground {
