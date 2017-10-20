@@ -93,7 +93,18 @@ Starts the whole process
     try {
       ui.startProgress();
       var code = window.location.href.match(/\?code=(.*)/)[1];
-
+      if (store.get("consent")){
+        code = code + '?has_consented=true'
+      }
+      if (store.get("nickname")){
+        code = code + '&nickanme="TMP"'.replace(TMP, store.get("nickname"))
+      }
+      if (store.get("email")){
+        code = code + '&use_email=true'
+      }
+      if (store.get("profile_pic")){
+        code = code + '&use_profile_pic=true'
+      }
 
       var oauth_url = config.auth_url[window.location.host];
 
