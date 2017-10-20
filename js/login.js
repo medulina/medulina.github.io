@@ -97,7 +97,7 @@ Starts the whole process
         code = code + '?has_consented=true'
       }
       if (store.get("nickname")){
-        code = code + '&nickname="TMP"'.replace("TMP", store.get("nickname"))
+        code = code + '&nickname=TMP'.replace("TMP", store.get("nickname"))
       }
       if (store.get("email")){
         code = code + '&use_email=true'
