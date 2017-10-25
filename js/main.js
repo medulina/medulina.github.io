@@ -61,7 +61,7 @@ main.initializeBaseRaster = function(raster) {
   var tmpCtx = tmpCanvas.getContext("2d")
 
   raster.origImg = copyImageData(tmpCtx,
-    raster.canvas.getContext("2d").getImageData(0, 0, raster.width, raster.height))
+  raster.canvas.getContext("2d").getImageData(0, 0, raster.width, raster.height))
 
   //allRasters[0] = raster
   if (!main.allRasters.length) {
