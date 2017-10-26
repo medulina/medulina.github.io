@@ -315,7 +315,7 @@ var app = new Vue({
   }
 })
 
-var url = config.player_url.replace("/user","")//'https://api.medulina.com/api/v1/'
+var url = config.config.player_url.replace("/user","")//'https://api.medulina.com/api/v1/'
 //var init_user = '5991b1bdf441bd00082835a3'
 //app.current_user = init_user;
 //var query = 'mask?where={"mode":"try","user_id":"' +app.current_user + '"}&max_results=100 '
