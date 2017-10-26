@@ -135,6 +135,7 @@ Starts the whole process
         });
       }).fail(function(data){
         console.log("This failed!!", data)
+        app.showConsent()
       });
 
     } catch (e) {
