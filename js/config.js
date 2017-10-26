@@ -62,7 +62,7 @@ config.config = {
   context: config.context_dict[window.location.host]
 }
 
-if (window.location.host == "test.medulina.com" || "localhost:8000") {
+if (window.location.host == "test.medulina.com" || window.location.host == "localhost:8000") {
   console.log("USING TEST CONFIG")
   config.config = {
     mask_url: 'https://testapi.medulina.com/api/v1/mask',
