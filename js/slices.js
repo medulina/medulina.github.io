@@ -362,7 +362,7 @@ var app = new Vue({
   }
 })
 
-var url = 'https://api.medulina.com/api/v1/'
+var url = config.config.player_url.replace("user","")//'https://api.medulina.com/api/v1/'
 
 function getData() {
   $.get(url + app.query(), function(data) {
