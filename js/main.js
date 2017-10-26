@@ -1226,17 +1226,3 @@ main.get_images = function(url, callback) {
 
   })
 }
-
-ui.startProgress()
-login.Login(function() {
-  if(window.location.host=="tumor.medulina.com"){
-    $("#tutorial_nice").modal()
-  }
-  else if (app.login.n_try <= 10){
-    tour.startIntro()
-  }
-  var url = api.get_image_url()
-  console.log('url is', url);
-  main.get_images(url, main.start);
-
-})

@@ -27,6 +27,10 @@ login.getUserInfo =function(user_token, callback) {
     "contentType": false,
   }
 
+  if (app.loginType == "anon"){
+    settings.url = config.config.player_url + '?where=_id%3D%3D"' + app.login.user_id + '"'
+  }
+
   // for debugging, log the settings
   console.log("settings is", settings)
 
@@ -37,6 +41,8 @@ login.getUserInfo =function(user_token, callback) {
       var score_info = data._items[0]
       console.log("score_info is", score_info)
       app.login.ave_score = score_info.ave_score;
+      app.consent.consent = score_info.has_consented;
+      app.consent.age = score_info.has_consented;
       app.login.n_subs = score_info.n_subs;
       app.login.n_test = score_info.n_test;
       app.login.n_try = score_info.n_try;
@@ -87,7 +93,18 @@ Starts the whole process
     try {
       ui.startProgress();
       var code = window.location.href.match(/\?code=(.*)/)[1];
-
+      if (store.get("consent")){
+        code = code + '?has_consented=true'
+      }
+      if (store.get("nickname")){
+        code = code + '&nickname=TMP'.replace("TMP", store.get("nickname"))
+      }
+      if (store.get("email")){
+        code = code + '&use_email=true'
+      }
+      if (store.get("profile_pic")){
+        code = code + '&use_profile_pic=true'
+      }
 
       var oauth_url = config.auth_url[window.location.host];
 

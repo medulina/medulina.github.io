@@ -162,6 +162,13 @@
         background-color: #FF595E !important;
       }
 
+      .topnav {
+        height: 56px !important;
+      }
+
+
+
+
     </style>
 
     <!-- D3 style stuff -->
@@ -190,7 +197,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
+    <!--<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-blue">
       <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -218,7 +225,51 @@
           <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
+    </nav>-->
+    <nav class="navbar navbar-toggleable-sm navbar-inverse fixed-top bg-blue justify-content-between flex-row" id="topnav">
+
+      <a class="navbar-brand" href="http://www.medulina.com">
+        <img class="navbar-brand" src="https://cdn.rawgit.com/Shotgunosine/medulina_icon/b26e8ab5/icon_white.png" width="25px">
+      </a>
+
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up"
+              type="button" data-toggle="collapse"
+              data-target="#navbarsExampleDefault"
+              aria-controls="navbarsExampleDefault"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse w-100" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto" >
+
+          <li class="nav-item active">
+            <a class="nav-link" >Leaderboard <span class="sr-only">(current)</span> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/"> Play {{instruction}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/slices.html"> Images </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Help</a>
+          </li>
+          <li class="nav-item">
+           <a href="#" class="nav-link">
+             {{login.username}}
+              <!--<span class="caret"></span>-->
+           </a>
+         </li>
+
+        </ul>
+
+      </div>
+
     </nav>
+
 
     <div class="container-fluid" id="main" v-cloak>
       <div class="row">
@@ -318,19 +369,22 @@
               Score: {{user_data[hover_idx].score | formatNumber}}
             </h3>
           </div>
-          <div id="imageLoad">
-            <canvas id="currentImg" class="mx-auto d-block" resize>
-          </div>
-          <br>
-          <div>
-            <a v-if="hover_idx != null && user_data[hover_idx]"
-             class="btn btn-primary mx-auto d-block"
-             role="button"
-             v-bind:href="'/slices.html?image_id=' + user_data[hover_idx].image_id"
-             style="width:120px;">Slice Stats</a>
-          </div>
+
           <br>
         </div>
+
+        <div id="imageLoad">
+          <canvas id="currentImg" class="mx-auto d-block" resize>
+        </div>
+        <br>
+        <div>
+          <a v-if="hover_idx != null && user_data[hover_idx]"
+           class="btn btn-primary mx-auto d-block"
+           role="button"
+           v-bind:href="'/slices.html?image_id=' + user_data[hover_idx].image_id"
+           style="width:120px;">Slice Stats</a>
+        </div>
+
         <div id="test"></div>
         </main>
       </div>
@@ -358,6 +412,54 @@
     <script type="text/paperscript" canvas="currentImg" src="js/paper_stuff.js"></script>
     <script src="js/config.js"></script>
     <script src="js/dash.js"></script>
+    <script>
+    var nav = new Vue({
+      el:"#topnav",
+      data: {
+        instruction: config.title_dict[window.location.host],
+        login: {
+          username: "",
+          token: null
+        }
+      }
+    })
+
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": config.config.player_url + "?where=token%3D%3D%22" + user_token + "%22",
+      "method": "GET",
+      "headers": {},
+      "processData": false,
+      "contentType": false,
+    }
+
+    // for debugging, log the settings
+    console.log("settings is", settings)
+    var user_token = store.get("user_token")
+
+    // when the GET is done. set the app variables and run the callback
+    $.get(settings).done(function(data) {
+      console.log("data is", data)
+      if (data._meta.total) {
+        console.log("found user in db", data)
+        var score_info = data._items[0]
+        console.log("score_info is", score_info)
+        //app.login.ave_score = score_info.ave_score;
+        //app.login.n_subs = score_info.n_subs;
+        //app.login.n_test = score_info.n_test;
+        //app.login.n_try = score_info.n_try;
+        //app.login.total_score = score_info.total_score;
+        //app.login.id = score_info._id;
+        //app.login.avatar = score_info.avatar;
+        //app.login.github_id = score_info.id;
+        nav.login.username = score_info.username;
+        nav.login.token = user_token;
+        //callback()
+
+      }})
+
+    </script>
 
 
   </body>
