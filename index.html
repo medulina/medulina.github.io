@@ -445,8 +445,8 @@
 
 
 
-        <div id="legend" style="z-index:99999; background:rgba(1,1,1,1); position: fixed; right:3px; top:55px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px;" v-if="status=='Next'">
-
+        <div id="legend" style="z-index:99999; background:rgba(1,1,1,1); position: fixed; right:3px; top:56px; color:white; display: block; border-color: black; border-style: solid; border-radius: 10px;" v-if="status=='Next'">
+            <h3 style="text-align: center">{{score.dice | | formatNumber}}</h3>
             <div style="display:inline-flex;text-align:center;">
                 <div id="falsePos" v-bind:class="{'missed': !view_feedback_foo.missed, 'missed view': view_feedback_foo.missed}" v-on:click="toggle('missed')"></div>
                 <span style="line-height:50px;">Missed</span>
