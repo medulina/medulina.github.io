@@ -48,7 +48,7 @@ config.task_config = {
   "db_cor_context03": {care_about_fill: false},
 }
 
-config.anon_url = "https://testapi.medulina.com/api/anonymous?has_consented="
+//config.anon_url = "https://testapi.medulina.com/api/anonymous?has_consented="
 
 config.config = {
   mask_url: 'https://api.medulina.com/api/v1/mask',
@@ -56,6 +56,7 @@ config.config = {
   base_url: "https://api.medulina.com",
   player_url: 'https://api.medulina.com/api/v1/user/',
   edit_url: 'https://api.medulina.com/api/v1/mask',
+  anon_url: "https://api.medulina.com/api/anonymous?has_consented=",
   use_random: false,
   task: config.task_dict[window.location.host],
   num: 15,
@@ -70,6 +71,7 @@ if (window.location.host == "test.medulina.com" || window.location.host == "loca
     mask_url: 'https://testapi.medulina.com/api/v1/mask',
     image_url: 'https://testapi.medulina.com/api/v1/image/',
     base_url: "https://testapi.medulina.com",
+    anon_url: "https://testapi.medulina.com/api/anonymous?has_consented=",
     player_url: 'https://testapi.medulina.com/api/v1/user',
     edit_url: 'https://testapi.medulina.com/api/v1/mask',
     use_random: false,

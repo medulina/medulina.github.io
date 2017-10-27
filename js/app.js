@@ -383,7 +383,7 @@ var app = new Vue({
           this.consent.age = true; //TODO: fix 2 way binding w/ custom component
           this.save_to_storage("consent", true)
           if (this.loginType == "anon"){
-            $.get(config.anon_url+app.consent.consent, function(data){
+            $.get(config.config.anon_url+app.consent.consent, function(data){
               console.log("anon data is", data)
               app.login.token = data.token;
               store.set('user_token', data.token);
