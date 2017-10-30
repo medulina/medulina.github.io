@@ -79,7 +79,7 @@ Starts the whole process
   */
 
   var profile = store.get('user_token');
-  if (profile && !store.get("transfer_token")) {
+  if (profile && store.get("transfer_token") != null) {
     /*app.login.username = profile.login;
     app.login.avatar = profile.avatar_url;
     app.login.github_id = profile.id;*/

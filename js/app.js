@@ -431,7 +431,7 @@ var app = new Vue({
               app.login.user_id = data.user_id;
               app.login.transfer_token = data.transfer_token;
               app.login.transfer_user_id = data.user_id;
-              self.save_to_storage("transfer_token", data.tranfer_token)
+              self.save_to_storage("transfer_token", data.transfer_token)
               self.save_to_storage("transfer_user_id", data.user_id)
 
               login.getUserInfo(app.login.user_id, function(){

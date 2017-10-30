@@ -206,7 +206,7 @@
               <span class="caret"></span>
            </a>
            <ul class="dropdown-menu" role="menu">
-             <li v-if="login.user_id == null || app.loginType == 'anon'"> <a href="#" v-on:click="transfer_login">Link to GitHub</a> </li>
+             <li v-if="login.transfer_token != null"> <a href="#" v-on:click="transfer_login">Link to GitHub</a> </li>
              <li><a href="#" onclick="login.logout()">Logout</a></li>
            </ul>
           </li>
@@ -526,6 +526,10 @@ window.onload = function(){
     }
     var url = api.get_image_url()
     console.log('url is', url);
+
+    if (store.get("transfer_token")){
+      app.login.transfer_token = store.get("transfer_token")
+    }
 
     if (!app.consent.consent){
       $("#consent_form").modal({
