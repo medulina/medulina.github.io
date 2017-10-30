@@ -206,7 +206,7 @@
               <span class="caret"></span>
            </a>
            <ul class="dropdown-menu" role="menu">
-             <li v-if="login.user_id == null || app.loginType == 'anon'"> <a href="#">Link to GitHub</a> </li>
+             <li v-if="login.user_id == null || app.loginType == 'anon'"> <a href="#" v-on:click="transfer_login">Link to GitHub</a> </li>
              <li><a href="#" onclick="login.logout()">Logout</a></li>
            </ul>
           </li>

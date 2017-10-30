@@ -286,6 +286,7 @@ var app = new Vue({
             url: 'https://github.com/login/oauth/authorize?client_id=' + get_oauth_id(),
             image: 'images/Octocat1.jpg',
             transfer_token:null,
+            transfer_user_id: null,
             user_id: null,
             token: null
         },
@@ -298,7 +299,11 @@ var app = new Vue({
         appMode: null
     },
     computed: {
-
+      transfer_url: function(){
+        ttoken = this.get_from_storage("transfer_token")
+        tid = this.get_from_storage("transfer_user_id")
+        return config.auth_url[window.location.host] + "?transfer_token=" + ttoken + "&transfer_user_id="+tid
+      }
     },
     methods: {
         hide: function() {
@@ -405,11 +410,19 @@ var app = new Vue({
 
         },
 
+        transfer_login: function(){
+          $("#login2").modal({
+            backdrop: 'static',
+            keyboard: false
+          })
+        },
+
         afterConsent: function(age, consent){
           console.log("AFTER CONSENT", age, consent)
           this.consent.consent = true; //TODO: fix 2 way binding w/ custom component
           this.consent.age = true; //TODO: fix 2 way binding w/ custom component
           this.save_to_storage("consent", true)
+          var self = this;
           if (this.loginType == "anon"){
             $.get(config.config.anon_url+app.consent.consent, function(data){
               console.log("anon data is", data)
@@ -417,6 +430,10 @@ var app = new Vue({
               store.set('user_token', data.token);
               app.login.user_id = data.user_id;
               app.login.transfer_token = data.transfer_token;
+              app.login.transfer_user_id = data.user_id;
+              self.save_to_storage("transfer_token", data.tranfer_token)
+              self.save_to_storage("transfer_user_id", data.user_id)
+
               login.getUserInfo(app.login.user_id, function(){
                 var url = api.get_image_url()
                 main.get_images(url, main.start);
@@ -448,6 +465,10 @@ var app = new Vue({
         save_to_storage(key,value){
           console.log("saving", key, value)
           store.set(key, value)
+        },
+
+        get_from_storage(key){
+          return store.get(key)
         }
 
     },

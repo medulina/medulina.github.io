@@ -79,7 +79,7 @@ Starts the whole process
   */
 
   var profile = store.get('user_token');
-  if (profile) {
+  if (profile && !store.get("transfer_token")) {
     /*app.login.username = profile.login;
     app.login.avatar = profile.avatar_url;
     app.login.github_id = profile.id;*/
@@ -105,6 +105,10 @@ Starts the whole process
       if (store.get("profile_pic")){
         code = code + '&use_profile_pic=true'
       }
+      if (store.get("transfer_token") && store.get("transfer_user_id")){
+        console.log("CODE IS", code)
+        code = code + "&transfer_token="+store.get("transfer_token")+"&transfer_user_id="+store.get("transfer_user_id")
+      }
 
       var oauth_url = config.auth_url[window.location.host];
 
@@ -127,7 +131,9 @@ Starts the whole process
             }, '', newurl);
           };
 
+          store.clearAll()
           store.set('user_token', data.token);
+
           callback();
           //getUserInfo(profile, callback)
 
