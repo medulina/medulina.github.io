@@ -1,3 +1,4 @@
+Vue.config.devtools = true
 paper.install(window)
 
 $.ajaxSetup({

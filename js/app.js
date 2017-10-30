@@ -1,9 +1,37 @@
-  $(".fireworks").hide()
+Vue.config.devtools = true
+
+$(".fireworks").hide()
 
 Vue.filter("formatNumber", function(value) {
     return numeral(value).format("0.0[0]"); // displaying other groupings/separators is possible, look at the docs
 });
 
+Vue.component('plainmodal', {
+  template: `
+
+  <div class="modal fade" v-bind:id="id">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{title}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white;">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p v-html="body"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  `,
+  props: ['title', 'body', 'id']
+})
 
 Vue.component('modal', {
     template: `

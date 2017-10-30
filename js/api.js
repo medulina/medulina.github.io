@@ -156,6 +156,10 @@ api.get_next = function(){
   $('#submit_button').prop('disabled',true);
   ui.startProgress()
 
+  if (app.login.n_try == 10 && app.login.n_test == 0){
+    $("#test_time").modal()
+  }
+
   var url = api.get_image_url()
   main.get_images(url, function(base_url){
     main.base.setSource('data:image/jpeg;base64,'+base_url)

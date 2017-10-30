@@ -202,10 +202,11 @@
           </li>
           <li class="nav-item dropdown">
            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-             {{login.username}}
+             <i class="fa fa-user-circle" aria-hidden="true"></i> {{login.username}}
               <span class="caret"></span>
            </a>
            <ul class="dropdown-menu" role="menu">
+             <li v-if="login.user_id == null || app.loginType == 'anon'"> <a href="#">Link to GitHub</a> </li>
              <li><a href="#" onclick="login.logout()">Logout</a></li>
            </ul>
           </li>
@@ -313,6 +314,7 @@
         <!--<modal v-bind:content="login" id="loginModal"></modal>-->
         <modal v-bind:content="alert" id="alertModal"></modal>
         <modal v-bind:content="fill" id="fillModal" action="runFillEval"></modal>
+        <plainmodal id="test_time" title="Congratulations!" body="<h4>You've complated training</h4> <p>From now on you'll get new images to paint. You will also get a <strong> point </strong> for each new image you complete. You can compete with friends on the <strong>leaderboard </strong>. <p> <h4>We won't give you any feedback</h4> but we may check in on your accuracy every now and then. <br><br><p> <strong>Try your best!</strong> Don't worry if you aren't sure about your painting, we will be averaging paintings from multiple users.</p> <strong>Good luck! </strong>"> </plainmodal>
         <consent v-bind:age="consent.age" v-bind:consent="consent.consent" v-bind:afterConsent="afterConsent"></consent>
 
         <div class="modal fade" id="tutorial_nice">
