@@ -342,7 +342,7 @@ onClick = function(data) {
   }
   try_data = app.user_data[data.x - 1];
 
-  $.get(url + "image/" + try_data.image_id, function(data) {
+  $.get(urljoin(url, urljoin("image/", try_data.image_id)), function(data) {
     //app.current_image = "data:image/png;base64," + data.pic
     console.log("starting a base raster")
     if (!window.base) {
@@ -361,7 +361,7 @@ onClick = function(data) {
       initializeBaseRaster(window.base)
       initialize_roi_raster(window.base, window.roi)
       console.log("initialized rasters")
-      $.get(url + 'mask?where={"mode":"truth","image_id":"' + try_data.image_id + '"}', function(data) {
+      $.get(urljoin(url,'mask?where={"mode":"truth","image_id":"' + try_data.image_id + '"}'), function(data) {
         console.log("got truth", data)
         //window.roi.fillPixelLog(data._items[0].pic, draw.LUT)
         window.roi.fillPixelLog(try_data.pic, draw.LUT)
