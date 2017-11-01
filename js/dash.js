@@ -375,6 +375,7 @@ onClick = function(data) {
 function get_data(url, query, updater, callback) {
 
   if (query != null) {
+    console.log("getting data recursive", urljoin(url, query))
     $.get(urljoin(url, query), function(data) {
       //app.user_data = app.user_data.concat(data._items);
       //console.log(updater)
@@ -391,7 +392,7 @@ function get_data(url, query, updater, callback) {
 
 var task = config.task_dict[window.location.host]
 console.log("task is", task)
-var user_query = 'score?where={"task":"' +task+ '"}&sort=-n_test'
+var user_query = 'score?where={"task":"' +task+ '", "username":{"$exists": true}}&sort=-n_test'
 console.log(user_query)
 get_data(url,
   user_query,
@@ -411,7 +412,7 @@ function set_user(user) {
 
   app.current_user = user;
 
-  get_data(url, 'user/' + user, function(data) {
+  get_data(url, urljoin('user/', user), function(data) {
       console.log("setting rank...")
       app.user_info = data
     },
@@ -419,7 +420,7 @@ function set_user(user) {
       console.log("done getting user")
       app.user_data = []
 
-      $.get(url + app.query(), function(data) {
+      $.get(urljoin(url, app.query()), function(data) {
         app.user_data = data._items.reverse();
         app.user_data_meta = data._meta;
         console.log("some user tries are:", data)
