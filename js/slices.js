@@ -302,8 +302,11 @@ var app = new Vue({
           });
           console.log("averaging", ave_score, data._items.length)
           me.current_image_score = ave_score / data._items.length
+          console.log("getting maskagg", r)
+          $.getJSON({
+            url: r,
 
-          $.get(r, function(agg) {
+          }, function(agg) {
             console.log("agg is", agg)
             var vote = agg.mask_sum
             var max_vote = agg._items[0].nattempts

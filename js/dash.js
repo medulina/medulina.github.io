@@ -375,7 +375,7 @@ onClick = function(data) {
 function get_data(url, query, updater, callback) {
 
   if (query != null) {
-    $.get(url + query, function(data) {
+    $.get(urljoin(url, query), function(data) {
       //app.user_data = app.user_data.concat(data._items);
       //console.log(updater)
       updater(data)
